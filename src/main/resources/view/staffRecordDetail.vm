@@ -1,0 +1,84 @@
+<div class="col-md-10" style="width:100%">
+    <div class="panel panel-default minHeight">
+        <div class="panel-heading">查看详情</div>
+        <div class="panel-body">
+            <form class="form-horizontal" role="form">
+                <fieldset disabled>
+                    <div class="form-group mno">
+                        <label for="inputEmail3" class="col-sm-1 control-label" style="text-align:left;">预定日期</label>
+                        <div class="col-sm-2">
+                            <input type="text" value="$!dateTool.format("yyyy-MM-dd",$!{staffRecord.date})" name="date"
+                                   id="date" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group mno">
+                        <label for="inputEmail3" class="col-sm-1 control-label" style="text-align:left;">预定开始时间</label>
+                        <div class="col-sm-2">
+                            <input type="text" value="$!{staffRecord.startTime}" name="startTime" id="startTime"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group mno">
+                        <label for="inputEmail3" class="col-sm-1 control-label" style="text-align:left;">预定结束时间</label>
+                        <div class="col-sm-2">
+                            <input type="text" value="$!{staffRecord.endTime}" name="endTime" id="endTime"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group mno">
+                        <label for="inputEmail3" class="col-sm-1 control-label"
+                               style="text-align:left;">编码:layer-pid</label>
+                        <div class="col-sm-2">
+                            <input type="text" value="$!{staffRecord.encode}" name="encode" id="encode"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group mno">
+                        <label for="inputEmail3" class="col-sm-1 control-label" style="text-align:left;">是否已取消：0-取消，1-未取消</label>
+                        <div class="col-sm-2">
+                            <input type="text" value="$!{staffRecord.isvalid}" name="isvalid" id="isvalid"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group mno">
+                        <label for="inputEmail3" class="col-sm-1 control-label" style="text-align:left;">预订人姓名</label>
+                        <div class="col-sm-2">
+                            <input type="text" value="$!{staffRecord.staffName}" name="staffName" id="staffName"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group mno">
+                        <label for="inputEmail3" class="col-sm-1 control-label" style="text-align:left;">预定用途</label>
+                        <div class="col-sm-2">
+                            <input type="text" value="$!{staffRecord.comment}" name="comment" id="comment"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group mno">
+                        <label for="inputEmail3" class="col-sm-1 control-label" style="text-align:left;">创建时间</label>
+                        <div class="col-sm-2">
+                            <input type="text" value="$!dateTool.format("yyyy-MM-dd",$!{staffRecord.createTime})"
+                                   name="createTime" id="createTime" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group mno">
+                        <label for="inputEmail3" class="col-sm-1 control-label" style="text-align:left;">更新时间</label>
+                        <div class="col-sm-2">
+                            <input type="text" value="$!dateTool.format("yyyy-MM-dd",$!{staffRecord.updateTime})"
+                                   name="updateTime" id="updateTime" class="form-control"/>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <span class="col-sm-1"></span>
+                    <a href="#" class="btn btn-primary" id="returnButton" role="button">返回</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#returnButton").bind("click", function () {
+        history.go(-1);
+    });
+</script>

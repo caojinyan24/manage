@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="swa.manage.mapper.RoomConfigMapper">
+
+    <!-- 查询条件 -->
+    <sql id="wherecontation">
+        <trim suffixOverrides=",">
+            <if test="query.encode != null and query.encode != ''">
+                AND rc.encode = #{query.encode}
+            </if>
+            <if test="query.layer != null and query.layer != ''">
+                AND rc.layer = #{query.layer}
+            </if>
+            <if test="query.pid != null and query.pid != ''">
+                AND rc.pid = #{query.pid}
+            </if>
+            <if test="query.roomName != null and query.roomName != ''">
+                AND rc.name_name = #{query.roomName}
+            </if>
+            <if test="query.pPid != null and query.pPid != ''">
+                AND rc.p_pid = #{query.pPid}
+            </if>
+            <if test="query.isvalid != null and query.isvalid != ''">
+                AND rc.isvalid = #{query.isvalid}
+            </if>
+            <if test="query.createTime != null and query.createTime != ''">
+                AND rc.create_time = #{query.createTime}
+            </if>
+            <if test="query.updateTime != null and query.updateTime != ''">
+                AND rc.update_time = #{query.updateTime}
+            </if>
+        </trim>
+    </sql>
+
+    <!--
+	方法名称: insert
+	调用路径: RoomConfig.insert
+	-->
+    <insert id="insert" parameterType="Object">
+        INSERT INTO room_config /* 配置表 */
+        (
+        encode
+        ,layer
+        ,pid
+        ,room_name
+        ,p_pid
+        ,isvalid
+        ,create_time
+        ,update_time
+        )
+        values
+        (
+        #{encode}
+        ,#{layer}
+        ,#{pid}
+        ,#{roomName}
+        ,#{pPid}
+        ,#{isvalid}
+        ,#{createTime}
+        ,#{updateTime}
+        )
+    </insert>
+
+
+    <!--
+	方法名称: update
+	调用路径: RoomConfig.update
+	-->
+    <update id="update" parameterType="Object">
+        UPDATE room_config /* 配置表 */
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="encode != null">
+                encode = #{encode},
+            </if>
+            <if test="layer != null">
+                layer = #{layer},
+            </if>
+            <if test="pid != null">
+                pid = #{pid},
+            </if>
+            <if test="roomName != null">
+                room_name = #{roomName},
+            </if>
+            <if test="pPid != null">
+                p_pid = #{pPid},
+            </if>
+            <if test="isvalid != null">
+                isvalid = #{isvalid},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <!--
+	方法名称: get
+	调用路径: RoomConfig.get
+	处理信息: 根据主键查询记录
+	-->
+    <select id="get" parameterType="Object" resultType="swa.manage.entity.RoomConfig">
+        SELECT
+        rc.id AS id
+        ,rc.encode AS encode
+        ,rc.layer AS layer
+        ,rc.pid AS pid
+        ,rc.room_name AS roomName
+        ,rc.p_pid AS pPid
+        ,rc.isvalid AS isvalid
+        ,rc.create_time AS createTime
+        ,rc.update_time AS updateTime
+        FROM room_config AS rc
+        WHERE
+        id = #{id}
+    </select>
+
+    <!--
+	方法名称: delete
+	调用路径: RoomConfig.delete
+	处理信息: 删除记录
+	-->
+    <delete id="delete" parameterType="Object">
+        DELETE FROM room_config
+        WHERE
+        id = #{id}
+    </delete>
+
+    <!--
+	方法名称: queryItemCount
+	调用路径: RoomConfig.queryItemCount
+	-->
+    <select id="queryItemCount" resultType="java.lang.Integer" parameterType="Object">
+        SELECT count(*) FROM room_config AS rc
+        WHERE 1=1
+        <include refid="wherecontation"/>
+    </select>
+
+
+
+    <select id="queryConfig" resultType="swa.manage.entity.RoomConfig">
+        SELECT
+        id AS id,
+        encode AS encode,
+        layer AS layer,
+        pid AS pid,
+        room_name AS roomName,
+        p_pid AS pPid,
+        isvalid AS isvalid,
+        create_time AS createTime,
+        update_time AS updateTime
+        FROM room_config
+    </select>
+
+</mapper>

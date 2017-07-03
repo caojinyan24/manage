@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="swa.manage.mapper.StaffRecordMapper">
+
+    <!-- 查询条件 -->
+    <sql id="wherecontation">
+        <trim suffixOverrides=",">
+            <if test="query.date != null and query.date != ''">
+                AND sr.date = #{query.date}
+            </if>
+            <if test="query.startTime != null and query.startTime != ''">
+                AND sr.start_time = #{query.startTime}
+            </if>
+            <if test="query.endTime != null and query.endTime != ''">
+                AND sr.end_time = #{query.endTime}
+            </if>
+            <if test="query.encode != null and query.encode != ''">
+                AND sr.encode = #{query.encode}
+            </if>
+            <if test="query.isvalid != null and query.isvalid != ''">
+                AND sr.isvalid = #{query.isvalid}
+            </if>
+            <if test="query.staffName != null and query.staffName != ''">
+                AND sr.staff_name = #{query.staffName}
+            </if>
+            <if test="query.comment != null and query.comment != ''">
+                AND sr.comment = #{query.comment}
+            </if>
+            <if test="query.createTime != null and query.createTime != ''">
+                AND sr.create_time = #{query.createTime}
+            </if>
+            <if test="query.updateTime != null and query.updateTime != ''">
+                AND sr.update_time = #{query.updateTime}
+            </if>
+        </trim>
+    </sql>
+
+    <!--
+	方法名称: insert
+	调用路径: StaffRecord.insert
+	-->
+    <insert id="insert" parameterType="Object">
+        INSERT INTO staff_record /* 人员预定记录表 */
+        (
+        date
+        ,start_time
+        ,end_time
+        ,encode
+        ,isvalid
+        ,staff_name
+        ,comment
+        ,create_time
+        ,update_time
+        )
+        values
+        (
+        #{date}
+        ,#{startTime}
+        ,#{endTime}
+        ,#{encode}
+        ,#{isvalid}
+        ,#{staffName}
+        ,#{comment}
+        ,#{createTime}
+        ,#{updateTime}
+        )
+    </insert>
+
+
+    <!--
+	方法名称: update
+	调用路径: StaffRecord.update
+	-->
+    <update id="update" parameterType="Object">
+        UPDATE staff_record /* 人员预定记录表 */
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="date != null">
+                date = #{date},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime},
+            </if>
+            <if test="encode != null">
+                encode = #{encode},
+            </if>
+            <if test="isvalid != null">
+                isvalid = #{isvalid},
+            </if>
+            <if test="staffName != null">
+                staff_name = #{staffName},
+            </if>
+            <if test="comment != null">
+                comment = #{comment},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <!--
+	方法名称: get
+	调用路径: StaffRecord.get
+	处理信息: 根据主键查询记录
+	-->
+    <select id="get" parameterType="Object" resultType="swa.manage.entity.StaffRecord">
+        SELECT
+        sr.id AS id
+        ,sr.date AS date
+        ,sr.start_time AS startTime
+        ,sr.end_time AS endTime
+        ,sr.encode AS encode
+        ,sr.isvalid AS isvalid
+        ,sr.staff_name AS staffName
+        ,sr.comment AS comment
+        ,sr.create_time AS createTime
+        ,sr.update_time AS updateTime
+        FROM staff_record AS sr
+        WHERE
+        id = #{id}
+    </select>
+
+    <!--
+	方法名称: delete
+	调用路径: StaffRecord.delete
+	处理信息: 删除记录
+	-->
+    <delete id="delete" parameterType="Object">
+        DELETE FROM staff_record
+        WHERE
+        id = #{id}
+    </delete>
+
+    <!--
+	方法名称: queryItemCount
+	调用路径: StaffRecord.queryItemCount
+	-->
+    <select id="queryItemCount" resultType="java.lang.Integer" parameterType="Object">
+        SELECT count(*) FROM staff_record AS sr
+        WHERE 1=1
+        <include refid="wherecontation"/>
+    </select>
+
+    <!--
+	方法名称: queryPagenationList
+	调用路径: StaffRecord.queryPagenationList
+	-->
+    <select id="queryPagenationList" parameterType="Object" resultType="swa.manage.entity.StaffRecord">
+        SELECT
+        sr.id AS id
+        ,sr.date AS date
+        ,sr.start_time AS startTime
+        ,sr.end_time AS endTime
+        ,sr.encode AS encode
+        ,sr.isvalid AS isvalid
+        ,sr.staff_name AS staffName
+        ,sr.comment AS comment
+        ,sr.create_time AS createTime
+        ,sr.update_time AS updateTime
+        FROM staff_record AS sr
+        WHERE 1=1
+        <include refid="wherecontation"/>
+        ORDER BY sr.id DESC
+        LIMIT #{startRow}
+        ,#{pageSize}
+    </select>
+
+</mapper>

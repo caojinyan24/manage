@@ -1,0 +1,2 @@
+*Cannot determine embedded datasource
+mybatis和datasource的配置数据应该写在系统生成的application.properties中，否则不能加载进来
