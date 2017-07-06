@@ -9,6 +9,7 @@ import swa.manage.mapper.RoomConfigMapper;
 import swa.manage.service.RoomConfigService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * RoomConfigService
@@ -37,7 +38,7 @@ public class RoomConfigServiceImpl implements RoomConfigService {
     }
 
     @Override
-    public RoomConfig queryByPriKey(Long id) {
-        return null;
+    public List<RoomConfig> queryConfig() {
+        return roomConfigMapper.queryConfig();
     }
 }

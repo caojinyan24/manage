@@ -17,9 +17,9 @@ public class ViewController {
         SpringApplication.run(ViewController.class, args);
     }
 
-    @RequestMapping("/")
-    String home() {
-        return "Hello World!";
-    }
+//    @RequestMapping("/")
+//    String home() {
+//        return "Hello World!";
+//    }
 
 }

@@ -1,6 +1,8 @@
 package swa.manage.component;
 
 import org.apache.catalina.filters.RemoteIpFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +12,8 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class WebConfiguration {
+    private static final Logger logger = LoggerFactory.getLogger(WebConfiguration.class);
+
     @Bean
     public RemoteIpFilter remoteIpFilter() {
         return new RemoteIpFilter();

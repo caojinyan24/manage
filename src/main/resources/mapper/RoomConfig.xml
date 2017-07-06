@@ -143,7 +143,6 @@
     </select>
 
 
-
     <select id="queryConfig" resultType="swa.manage.entity.RoomConfig">
         SELECT
         id AS id,

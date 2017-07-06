@@ -4,14 +4,15 @@ package swa.manage.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import swa.manage.entity.RoomConfig;
 import swa.manage.service.RoomConfigService;
+
+import java.util.List;
 
 /**
  * RoomConfigController  配置表
@@ -19,6 +20,7 @@ import swa.manage.service.RoomConfigService;
  */
 @Controller
 @RequestMapping("/roomConfig")
+@EnableAutoConfiguration
 public class RoomConfigController {
 
     private static final Logger logger = LoggerFactory.getLogger(RoomConfigController.class);
@@ -34,16 +36,18 @@ public class RoomConfigController {
     public ModelAndView roomConfigIndex(@ModelAttribute RoomConfig query,
                                         @RequestParam(required = false, value = "pageNo", defaultValue = "1") int pageNo,
                                         @RequestParam(required = false, value = "pageSize", defaultValue = "10") int pageSize) {
-//        PageQuery<RoomConfig> pageQuery = new PageQuery<RoomConfig>();
-//        pageQuery.setPageNo(pageNo);
-//        pageQuery.setPageSize(pageSize);
-//        ModelAndView mav = new ModelAndView();
-//        pageQuery.setQuery(query);
-//        mav.addObject("query", query);
-//        mav.setViewName("pay/roomConfigIndex");
-//        mav.addObject("pageInfos", SystemTools.convertPaginatedList(roomConfigService.queryRoomConfigPageList(pageQuery)));
-//        return mav;
-        return null;
+        ModelAndView modelAndView = new ModelAndView("roomConfig/roomConfigIndex");
+        List<RoomConfig> roomConfigs = roomConfigService.queryConfig();
+        modelAndView.addObject("datas", roomConfigs);
+        logger.info("roomConfig:{}", roomConfigs);
+        return modelAndView;
+    }
+
+    @RequestMapping("test")
+    @ResponseBody
+    public String test(){
+//        return "test hello world";
+        return "roomConfig/roomConfigIndex";
     }
 
     /**
