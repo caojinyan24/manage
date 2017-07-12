@@ -18,8 +18,8 @@ import javax.annotation.Resource;
 public class RoomRecordServiceImpl implements RoomRecordService {
     private static final Logger logger = LoggerFactory.getLogger(RoomRecordServiceImpl.class);
 
-    @Resource
-    private RoomRecordMapper roomRecordMapper;
+//    @Resource
+//    private RoomRecordMapper roomRecordMapper;
 
 
     @Override

@@ -1,26 +1,27 @@
 package swa.manage.controller;
 
 
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import swa.manage.entity.RoomConfig;
 import swa.manage.service.RoomConfigService;
 
+import java.io.StringWriter;
 import java.util.List;
 
 /**
  * RoomConfigController  配置表
  * Created by jinyan.cao on 2017-07-03 17:47:53
  */
-@Controller
+@RestController
 @RequestMapping("/roomConfig")
-@EnableAutoConfiguration
 public class RoomConfigController {
 
     private static final Logger logger = LoggerFactory.getLogger(RoomConfigController.class);
@@ -32,38 +33,56 @@ public class RoomConfigController {
      *
      * @return
      */
-    @RequestMapping(value = "roomConfigIndex", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView roomConfigIndex(@ModelAttribute RoomConfig query,
-                                        @RequestParam(required = false, value = "pageNo", defaultValue = "1") int pageNo,
-                                        @RequestParam(required = false, value = "pageSize", defaultValue = "10") int pageSize) {
-        ModelAndView modelAndView = new ModelAndView("roomConfig/roomConfigIndex");
+    @RequestMapping("/roomConfigIndex")
+    public String roomConfigIndex(Model model) {
+////        ModelAndView modelAndView = new ModelAndView("roomConfig/roomConfigIndex");
+//        List<RoomConfig> roomConfigs = roomConfigService.queryConfig();
+//        model.addAttribute("datas", roomConfigs);
+//        logger.info("roomConfig:{}", roomConfigs);
+//        return "roomConfigIndex";
+
+        String result = null;
+
+        VelocityEngine velocity = new VelocityEngine();
+
+        velocity.init();
+        Template template = velocity.getTemplate("src/main/resources/templates/roomConfigIndex.vm");
+
+        logger.info("template:{}##{}", template.getEncoding(), template.getData());
+        VelocityContext context = new VelocityContext();
+        context.put("title", "Apache Velocity");
         List<RoomConfig> roomConfigs = roomConfigService.queryConfig();
-        modelAndView.addObject("datas", roomConfigs);
-        logger.info("roomConfig:{}", roomConfigs);
-        return modelAndView;
+        context.put("datas", roomConfigs);
+        StringWriter writer = new StringWriter();
+        template.merge(context, writer);
+
+        result = writer.toString();
+        logger.info("roomConfigIndex:{}", result);
+
+        return result;
     }
 
-    @RequestMapping("test")
-    @ResponseBody
-    public String test(){
-//        return "test hello world";
-        return "roomConfig/roomConfigIndex";
-    }
-
-    /**
-     * 详情
-     *
-     * @return
-     */
-    @RequestMapping(value = "roomConfigDetail", method = RequestMethod.GET)
-    public ModelAndView roomConfigDetail(@RequestParam(required = true, value = "id") Long id) {
-//        ModelAndView mav = new ModelAndView();
-//        mav.setViewName("pay/roomConfigDetail");
-//        RoomConfig roomConfig = roomConfigService.queryByPriKey(id);
-//        mav.addObject("roomConfig", roomConfig);
-//        return mav;
-        return null;
-    }
+//    @RequestMapping("test")
+//    @ResponseBody
+//    public String test() {
+////        return "test hello world";
+//        return "roomConfig/roomConfigIndex";
+//    }
+//
+//    /**
+//     * 详情
+//     *
+//     * @return
+//     */
+//    @RequestMapping(value = "roomConfigDetail", method = RequestMethod.GET)
+//    public ModelAndView roomConfigDetail(@RequestParam(required = true, value = "id") Long id) {
+////        ModelAndView mav = new ModelAndView();
+////        mav.setViewName("pay/roomConfigDetail");
+////        RoomConfig roomConfig = roomConfigService.queryByPriKey(id);
+////        mav.addObject("roomConfig", roomConfig);
+////        return mav;
+//        return null;
+//    }
 
 //    /**
 //     * 跳转到添加页面

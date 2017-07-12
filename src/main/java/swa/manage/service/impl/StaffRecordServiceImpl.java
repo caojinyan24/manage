@@ -16,9 +16,9 @@ import javax.annotation.Resource;
 @Service
 public class StaffRecordServiceImpl implements StaffRecordService {
     private static final Logger logger = LoggerFactory.getLogger(StaffRecord.class);
-
-    @Resource
-    private StaffRecordMapper staffRecordMapper;
+//
+//    @Resource
+//    private StaffRecordMapper staffRecordMapper;
 
 
     @Override
