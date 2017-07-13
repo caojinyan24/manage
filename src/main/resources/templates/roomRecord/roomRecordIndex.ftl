@@ -10,7 +10,7 @@
                         <div class="col-sm-8">
                             <input type="text" name="date"
                                    id="date"
-                                   value="$!dateTool.format('yyyy-MM-dd',$!{roomRecord.date})"
+                                   value="${data.date?string("yyyy-MM-dd")}"
                                    class="form-control" placeholder="预定日期">
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                         <div class="col-sm-8">
                             <input type="text" name="timePeriod"
                                    id="timePeriod"
-                                   value="$!{roomRecord.timePeriod}" class="form-control"
+                                   value="${roomRecord.timePeriod}" class="form-control"
                                    placeholder="预定时间段，如0代表00:00-00:30，1代表00:30-1:00">
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <div class="col-sm-8">
                             <input type="text" name="encode"
                                    id="encode"
-                                   value="$!{roomRecord.encode}" class="form-control"
+                                   value="${roomRecord.encode}" class="form-control"
                                    placeholder="编码:layer-pid">
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                         <div class="col-sm-8">
                             <input type="text" name="staffRecordId"
                                    id="staffRecordId"
-                                   value="$!{roomRecord.staffRecordId}" class="form-control"
+                                   value="${roomRecord.staffRecordId}" class="form-control"
                                    placeholder="人员预定表中关联id">
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                         <div class="col-sm-8">
                             <input type="text" name="isvalid"
                                    id="isvalid"
-                                   value="$!{roomRecord.isvalid}" class="form-control"
+                                   value="${roomRecord.isvalid}" class="form-control"
                                    placeholder="是否已取消：0-取消，1-未取消">
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                         <div class="col-sm-8">
                             <input type="text" name="createTime"
                                    id="createTime"
-                                   value="$!dateTool.format('yyyy-MM-dd',$!{roomRecord.createTime})"
+                                   value="${roomRecord.createTime?string("yyyy-MM-dd HH:mm:ss")}"
                                    class="form-control" placeholder="创建时间">
                         </div>
                     </div>
@@ -70,58 +70,44 @@
                         <div class="col-sm-8">
                             <input type="text" name="updateTime"
                                    id="updateTime"
-                                   value="$!dateTool.format('yyyy-MM-dd',$!{roomRecord.updateTime})"
+                                   value="${roomRecord.updateTime?string("yyyy-MM-dd HH:mm:ss")}"
                                    class="form-control" placeholder="更新时间">
                         </div>
                     </div>
                     <div class="clearfix"></div>
                     <button type="submit" class="btn btn-primary">搜 索</button>
                 </div>
-                <div id="legend">
-                    <legend class="le">
-                        <button type="button" class="btn btn-primary"
-                                onclick="remoteUrl('../roomRecord/toAddDialog.do','新增用户')">新增
-                        </button>
-                    </legend>
-                </div>
+
                 <table class="table table-striped">
-                    <thead>
-                    <th>预定日期</th>
-                    <th>预定时间段，如0代表00:00-00:30，1代表00:30-1:00</th>
-                    <th>编码:layer-pid</th>
-                    <th>人员预定表中关联id</th>
-                    <th>是否已取消：0-取消，1-未取消</th>
-                    <th>创建时间</th>
-                    <th>更新时间</th>
-                    <th>操作</th>
-                    </thead>
-                    <tobody>
-                        #if($!{pageInfos})
-                            #foreach($!{info} in $!{pageInfos})
-                                <tr>
-                                    <td>$!dateTool.format("yyyy-MM-dd",$!{info.date})</td>
-                                    <td>$!{info.timePeriod}</td>
-                                    <td>$!{info.encode}</td>
-                                    <td>$!{info.staffRecordId}</td>
-                                    <td>$!{info.isvalid}</td>
-                                    <td>$!dateTool.format("yyyy-MM-dd",$!{info.createTime})</td>
-                                    <td>$!dateTool.format("yyyy-MM-dd",$!{info.updateTime})</td>
-                                    <td class="last">
-                                        <a href="javascript:remoteUrl('../roomRecord/toEditDialog.do?id=$!{info.id}','编辑用户')">编辑</a>
-                                        <a href="javascript:delData('../roomRecord/roomRecordDelete.do?id=$!{info.id}')">删除</a>
-                                        <a href="../roomRecord/roomRecordDetail.do?id=$!{info.id}">详情</a>
-                                    </td>
-                                </tr>
-                            #end
-                        #end
-                    </tobody>
+                    <tr>
+                        <th>预定日期</th>
+                        <th>预定时间段，如0代表00:00-00:30，1代表00:30-1:00</th>
+                        <th>编码:layer-pid</th>
+                        <th>人员预定表中关联id</th>
+                        <th>是否已取消：0-取消，1-未取消</th>
+                        <th>创建时间</th>
+                        <th>更新时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr>
+                    <tr>
+
+                    <#list datas as data>
+                        <td>${data.date?string("yyyy-MM-dd")}</td>
+                        <td>${data.timePeriod}</td>
+                        <td>${data.encode}</td>
+                        <td>${data.staffRecordId}</td>
+                        <td>${data.isvalid}</td>
+                        <td>${data.createTime?string("yyyy-MM-dd HH:mm:ss")})</td>
+                        <td>${data.updateTime?string("yyyy-MM-dd HH:mm:ss")})</td>
+                        <td class="last">
+                            <a href="/roomRecord/toEditDialog.do?id=$!{data.id}','编辑用户')">编辑</a>
+                            <a href="/roomRecord/roomRecordDelete.do?id=$!{data.id}')">删除</a>
+                            <a href="../roomRecord/roomRecordDetail.do?id=$!{data.id}">详情</a>
+                        </td>
+                    </#list>
+                    </tr>
                 </table>
-                <div class="text-right">
-                    <!--公用翻页代码-->
-                    #set($attr='formSubmit')
-                    #showPageList($pageInfos $attr)
-                    <!--END公用翻页代码-->
-                </div>
             </div>
         </div>
     </div>

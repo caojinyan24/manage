@@ -8,6 +8,7 @@ import swa.manage.mapper.StaffRecordMapper;
 import swa.manage.service.StaffRecordService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * StaffRecordService
@@ -16,28 +17,33 @@ import javax.annotation.Resource;
 @Service
 public class StaffRecordServiceImpl implements StaffRecordService {
     private static final Logger logger = LoggerFactory.getLogger(StaffRecord.class);
-//
-//    @Resource
-//    private StaffRecordMapper staffRecordMapper;
+
+    @Resource
+    private StaffRecordMapper staffRecordMapper;
 
 
     @Override
     public void add(StaffRecord staffRecord) {
-
+        staffRecordMapper.add(staffRecord);
     }
 
     @Override
     public void update(StaffRecord staffRecord) {
-
+        staffRecordMapper.update(staffRecord);
     }
 
     @Override
     public void deleteByPriKey(Long id) {
-
+        staffRecordMapper.deleteByPriKey(id);
     }
 
     @Override
     public StaffRecord queryByPriKey(Long id) {
-        return null;
+        return staffRecordMapper.queryByPriKey(id);
+    }
+
+    @Override
+    public List<StaffRecord> queryStaffRecord() {
+        return staffRecordMapper.queryStaffRecord();
     }
 }

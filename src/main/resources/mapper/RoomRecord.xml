@@ -92,12 +92,8 @@
         id = #{id}
     </update>
 
-    <!--
-	方法名称: get
-	调用路径: RoomRecord.get
-	处理信息: 根据主键查询记录
-	-->
-    <select id="get" parameterType="Object" resultType="swa.manage.entity.RoomRecord">
+
+    <select id="queryRoomRecord" resultType="swa.manage.entity.RoomRecord">
         SELECT
         rr.id AS id
         ,rr.date AS date
@@ -108,8 +104,6 @@
         ,rr.create_time AS createTime
         ,rr.update_time AS updateTime
         FROM room_record AS rr
-        WHERE
-        id = #{id}
     </select>
 
     <!--

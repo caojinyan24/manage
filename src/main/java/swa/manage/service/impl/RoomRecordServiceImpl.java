@@ -9,6 +9,7 @@ import swa.manage.mapper.RoomRecordMapper;
 import swa.manage.service.RoomRecordService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * RoomRecordService
@@ -18,27 +19,32 @@ import javax.annotation.Resource;
 public class RoomRecordServiceImpl implements RoomRecordService {
     private static final Logger logger = LoggerFactory.getLogger(RoomRecordServiceImpl.class);
 
-//    @Resource
-//    private RoomRecordMapper roomRecordMapper;
+    @Resource
+    private RoomRecordMapper roomRecordMapper;
 
 
     @Override
     public void add(RoomRecord roomRecord) {
-
+        roomRecordMapper.add(roomRecord);
     }
 
     @Override
     public void update(RoomRecord roomRecord) {
-
+        roomRecordMapper.update(roomRecord);
     }
 
     @Override
     public void deleteByPriKey(Long id) {
-
+        roomRecordMapper.deleteByPriKey(id);
     }
 
     @Override
     public RoomRecord queryByPriKey(Long id) {
-        return null;
+        return roomRecordMapper.queryByPriKey(id);
+    }
+
+    @Override
+    public List<RoomRecord> queryRoomRecord() {
+        return roomRecordMapper.queryRoomRecord();
     }
 }

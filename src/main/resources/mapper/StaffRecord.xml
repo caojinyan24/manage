@@ -113,7 +113,7 @@
 	调用路径: StaffRecord.get
 	处理信息: 根据主键查询记录
 	-->
-    <select id="get" parameterType="Object" resultType="swa.manage.entity.StaffRecord">
+    <select id="queryStaffRecord" resultType="swa.manage.entity.StaffRecord">
         SELECT
         sr.id AS id
         ,sr.date AS date
@@ -126,8 +126,6 @@
         ,sr.create_time AS createTime
         ,sr.update_time AS updateTime
         FROM staff_record AS sr
-        WHERE
-        id = #{id}
     </select>
 
     <!--

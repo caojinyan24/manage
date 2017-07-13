@@ -5,14 +5,25 @@ mybatis和datasource的配置数据应该写在系统生成的application.proper
 * resources/static目录下默认为default页面
 jsp视图管理：
 <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-thymeleaf</artifactId>
 </dependency>
 若无这个依赖，controller返回的字符串将无法和页面映射起来
 * 使用velocity模板引擎
 添加依赖
 <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-velocity</artifactId>
-            <version>1.4.7.RELEASE</version>
-        </dependency>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-starter-velocity</artifactId>
+     <version>1.4.7.RELEASE</version>
+</dependency>
+使用velocity无法找到默认的viewResolver，自己写的时候发现springmvcjar包中关于velocity的类都废弃掉了，索性换freemarker吧
+     
+        
+#freemarker
+FreeMarker的插值有如下两种类型:1,通用插值${expr};2,数字格式化插值:#{expr}或#{expr;format} 
+如果该指令是一个用户指令而不是系统内建指令时,应将#符号改成@符号. 
+
+
+
+#todo
+添加layout

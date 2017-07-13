@@ -24,21 +24,26 @@ public class RoomConfigServiceImpl implements RoomConfigService {
 
     @Override
     public void add(RoomConfig roomConfig) {
-
+        roomConfigMapper.add(roomConfig);
     }
 
     @Override
     public void update(RoomConfig roomConfig) {
-
+        roomConfigMapper.update(roomConfig);
     }
 
     @Override
     public void deleteByPriKey(Long id) {
-
+        roomConfigMapper.deleteByPriKey(id);
     }
 
     @Override
     public List<RoomConfig> queryConfig() {
         return roomConfigMapper.queryConfig();
+    }
+
+    @Override
+    public RoomConfig queryById(Long id) {
+        return roomConfigMapper.queryById(id);
     }
 }

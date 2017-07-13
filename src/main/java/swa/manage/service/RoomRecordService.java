@@ -3,6 +3,8 @@ package swa.manage.service;
 
 import swa.manage.entity.RoomRecord;
 
+import java.util.List;
+
 /**
  * RoomRecordService
  * Created by jinyan.cao on 2017-07-03 17:47:53
@@ -16,6 +18,8 @@ public interface RoomRecordService {
     public void deleteByPriKey(Long id);
 
     public RoomRecord queryByPriKey(Long id);
+
+    List<RoomRecord>queryRoomRecord();
 
 }
 

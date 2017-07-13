@@ -14,14 +14,14 @@ CREATE TABLE `room_config` (
 
 
 
-INSERT INTO `room_config` (`layer`, `pid`, `room_name`, `p_pid`) VALUES ('1', '1', '北京', '0');
-INSERT INTO `room_config` (`layer`, `pid`, `room_name`, `p_pid`) VALUES ('1', '2', '成都', '0');
-INSERT INTO `room_config` (`layer`, `pid`, `room_name`, `p_pid`) VALUES ('2', '1', '互联网金融中心', '1');
-INSERT INTO `room_config` (`layer`, `pid`, `room_name`, `p_pid`) VALUES ('2', '2', '电子大厦', '1');
-INSERT INTO `room_config` (`layer`, `pid`, `room_name`, `p_pid`) VALUES ('3', '1', '17层', '1');
-INSERT INTO `room_config` (`layer`, `pid`, `room_name`, `p_pid`) VALUES ('3', '2', '24层', '1');
-INSERT INTO `room_config` (`layer`, `pid`, `room_name`, `p_pid`) VALUES ('4', '1', 'room1', '1');
-INSERT INTO `room_config` (`layer`, `pid`, `room_name`, `p_pid`) VALUES ('4', '2', 'room2', '1');
+INSERT INTO `room_config` (`encode`, `layer`, `pid`, `room_name`, `p_pid`) VALUES ('1-1,''1', '1', '北京', '0');
+INSERT INTO `room_config` (`encode`, `layer`, `pid`, `room_name`, `p_pid`) VALUES ('1-2','1', '2', '成都', '0');
+INSERT INTO `room_config` (`encode`, `layer`, `pid`, `room_name`, `p_pid`) VALUES ('2-1','2', '1', '互联网金融中心', '1');
+INSERT INTO `room_config` (`encode`, `layer`, `pid`, `room_name`, `p_pid`) VALUES ('2-2','2', '2', '电子大厦', '1');
+INSERT INTO `room_config` (`encode`, `layer`, `pid`, `room_name`, `p_pid`) VALUES ('3-1','3', '1', '17层', '1');
+INSERT INTO `room_config` (`encode`, `layer`, `pid`, `room_name`, `p_pid`) VALUES ('3-2','3', '2', '24层', '1');
+INSERT INTO `room_config` (`encode`, `layer`, `pid`, `room_name`, `p_pid`) VALUES ('4-1','4', '1', 'room1', '1');
+INSERT INTO `room_config` (`encode`, `layer`, `pid`, `room_name`, `p_pid`) VALUES ('4-2','4', '2', 'room2', '1');
 
 
 CREATE TABLE `room_record` (

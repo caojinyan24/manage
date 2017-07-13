@@ -4,7 +4,6 @@
 
 <mapper namespace="swa.manage.mapper.RoomConfigMapper">
 
-    <!-- 查询条件 -->
     <sql id="wherecontation">
         <trim suffixOverrides=",">
             <if test="query.encode != null and query.encode != ''">
@@ -34,12 +33,9 @@
         </trim>
     </sql>
 
-    <!--
-	方法名称: insert
-	调用路径: RoomConfig.insert
-	-->
-    <insert id="insert" parameterType="Object">
-        INSERT INTO room_config /* 配置表 */
+
+    <insert id="add" parameterType="swa.manage.entity.RoomConfig">
+        INSERT INTO room_config
         (
         encode
         ,layer
@@ -63,12 +59,7 @@
         )
     </insert>
 
-
-    <!--
-	方法名称: update
-	调用路径: RoomConfig.update
-	-->
-    <update id="update" parameterType="Object">
+    <update id="update" parameterType="swa.manage.entity.RoomConfig">
         UPDATE room_config /* 配置表 */
         <trim prefix="SET" suffixOverrides=",">
             <if test="encode != null">
@@ -100,43 +91,16 @@
         id = #{id}
     </update>
 
-    <!--
-	方法名称: get
-	调用路径: RoomConfig.get
-	处理信息: 根据主键查询记录
-	-->
-    <select id="get" parameterType="Object" resultType="swa.manage.entity.RoomConfig">
-        SELECT
-        rc.id AS id
-        ,rc.encode AS encode
-        ,rc.layer AS layer
-        ,rc.pid AS pid
-        ,rc.room_name AS roomName
-        ,rc.p_pid AS pPid
-        ,rc.isvalid AS isvalid
-        ,rc.create_time AS createTime
-        ,rc.update_time AS updateTime
-        FROM room_config AS rc
-        WHERE
-        id = #{id}
-    </select>
 
-    <!--
-	方法名称: delete
-	调用路径: RoomConfig.delete
-	处理信息: 删除记录
-	-->
-    <delete id="delete" parameterType="Object">
+
+    <delete id="deleteByPriKey" parameterType="java.lang.Long">
         DELETE FROM room_config
         WHERE
         id = #{id}
     </delete>
 
-    <!--
-	方法名称: queryItemCount
-	调用路径: RoomConfig.queryItemCount
-	-->
-    <select id="queryItemCount" resultType="java.lang.Integer" parameterType="Object">
+
+    <select id="queryItemCount" resultType="java.lang.Integer" parameterType="swa.manage.entity.RoomConfig">
         SELECT count(*) FROM room_config AS rc
         WHERE 1=1
         <include refid="wherecontation"/>
@@ -155,6 +119,20 @@
         create_time AS createTime,
         update_time AS updateTime
         FROM room_config
+    </select>
+
+    <select id="queryById" resultType="swa.manage.entity.RoomConfig" parameterType="java.lang.Long">
+        SELECT
+        id AS id,
+        encode AS encode,
+        layer AS layer,
+        pid AS pid,
+        room_name AS roomName,
+        p_pid AS pPid,
+        isvalid AS isvalid,
+        create_time AS createTime,
+        update_time AS updateTime
+        FROM room_config where id=#{id}
     </select>
 
 </mapper>

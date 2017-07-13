@@ -19,5 +19,7 @@ public interface RoomConfigService {
 
     List<RoomConfig> queryConfig();
 
+    RoomConfig queryById(Long id);
+
 }
 

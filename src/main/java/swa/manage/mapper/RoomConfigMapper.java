@@ -19,4 +19,6 @@ public interface RoomConfigMapper {
 
     List<RoomConfig> queryConfig();
 
+    RoomConfig queryById(Long id);
+
 }
