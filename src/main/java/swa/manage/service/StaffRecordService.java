@@ -19,7 +19,7 @@ public interface StaffRecordService {
 
     public StaffRecord queryByPriKey(Long id);
 
-    List<StaffRecord>queryStaffRecord();
+    List<StaffRecord> queryStaffRecord();
 
 }
 

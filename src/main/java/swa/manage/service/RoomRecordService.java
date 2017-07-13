@@ -19,7 +19,7 @@ public interface RoomRecordService {
 
     public RoomRecord queryByPriKey(Long id);
 
-    List<RoomRecord>queryRoomRecord();
+    List<RoomRecord> queryRoomRecord();
 
 }
 

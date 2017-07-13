@@ -92,7 +92,6 @@
     </update>
 
 
-
     <delete id="deleteByPriKey" parameterType="java.lang.Long">
         DELETE FROM room_config
         WHERE

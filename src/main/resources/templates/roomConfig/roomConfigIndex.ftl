@@ -1,5 +1,10 @@
 <html>
-<body>
+<#import "../common/defaultLayout.ftl" as defaultLayout>
+
+<@defaultLayout.layout>
+
+
+
 <table border="1">
     <tr>
         <th>编码:layer-pid</th>
@@ -13,23 +18,24 @@
         <th>操作</th>
     </tr>
 
-<#list datas as data>
-    <tr>
-        <td>${data.encode}</td>
-        <td>${data.layer}</td>
-        <td>${data.pid}</td>
-        <td>${data.roomName}</td>
-        <td>${data.pPid}</td>
-        <td>${data.isvalid}</td>
-        <td>${data.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
-        <td>${data.updateTime?string("yyyy-MM-dd HH:mm:ss")}</td>
-        <td>
-            <a href="/roomConfig/toEditDialog.do?id=${data.id}">编辑</a>
-            <a hidden href="/roomConfig/roomConfigDelete.do?id=${data.id}">删除</a>
-            <a href="/roomConfig/roomConfigDetail.do?id=${data.id}">详情</a>
-        </td
-    </tr>
-</#list>
+    <#list datas as data>
+        <tr>
+            <td>${data.encode}</td>
+            <td>${data.layer}</td>
+            <td>${data.pid}</td>
+            <td>${data.roomName}</td>
+            <td>${data.pPid}</td>
+            <td>${data.isvalid}</td>
+            <td>${data.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
+            <td>${data.updateTime?string("yyyy-MM-dd HH:mm:ss")}</td>
+            <td>
+                <a href="/roomConfig/toEditDialog.do?id=${data.id}">编辑</a>
+                <a hidden href="/roomConfig/roomConfigDelete.do?id=${data.id}">删除</a>
+                <a href="/roomConfig/roomConfigDetail.do?id=${data.id}">详情</a>
+            </td
+        </tr>
+    </#list>
 </table>
-</body>
+
+</@defaultLayout.layout>
 </html>
