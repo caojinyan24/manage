@@ -3,6 +3,7 @@ package swa.manage.service;
 
 import swa.manage.entity.RoomRecord;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -11,7 +12,6 @@ import java.util.List;
  */
 public interface RoomRecordService {
 
-    public void add(RoomRecord roomRecord);
 
     public void update(RoomRecord roomRecord);
 
@@ -19,7 +19,12 @@ public interface RoomRecordService {
 
     public RoomRecord queryByPriKey(Long id);
 
-    List<RoomRecord> queryRoomRecord();
+    List<RoomRecord> queryRoomRecord(Date queryDate, String encode);
+
+    void insertInitRecord(Date date, String encode);
+
+    List<RoomRecord> queryRoomRecord(Date queryDate);
+
 
 }
 

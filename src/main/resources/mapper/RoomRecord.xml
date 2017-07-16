@@ -93,19 +93,6 @@
     </update>
 
 
-    <select id="queryRoomRecord" resultType="swa.manage.entity.RoomRecord">
-        SELECT
-        rr.id AS id
-        ,rr.date AS date
-        ,rr.time_period AS timePeriod
-        ,rr.encode AS encode
-        ,rr.staff_record_id AS staffRecordId
-        ,rr.isvalid AS isvalid
-        ,rr.create_time AS createTime
-        ,rr.update_time AS updateTime
-        FROM room_record AS rr
-    </select>
-
     <!--
 	方法名称: delete
 	调用路径: RoomRecord.delete
@@ -127,11 +114,7 @@
         <include refid="wherecontation"/>
     </select>
 
-    <!--
-	方法名称: queryPagenationList
-	调用路径: RoomRecord.queryPagenationList
-	-->
-    <select id="queryPagenationList" parameterType="Object" resultType="swa.manage.entity.RoomRecord">
+    <select id="queryRoomRecord" resultType="swa.manage.entity.RoomRecord">
         SELECT
         rr.id AS id
         ,rr.date AS date
@@ -142,11 +125,22 @@
         ,rr.create_time AS createTime
         ,rr.update_time AS updateTime
         FROM room_record AS rr
-        WHERE 1=1
-        <include refid="wherecontation"/>
-        ORDER BY rr.id DESC
-        LIMIT #{startRow}
-        ,#{pageSize}
+        WHERE rr.date=#{queryDate}
+        <if test="encode!=null">
+            and encode=#{encode}
+        </if>
     </select>
+
+    <insert id="insertInitRecord">
+        INSERT INTO room_record /* 会议室预定记录表 */
+        (
+        `date` ,time_period ,encode
+        )VALUES
+        <foreach collection="times" item="time" separator=",">
+            (
+            #{date},#{time},#{encode}
+            )
+        </foreach>
+    </insert>
 
 </mapper>

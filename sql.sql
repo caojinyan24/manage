@@ -30,22 +30,22 @@ CREATE TABLE `room_record` (
   `time_period` tinyint(4) NOT NULL DEFAULT '0' COMMENT '预定时间段，如0代表00:00-00:30，1代表00:30-1:00',
   `encode` varchar(8) NOT NULL DEFAULT '' COMMENT '编码:layer-pid',
   `staff_record_id` bigint(24) unsigned NOT NULL DEFAULT '0' COMMENT '人员预定表中关联id',
-  `isvalid` tinyint(4) unsigned NOT NULL DEFAULT '1' COMMENT '是否已取消：0-取消，1-未取消',
+  `isvalid` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '是否已定：0-未定，1-已定',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uniq_date_time_period_encode` (`date`,`time_period`,`encode`)
+  UNIQUE KEY `uniq_date_time_encode_period` (`date`,`time_period`,`encode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='会议室预定记录表';
 
 
 CREATE TABLE `staff_record` (
   `id` bigint(24) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
   `date` date NOT NULL DEFAULT '1971-01-01' COMMENT '预定日期',
-  `start_time` time NOT NULL DEFAULT '00:00:00' COMMENT '预定开始时间',
-  `end_time` time NOT NULL DEFAULT '00:00:00' COMMENT '预定结束时间',
+  `time_period_list` varchar(64) NOT NULL DEFAULT '' COMMENT '预定时间段，以，分割',
   `encode` varchar(8) NOT NULL DEFAULT '' COMMENT '编码:layer-pid',
   `isvalid` tinyint(4) unsigned NOT NULL DEFAULT '1' COMMENT '是否已取消：0-取消，1-未取消',
   `staff_name` varchar(16) NOT NULL DEFAULT '' COMMENT '预订人姓名',
+  `staff_phone` varchar(16) NOT NULL DEFAULT '' COMMENT '预订人手机号',
   `comment` varchar(1024) NOT NULL DEFAULT '' COMMENT '预定用途',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',

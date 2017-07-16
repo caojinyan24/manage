@@ -4,11 +4,13 @@ package swa.manage.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import swa.manage.common.TimePeriodEnum;
 import swa.manage.entity.RoomRecord;
 import swa.manage.mapper.RoomRecordMapper;
 import swa.manage.service.RoomRecordService;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,12 +23,6 @@ public class RoomRecordServiceImpl implements RoomRecordService {
 
     @Resource
     private RoomRecordMapper roomRecordMapper;
-
-
-    @Override
-    public void add(RoomRecord roomRecord) {
-        roomRecordMapper.add(roomRecord);
-    }
 
     @Override
     public void update(RoomRecord roomRecord) {
@@ -44,7 +40,19 @@ public class RoomRecordServiceImpl implements RoomRecordService {
     }
 
     @Override
-    public List<RoomRecord> queryRoomRecord() {
-        return roomRecordMapper.queryRoomRecord();
+    public List<RoomRecord> queryRoomRecord(Date queryDate, String encode) {
+        return roomRecordMapper.queryRoomRecord(queryDate, encode);
     }
+
+    @Override
+    public void insertInitRecord(Date date, String encode) {
+        roomRecordMapper.insertInitRecord(TimePeriodEnum.getAsMap().keySet(), date, encode);
+    }
+
+    @Override
+    public List<RoomRecord> queryRoomRecord(Date queryDate) {
+        return roomRecordMapper.queryRoomRecord(queryDate, null);
+    }
+
+
 }

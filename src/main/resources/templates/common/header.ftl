@@ -1,2 +1,1 @@
-
-<div style="background-color:#93DB70; float:none;" >header</div>
+<div style="background-color:#93DB70; float:none;">header</div>

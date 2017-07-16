@@ -110,39 +110,39 @@
 <#--</button>-->
 <#--</legend>-->
 <#--</div>-->
-    <table border="1">
-        <tr>
-            <th>预定日期</th>
-            <th>预定开始时间</th>
-            <th>预定结束时间</th>
-            <th>编码:layer-pid</th>
-            <th>是否已取消：0-取消，1-未取消</th>
-            <th>预订人姓名</th>
-            <th>预定用途</th>
-            <th>创建时间</th>
-            <th>更新时间</th>
-            <th>操作</th>
-        </tr>
+<table border="1">
+    <tr>
+        <th>预定日期</th>
+        <th>预定开始时间</th>
+        <th>预定结束时间</th>
+        <th>编码:layer-pid</th>
+        <th>是否已取消：0-取消，1-未取消</th>
+        <th>预订人姓名</th>
+        <th>预定用途</th>
+        <th>创建时间</th>
+        <th>更新时间</th>
+        <th>操作</th>
+    </tr>
 
-        <tr>
-            <#list datas as data>
-                <td>${data.date?string("yyyy-MM-dd")}</td>
-                <td>${info.startTime}</td>
-                <td>${info.endTime}</td>
-                <td>${info.encode}</td>
-                <td>${info.isvalid}</td>
-                <td>${info.staffName}</td>
-                <td>${info.comment}</td>
-                <td>${data.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
-                <td>${data.updateTime?string("yyyy-MM-dd HH:mm:ss")}</td>
-                <td>
-                    <a href="/staffRecord/toEditDialog.do?id=$!{info.id}','编辑用户')">编辑</a>
-                    <a href="/staffRecord/staffRecordDelete.do?id=$!{info.id}')">删除</a>
-                    <a href="/staffRecord/staffRecordDetail.do?id=$!{info.id}">详情</a>
-                </td>
-            </#list>
-        </tr>
-    </table>
+    <tr>
+        <#list datas as data>
+            <td>${data.date?string("yyyy-MM-dd")}</td>
+            <td>${info.startTime}</td>
+            <td>${info.endTime}</td>
+            <td>${info.encode}</td>
+            <td>${info.isvalid}</td>
+            <td>${info.staffName}</td>
+            <td>${info.comment}</td>
+            <td>${data.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
+            <td>${data.updateTime?string("yyyy-MM-dd HH:mm:ss")}</td>
+            <td>
+                <a href="/staffRecord/toEditDialog.do?id=$!{info.id}','编辑用户')">编辑</a>
+                <a href="/staffRecord/staffRecordDelete.do?id=$!{info.id}')">删除</a>
+                <a href="/staffRecord/staffRecordDetail.do?id=$!{info.id}">详情</a>
+            </td>
+        </#list>
+    </tr>
+</table>
 <#--<div class="text-right">-->
 <#--<!--公用翻页代码&ndash;&gt;-->
 <#--#set($attr='formSubmit')-->
