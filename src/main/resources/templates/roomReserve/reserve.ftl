@@ -45,8 +45,8 @@
 //            }
 //        });
 //        todo 优化下
-        var url = "/manage/reserveSubmit?encode=" + encode + "&date=" + date + "&timePeriods=" + timePeriods + "&reserveReason=" + reserveReason +
-                "&name=" + name + "&phone=" + phone;
+        var url = "/manage/reserveSubmit?encode=" + encode + "&reserveDateStr=" + date + "&timePeriodStr=" + timePeriods + "&reserveReason=" + reserveReason +
+                "&reserveStaffName=" + name + "&reserveStaffPhone=" + phone;
         console.info("submitReserve:" + url);
         window.open(url, "提交页面", 'height=100,width=400,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
     }

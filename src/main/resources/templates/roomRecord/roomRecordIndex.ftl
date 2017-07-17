@@ -21,7 +21,7 @@
             <td>${data.timePeriod}</td>
             <td>${data.encode}</td>
             <td>${data.staffRecordId}</td>
-            <td>${data.isvalid}</td>
+            <td>${data.validStatus}</td>
             <td>${data.createTime?string("yyyy-MM-dd HH:mm:ss")})</td>
             <td>${data.updateTime?string("yyyy-MM-dd HH:mm:ss")})</td>
             <td class="last">

@@ -54,7 +54,7 @@
                             <label for="inputEmail3" class="col-sm-1 control-label"
                                    style="text-align:left;">是否可用：0-不可用，1-可用</label>
                             <div class="col-sm-2">
-                                <input type="text" value="${roomConfig.isvalid}" name="isvalid" id="isvalid"
+                                <input type="text" value="${roomConfig.validStatus}" name="validStatus" id="validStatus"
                                        class="form-control"/>
                             </div>
                         </div>

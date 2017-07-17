@@ -21,8 +21,8 @@
             <if test="query.pPid != null and query.pPid != ''">
                 AND rc.p_pid = #{query.pPid}
             </if>
-            <if test="query.isvalid != null and query.isvalid != ''">
-                AND rc.isvalid = #{query.isvalid}
+            <if test="query.validStatus != null and query.validStatus != ''">
+                AND rc.valid_status = #{query.validStatus}
             </if>
             <if test="query.createTime != null and query.createTime != ''">
                 AND rc.create_time = #{query.createTime}
@@ -42,7 +42,7 @@
         ,pid
         ,room_name
         ,p_pid
-        ,isvalid
+        ,valid_status
         ,create_time
         ,update_time
         )
@@ -53,7 +53,7 @@
         ,#{pid}
         ,#{roomName}
         ,#{pPid}
-        ,#{isvalid}
+        ,#{validStatus}
         ,#{createTime}
         ,#{updateTime}
         )
@@ -77,8 +77,8 @@
             <if test="pPid != null">
                 p_pid = #{pPid},
             </if>
-            <if test="isvalid != null">
-                isvalid = #{isvalid},
+            <if test="validStatus != null">
+                valid_status = #{validStatus},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime},
@@ -114,7 +114,7 @@
         pid AS pid,
         room_name AS roomName,
         p_pid AS pPid,
-        isvalid AS isvalid,
+        valid_status AS validStatus,
         create_time AS createTime,
         update_time AS updateTime
         FROM room_config
@@ -128,7 +128,7 @@
         pid AS pid,
         room_name AS roomName,
         p_pid AS pPid,
-        isvalid AS isvalid,
+        valid_status AS validStatus,
         create_time AS createTime,
         update_time AS updateTime
         FROM room_config where id=#{id}

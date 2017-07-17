@@ -25,11 +25,11 @@
         <tr>
             <td>${encode}</td>
             <#list records[encode] as record>
-                <#if record.isvalid==0>
+                <#if record.validStatus.code==1>
                 <#--<td><a href="">预定</a></td>-->
                     <td width="4%" height="26" align="center">
                         <input type="checkbox" name="timeChecked" id="timeChecked"
-                               value=${record.timePeriod}>
+                               value=${record.timePeriod.code}>
                     </td>
                 <#else>
                     <td></td>

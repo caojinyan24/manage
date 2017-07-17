@@ -1,4 +1,4 @@
-package swa.manage.common;
+package swa.manage.value;
 
 import com.google.common.collect.Maps;
 
@@ -28,13 +28,6 @@ public enum TimePeriodEnum {
     EIGHTWEEN(36, "18:00"),
     EIGHTWEEN_HALF(37, "18:30");
 
-    private static final Map<Integer, String> keyvalueMap = Maps.newLinkedHashMap();
-
-    static {
-        for (TimePeriodEnum item : TimePeriodEnum.values()) {
-            keyvalueMap.put(item.getCode(), item.getDesc());
-        }
-    }
 
     private final Integer code;
     private final String desc;
@@ -44,8 +37,22 @@ public enum TimePeriodEnum {
         this.desc = desc;
     }
 
+    private static final Map<Integer, String> keyvalueMap = Maps.newLinkedHashMap();
+    private static final Map<Integer, TimePeriodEnum> keyEnumMap = Maps.newLinkedHashMap();
+
+    static {
+        for (TimePeriodEnum item : TimePeriodEnum.values()) {
+            keyvalueMap.put(item.getCode(), item.getDesc());
+            keyEnumMap.put(item.getCode(), item);
+        }
+    }
+
     public static Map<Integer, String> getAsMap() {
         return keyvalueMap;
+    }
+
+    public static TimePeriodEnum toEnum(Integer code) {
+        return keyEnumMap.get(code);
     }
 
     public Integer getCode() {

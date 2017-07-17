@@ -25,7 +25,7 @@
             <td>${data.pid}</td>
             <td>${data.roomName}</td>
             <td>${data.pPid}</td>
-            <td>${data.isvalid}</td>
+            <td>${data.validStatus}</td>
             <td>${data.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
             <td>${data.updateTime?string("yyyy-MM-dd HH:mm:ss")}</td>
             <td>

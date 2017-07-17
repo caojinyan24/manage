@@ -11,16 +11,13 @@
                 AND sr.date = #{query.date}
             </if>
             <if test="query.startTime != null and query.startTime != ''">
-                AND sr.start_time = #{query.startTime}
-            </if>
-            <if test="query.endTime != null and query.endTime != ''">
-                AND sr.end_time = #{query.endTime}
+                AND sr.time_period_list = #{query.startTime}
             </if>
             <if test="query.encode != null and query.encode != ''">
                 AND sr.encode = #{query.encode}
             </if>
-            <if test="query.isvalid != null and query.isvalid != ''">
-                AND sr.isvalid = #{query.isvalid}
+            <if test="query.validStatus != null and query.validStatus != ''">
+                AND sr.valid_status = #{query.validStatus}
             </if>
             <if test="query.staffName != null and query.staffName != ''">
                 AND sr.staff_name = #{query.staffName}
@@ -37,34 +34,25 @@
         </trim>
     </sql>
 
-    <!--
-	方法名称: insert
-	调用路径: StaffRecord.insert
-	-->
-    <insert id="insert" parameterType="Object">
+
+    <insert id="add" parameterType="swa.manage.entity.StaffRecord">
         INSERT INTO staff_record /* 人员预定记录表 */
         (
-        date
-        ,start_time
-        ,end_time
+        `date`
+        ,time_period_list
         ,encode
-        ,isvalid
+        ,valid_status
         ,staff_name
         ,comment
-        ,create_time
-        ,update_time
         )
         values
         (
         #{date}
-        ,#{startTime}
-        ,#{endTime}
+        ,#{timePeriodList}
         ,#{encode}
-        ,#{isvalid}
+        ,#{validStatus}
         ,#{staffName}
         ,#{comment}
-        ,#{createTime}
-        ,#{updateTime}
         )
     </insert>
 
@@ -79,17 +67,14 @@
             <if test="date != null">
                 date = #{date},
             </if>
-            <if test="startTime != null">
-                start_time = #{startTime},
-            </if>
-            <if test="endTime != null">
-                end_time = #{endTime},
+            <if test="timePeriodList != null">
+                time_period_list = #{timePeriodList},
             </if>
             <if test="encode != null">
                 encode = #{encode},
             </if>
-            <if test="isvalid != null">
-                isvalid = #{isvalid},
+            <if test="validStatus != null">
+                valid_status = #{validStatus},
             </if>
             <if test="staffName != null">
                 staff_name = #{staffName},
@@ -117,10 +102,9 @@
         SELECT
         sr.id AS id
         ,sr.date AS date
-        ,sr.start_time AS startTime
-        ,sr.end_time AS endTime
+        ,sr.time_period_list AS timePeriodList
         ,sr.encode AS encode
-        ,sr.isvalid AS isvalid
+        ,sr.valid_status AS validStatus
         ,sr.staff_name AS staffName
         ,sr.comment AS comment
         ,sr.create_time AS createTime
@@ -157,10 +141,9 @@
         SELECT
         sr.id AS id
         ,sr.date AS date
-        ,sr.start_time AS startTime
-        ,sr.end_time AS endTime
+        ,sr.time_period_list AS timePeriodList
         ,sr.encode AS encode
-        ,sr.isvalid AS isvalid
+        ,sr.valid_status AS validStatus
         ,sr.staff_name AS staffName
         ,sr.comment AS comment
         ,sr.create_time AS createTime

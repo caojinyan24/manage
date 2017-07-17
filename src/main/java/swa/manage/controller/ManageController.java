@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import swa.manage.biz.RoomBiz;
-import swa.manage.common.TimePeriodEnum;
+import swa.manage.value.TimePeriodEnum;
 import swa.manage.entity.RoomRecord;
 
 import javax.annotation.Resource;
@@ -47,7 +47,7 @@ public class ManageController {
             } else {
                 date = DateUtils.parseDate(dateStr, (String[]) Lists.newArrayList("yyyy-MM-dd").toArray());
             }
-            Map<String, List<RoomRecord>> records = roomBiz.assembleRecords(date);
+            Map<String, List<RoomRecord>> records = roomBiz.queryAndInitRecords(date);
             mav.addObject("records", records);
             mav.addObject("timePeriods", TimePeriodEnum.getAsMap().keySet());
             mav.addObject("date", DateFormatUtils.format(date, "yyyy-MM-dd"));

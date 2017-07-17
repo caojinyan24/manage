@@ -19,8 +19,8 @@
             <if test="query.staffRecordId != null and query.staffRecordId != ''">
                 AND rr.staff_record_id = #{query.staffRecordId}
             </if>
-            <if test="query.isvalid != null and query.isvalid != ''">
-                AND rr.isvalid = #{query.isvalid}
+            <if test="query.validStatus != null and query.validStatus != ''">
+                AND rr.valid_status = #{query.validStatus}
             </if>
             <if test="query.createTime != null and query.createTime != ''">
                 AND rr.create_time = #{query.createTime}
@@ -42,7 +42,7 @@
         ,time_period
         ,encode
         ,staff_record_id
-        ,isvalid
+        ,valid_status
         ,create_time
         ,update_time
         )
@@ -52,7 +52,7 @@
         ,#{timePeriod}
         ,#{encode}
         ,#{staffRecordId}
-        ,#{isvalid}
+        ,#{validStatus}
         ,#{createTime}
         ,#{updateTime}
         )
@@ -78,8 +78,8 @@
             <if test="staffRecordId != null">
                 staff_record_id = #{staffRecordId},
             </if>
-            <if test="isvalid != null">
-                isvalid = #{isvalid},
+            <if test="validStatus != null">
+                valid_status = #{validStatus},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime},
@@ -91,6 +91,19 @@
         WHERE
         id = #{id}
     </update>
+    <!--
+        方法名称: update
+        调用路径: RoomRecord.update
+        -->
+    <update id="updateValidStatus" parameterType="Object">
+        UPDATE room_record /* 会议室预定记录表 */
+        set valid_status=#{newValidStatus}
+        where `date`=#{date} and encode=#{encode} and time_period in
+        <foreach collection="timePeriods" close=")" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+    </update>
+
 
 
     <!--
@@ -121,7 +134,7 @@
         ,rr.time_period AS timePeriod
         ,rr.encode AS encode
         ,rr.staff_record_id AS staffRecordId
-        ,rr.isvalid AS isvalid
+        ,rr.valid_status AS validStatus
         ,rr.create_time AS createTime
         ,rr.update_time AS updateTime
         FROM room_record AS rr

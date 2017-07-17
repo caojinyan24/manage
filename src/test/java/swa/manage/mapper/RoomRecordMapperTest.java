@@ -1,5 +1,6 @@
 package swa.manage.mapper;
 
+import com.google.common.collect.Lists;
 import org.assertj.core.util.DateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTestContextBootstrapper;
 import org.springframework.test.context.BootstrapWith;
 import org.springframework.test.context.junit4.SpringRunner;
-import swa.manage.common.TimePeriodEnum;
+import swa.manage.value.TimePeriodEnum;
+import swa.manage.value.ValidEnum;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -32,6 +34,7 @@ public class RoomRecordMapperTest {
 
     @Test
     public void testQueryRoomRecord() throws Exception {
-        logger.info("##{}", roomRecordMapper.queryRoomRecord(DateUtil.truncateTime(new Date()), "abc"));
+        roomRecordMapper.updateValidStatus(ValidEnum.INVALID, Lists.newArrayList(TimePeriodEnum.EIGHTWEEN),new Date(),"1-1");
+        logger.info("##{}", roomRecordMapper.queryRoomRecord(DateUtil.truncateTime(new Date()), "1-1"));
     }
 }

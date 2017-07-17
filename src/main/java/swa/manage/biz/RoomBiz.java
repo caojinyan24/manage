@@ -1,6 +1,7 @@
 package swa.manage.biz;
 
 import swa.manage.entity.RoomRecord;
+import swa.manage.value.ReserveVo;
 
 import java.util.Date;
 import java.util.List;
@@ -11,5 +12,7 @@ import java.util.Map;
  */
 public interface RoomBiz {
 
-    Map<String, List<RoomRecord>> assembleRecords(Date queryDate);
+    Map<String, List<RoomRecord>> queryAndInitRecords(Date queryDate);
+
+    void reserve(ReserveVo reserveVo);
 }

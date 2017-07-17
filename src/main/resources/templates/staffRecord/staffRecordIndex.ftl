@@ -51,12 +51,12 @@
 <#--</div>-->
 <#--</div>-->
 <#--<div class="form-group col-sm-3">-->
-<#--<label for="isvalid"-->
+<#--<label for="validStatus"-->
 <#--class="control-label col-sm-3 line34">是否已取消：0-取消，1-未取消</label>-->
 <#--<div class="col-sm-8">-->
-<#--<input type="text" name="isvalid"-->
-<#--id="isvalid"-->
-<#--value="${staffRecord.isvalid}" class="form-control"-->
+<#--<input type="text" name="validStatus"-->
+<#--id="validStatus"-->
+<#--value="${staffRecord.validStatus}" class="form-control"-->
 <#--placeholder="是否已取消：0-取消，1-未取消">-->
 <#--</div>-->
 <#--</div>-->
@@ -130,7 +130,7 @@
             <td>${info.startTime}</td>
             <td>${info.endTime}</td>
             <td>${info.encode}</td>
-            <td>${info.isvalid}</td>
+            <td>${info.validStatus}</td>
             <td>${info.staffName}</td>
             <td>${info.comment}</td>
             <td>${data.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>

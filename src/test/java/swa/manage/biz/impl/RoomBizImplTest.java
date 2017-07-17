@@ -23,6 +23,6 @@ public class RoomBizImplTest {
 
     @Test
     public void testAssembleRecords() throws Exception {
-        roomBiz.assembleRecords(DateUtils.truncate(new Date(), Calendar.DATE));
+        roomBiz.queryAndInitRecords(DateUtils.truncate(new Date(), Calendar.DATE));
     }
 }

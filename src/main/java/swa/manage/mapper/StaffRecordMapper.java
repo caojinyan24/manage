@@ -11,13 +11,13 @@ import java.util.List;
  */
 public interface StaffRecordMapper {
 
-    public void add(StaffRecord staffRecord);
+    void add(StaffRecord staffRecord);
 
-    public void update(StaffRecord staffRecord);
+    void update(StaffRecord staffRecord);
 
-    public void deleteByPriKey(Long id);
+     void deleteByPriKey(Long id);
 
-    public StaffRecord queryByPriKey(Long id);
+     StaffRecord queryByPriKey(Long id);
 
     List<StaffRecord> queryStaffRecord();
 
