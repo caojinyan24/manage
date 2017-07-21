@@ -20,15 +20,17 @@
 <table>
     <tr>
         <td>房间编码</td>
-        <#list timePeriods as timePeriod>
+        <#list timePeriods?values as timePeriod>
             <th>${timePeriod}</th>
+            <#--<th>${timePeriods}</th>-->
+            <#--<th>${timePeriods.get(timePeriod)}</th>-->
         </#list>
         <th></th>
 
     </tr>
     <#list records?keys as encode>
         <tr>
-            <td>${encode}</td>
+            <td>${configs[encode].roomName}</td>
             <#list records[encode] as record>
                 <#if record.validStatus.code==1>
                     <td width="4%" height="26" align="center">

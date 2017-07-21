@@ -72,5 +72,17 @@ public class RoomBizImpl implements RoomBiz {
         staffRecordService.add(ReserveVo.assembleStaffRecord(reserveVo));
     }
 
+    @Override
+    public Map<String, RoomConfig> getConfigMap() {
 
+        Map<String, RoomConfig> result = Maps.newHashMap();
+        List<RoomConfig> configs = roomConfigService.queryConfig();
+
+        for (RoomConfig config : configs) {
+            result.put(config.getEncode(), config);
+        }
+        return result;
+
+
+    }
 }

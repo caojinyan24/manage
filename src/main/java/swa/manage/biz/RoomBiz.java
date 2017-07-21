@@ -1,5 +1,6 @@
 package swa.manage.biz;
 
+import swa.manage.entity.RoomConfig;
 import swa.manage.entity.RoomRecord;
 import swa.manage.value.ReserveVo;
 
@@ -15,4 +16,7 @@ public interface RoomBiz {
     Map<String, List<RoomRecord>> queryAndInitRecords(Date queryDate);
 
     void reserve(ReserveVo reserveVo);
+
+    public Map<String, RoomConfig> getConfigMap();
+
 }

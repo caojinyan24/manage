@@ -1,5 +1,6 @@
 package swa.manage.controller;
 
+import com.google.common.base.Splitter;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import swa.manage.biz.RoomBiz;
+import swa.manage.entity.RoomConfig;
 import swa.manage.entity.RoomRecord;
 import swa.manage.value.TimePeriodEnum;
 
@@ -47,7 +49,8 @@ public class ManageController {
             }
             Map<String, List<RoomRecord>> records = roomBiz.queryAndInitRecords(date);
             mav.addObject("records", records);
-            mav.addObject("timePeriods", TimePeriodEnum.getAsMap().keySet());
+            mav.addObject("configs",roomBiz.getConfigMap());
+            mav.addObject("timePeriods", TimePeriodEnum.getAsMap());
             mav.addObject("date", date);
 
         } catch (Exception e) {
@@ -73,9 +76,10 @@ public class ManageController {
         ModelAndView mav = new ModelAndView("roomReserve/reserve");
         logger.info("roomReserve-begin:{},{},{}", date, encode, timePeriodsStr);
         try {
-            mav.addObject("encode", encode);
+            mav.addObject("room", roomBiz.getConfigMap().get(encode));
             mav.addObject("date", date);
             mav.addObject("timePeriods", timePeriodsStr);
+            mav.addObject("showTime",getShowTime(timePeriodsStr));
         } catch (Exception e) {
             mav.addObject("records", Maps.newHashMap());
             mav.addObject("date", date);
@@ -84,6 +88,15 @@ public class ManageController {
         }
         logger.info("roomReserve-end:{}", mav.getModel());
         return mav;
+    }
+
+    private String getShowTime(String str){// TODO: 7/21/17 合并时间段 
+        List<String>list= Splitter.on(",").omitEmptyStrings().splitToList(str);
+        StringBuilder sb=new StringBuilder("");
+        for(String s:list){
+            sb.append(',').append(TimePeriodEnum.getAsMap().get(Integer.valueOf(s)));
+        }
+        return sb.toString().substring(1);
     }
 
 
