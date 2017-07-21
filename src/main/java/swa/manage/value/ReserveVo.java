@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import org.springframework.format.annotation.DateTimeFormat;
 import swa.manage.common.Tools;
 import swa.manage.entity.StaffRecord;
 
@@ -17,7 +18,8 @@ import java.util.List;
 public class ReserveVo {
     private static final Splitter splitter = Splitter.on(",").omitEmptyStrings();
 
-    String reserveDateStr;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    Date reserveDate;
     String encode;
     String timePeriodStr;
     String reserveStaffName;
@@ -56,15 +58,11 @@ public class ReserveVo {
     }
 
     public Date getReserveDate() {
-        return Tools.parseDate(this.reserveDateStr);
+        return reserveDate;
     }
 
-    public String getReserveDateStr() {
-        return reserveDateStr;
-    }
-
-    public void setReserveDateStr(String reserveDateStr) {
-        this.reserveDateStr = reserveDateStr;
+    public void setReserveDate(Date reserveDate) {
+        this.reserveDate = reserveDate;
     }
 
     public String getEncode() {
@@ -110,7 +108,7 @@ public class ReserveVo {
     @Override
     public String toString() {
         return "ReserveVo{" +
-                "reserveDateStr='" + reserveDateStr + '\'' +
+                "reserveDate='" + reserveDate + '\'' +
                 ", encode='" + encode + '\'' +
                 ", timePeriodStr='" + timePeriodStr + '\'' +
                 ", reserveStaffName='" + reserveStaffName + '\'' +

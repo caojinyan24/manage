@@ -3,14 +3,14 @@
 
 <body>
 <ul>
-    <li>预定时期：${date}</li>
+    <li>预定时期：${date?string("yyyy-MM-dd")}</li>
     <li>预定房间：${encode}</li>
     <li>预定时段：${timePeriods}</li>
     <li>申请用途：<input type="text" id="reserveReason" name="reserveReason"/></li>
     <li>申请人姓名：<input type="text" id="name" name="name"/></li>
     <li>申请人手机号：<input type="text" id="phone" name="phone"/></li>
     <li>
-        <button onclick="submitReserve('${date}','${encode}','${timePeriods}')">确定</button>
+        <button onclick="submitReserve('${date?string("yyyy-MM-dd")}','${encode}','${timePeriods}')">确定</button>
 
 
     </li>
@@ -45,7 +45,7 @@
 //            }
 //        });
 //        todo 优化下
-        var url = "/manage/reserveSubmit?encode=" + encode + "&reserveDateStr=" + date + "&timePeriodStr=" + timePeriods + "&reserveReason=" + reserveReason +
+        var url = "/manage/reserveSubmit?encode=" + encode + "&reserveDate=" + date + "&timePeriodStr=" + timePeriods + "&reserveReason=" + reserveReason +
                 "&reserveStaffName=" + name + "&reserveStaffPhone=" + phone;
         console.info("submitReserve:" + url);
         window.open(url, "提交页面", 'height=100,width=400,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');

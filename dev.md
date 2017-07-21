@@ -1,4 +1,4 @@
-*Cannot determine embedded datasource
+* Cannot determine embedded datasource
 mybatis和datasource的配置数据应该写在系统生成的application.properties中，否则不能加载进来
 
 
@@ -24,9 +24,10 @@ FreeMarker的插值有如下两种类型:1,通用插值${expr};2,数字格式化
 如果该指令是一个用户指令而不是系统内建指令时,应将#符号改成@符号. 
 
 
+jquery时间插件
+前后端String和Date互转
 
 #todo
-加入时间插件
 
 
 

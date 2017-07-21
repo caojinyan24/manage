@@ -1,22 +1,20 @@
-
 <#import "../common/defaultLayout.ftl" as defaultLayout>
 
 <@defaultLayout.layout>
 
 
-<#--<select id="startYear" name="startYear">-->
-<#--<option value="2012">2012年</option>-->
-<#--<option value="2013" selected="selected">2013年</option>-->
-<#--<option value="2014">2014年</option>-->
-<#--<option value="2015">2015年</option>-->
-<#--</select>-->
-<form action="/manage/index" method="post" name="search" >
-    <input name="date" id="date"  value="${date?string("yyyy-MM-dd")}"/>
-    <#--设置展示格式，转成string-->
-<#--onclick="$.datepicker.formatDate('yy-mm-dd', new Date())">-->
-    <input type="submit" value="搜索" />
-</form>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+
+<form action="/manage/index" method="post" name="search">
+    <input name="date" id="date" type="text" value="${date?string("yyyy-MM-dd")}">
+    <input type="submit" value="搜索"/>
+</form>
 
 
 <table>
@@ -43,8 +41,8 @@
             </#list>
             <td>
                 <button onclick="reserve('${encode}','${date?string("yyyy-MM-dd")}')">申请预定</button>
-                <#--date转成String-->
-                <#--date加‘’转成String，否则使用date格式转成get请求的时候会自动把date转成String，这样转换的结果是错误的-->
+            <#--date转成String-->
+            <#--date加‘’转成String，否则使用date格式转成get请求的时候会自动把date转成String，这样转换的结果是错误的-->
             </td>
 
         </tr>
@@ -53,6 +51,9 @@
 
 
 <script>
+    $(function () {
+        $("#date").datepicker({dateFormat: "yy-mm-dd"});
+    });
 
     function reserve(encode, date) {
 
