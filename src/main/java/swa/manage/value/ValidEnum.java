@@ -10,18 +10,6 @@ import java.util.Map;
 public enum ValidEnum {
     VALID(1, "可用"),
     INVALID(0, "不可用");
-    private final Integer code;
-    private final String msg;
-
-    ValidEnum(Integer code, String msg) {
-        this.code = code;
-        this.msg = msg;
-    }
-
-    public static ValidEnum toEnum(Integer code) {
-        return keyEnumMap.get(code);
-    }
-
     private static final Map<Integer, String> map = Maps.newHashMap();
     private static final Map<Integer, ValidEnum> keyEnumMap = Maps.newHashMap();
 
@@ -30,6 +18,17 @@ public enum ValidEnum {
             map.put(t.code, t.msg);
             keyEnumMap.put(t.code, t);
         }
+    }
+
+    private final Integer code;
+    private final String msg;
+    ValidEnum(Integer code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
+    public static ValidEnum toEnum(Integer code) {
+        return keyEnumMap.get(code);
     }
 
     public Integer getCode() {

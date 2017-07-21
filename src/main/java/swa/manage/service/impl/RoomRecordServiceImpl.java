@@ -4,10 +4,10 @@ package swa.manage.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import swa.manage.value.TimePeriodEnum;
 import swa.manage.entity.RoomRecord;
 import swa.manage.mapper.RoomRecordMapper;
 import swa.manage.service.RoomRecordService;
+import swa.manage.value.TimePeriodEnum;
 import swa.manage.value.ValidEnum;
 
 import javax.annotation.Resource;
@@ -51,8 +51,8 @@ public class RoomRecordServiceImpl implements RoomRecordService {
     }
 
     @Override
-    public void updatevalidStatus(ValidEnum newValidStatus,List<TimePeriodEnum> timePeriod,  Date date, String encode) {
-        roomRecordMapper.updateValidStatus(newValidStatus,timePeriod,date,encode);
+    public void updatevalidStatus(ValidEnum newValidStatus, List<TimePeriodEnum> timePeriod, Date date, String encode) {
+        roomRecordMapper.updateValidStatus(newValidStatus, timePeriod, date, encode);
     }
 
 

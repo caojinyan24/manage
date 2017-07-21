@@ -34,7 +34,7 @@ public class RoomRecordMapperTest {
 
     @Test
     public void testQueryRoomRecord() throws Exception {
-        roomRecordMapper.updateValidStatus(ValidEnum.INVALID, Lists.newArrayList(TimePeriodEnum.EIGHTWEEN),new Date(),"1-1");
+        roomRecordMapper.updateValidStatus(ValidEnum.INVALID, Lists.newArrayList(TimePeriodEnum.EIGHTWEEN), new Date(), "1-1");
         logger.info("##{}", roomRecordMapper.queryRoomRecord(DateUtil.truncateTime(new Date()), "1-1"));
     }
 }

@@ -5,10 +5,8 @@ import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import org.springframework.format.annotation.DateTimeFormat;
-import swa.manage.common.Tools;
 import swa.manage.entity.StaffRecord;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +16,7 @@ import java.util.List;
 public class ReserveVo {
     private static final Splitter splitter = Splitter.on(",").omitEmptyStrings();
 
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date reserveDate;
     String encode;
     String timePeriodStr;

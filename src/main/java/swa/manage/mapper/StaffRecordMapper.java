@@ -15,9 +15,9 @@ public interface StaffRecordMapper {
 
     void update(StaffRecord staffRecord);
 
-     void deleteByPriKey(Long id);
+    void deleteByPriKey(Long id);
 
-     StaffRecord queryByPriKey(Long id);
+    StaffRecord queryByPriKey(Long id);
 
     List<StaffRecord> queryStaffRecord();
 

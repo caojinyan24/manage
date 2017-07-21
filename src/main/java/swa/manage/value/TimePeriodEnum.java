@@ -29,14 +29,6 @@ public enum TimePeriodEnum {
     EIGHTWEEN_HALF(37, "18:30");
 
 
-    private final Integer code;
-    private final String desc;
-
-    TimePeriodEnum(Integer code, String desc) {
-        this.code = code;
-        this.desc = desc;
-    }
-
     private static final Map<Integer, String> keyvalueMap = Maps.newLinkedHashMap();
     private static final Map<Integer, TimePeriodEnum> keyEnumMap = Maps.newLinkedHashMap();
 
@@ -45,6 +37,14 @@ public enum TimePeriodEnum {
             keyvalueMap.put(item.getCode(), item.getDesc());
             keyEnumMap.put(item.getCode(), item);
         }
+    }
+
+    private final Integer code;
+    private final String desc;
+
+    TimePeriodEnum(Integer code, String desc) {
+        this.code = code;
+        this.desc = desc;
     }
 
     public static Map<Integer, String> getAsMap() {

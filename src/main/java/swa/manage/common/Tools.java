@@ -17,7 +17,7 @@ public class Tools {
         try {
             return sdf.parse(str);
         } catch (Exception e) {
-            logger.error("parseDate error:",e);
+            logger.error("parseDate error:", e);
             return null;
         }
     }

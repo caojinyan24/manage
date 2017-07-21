@@ -56,7 +56,6 @@
     </insert>
 
 
-
     <update id="update" parameterType="Object">
         UPDATE room_record
         <trim prefix="SET" suffixOverrides=",">
@@ -94,7 +93,6 @@
             #{item}
         </foreach>
     </update>
-
 
 
     <delete id="delete" parameterType="Object">
