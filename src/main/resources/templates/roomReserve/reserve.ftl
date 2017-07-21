@@ -21,7 +21,7 @@
 </ul>
 
 </body>
-<script type="text/javascript">
+<script>
 
 
     function submitReserve(date, encode, timePeriods) {

@@ -31,12 +31,9 @@
         </trim>
     </sql>
 
-    <!--
-	方法名称: insert
-	调用路径: RoomRecord.insert
-	-->
+
     <insert id="insert" parameterType="Object">
-        INSERT INTO room_record /* 会议室预定记录表 */
+        INSERT INTO room_record
         (
         date
         ,time_period
@@ -59,12 +56,9 @@
     </insert>
 
 
-    <!--
-	方法名称: update
-	调用路径: RoomRecord.update
-	-->
+
     <update id="update" parameterType="Object">
-        UPDATE room_record /* 会议室预定记录表 */
+        UPDATE room_record
         <trim prefix="SET" suffixOverrides=",">
             <if test="date != null">
                 date = #{date},
@@ -91,12 +85,9 @@
         WHERE
         id = #{id}
     </update>
-    <!--
-        方法名称: update
-        调用路径: RoomRecord.update
-        -->
+
     <update id="updateValidStatus" parameterType="Object">
-        UPDATE room_record /* 会议室预定记录表 */
+        UPDATE room_record
         set valid_status=#{newValidStatus}
         where `date`=#{date} and encode=#{encode} and time_period in
         <foreach collection="timePeriods" close=")" item="item" open="(" separator=",">
@@ -106,21 +97,13 @@
 
 
 
-    <!--
-	方法名称: delete
-	调用路径: RoomRecord.delete
-	处理信息: 删除记录
-	-->
     <delete id="delete" parameterType="Object">
         DELETE FROM room_record
         WHERE
         id = #{id}
     </delete>
 
-    <!--
-	方法名称: queryItemCount
-	调用路径: RoomRecord.queryItemCount
-	-->
+
     <select id="queryItemCount" resultType="java.lang.Integer" parameterType="Object">
         SELECT count(*) FROM room_record AS rr
         WHERE 1=1
@@ -145,7 +128,7 @@
     </select>
 
     <insert id="insertInitRecord">
-        INSERT INTO room_record /* 会议室预定记录表 */
+        INSERT INTO room_record
         (
         `date` ,time_period ,encode
         )VALUES

@@ -1,4 +1,6 @@
 <html>
+
+
 <#import "../common/defaultLayout.ftl" as defaultLayout>
 
 <@defaultLayout.layout>
@@ -10,6 +12,13 @@
 <#--<option value="2014">2014年</option>-->
 <#--<option value="2015">2015年</option>-->
 <#--</select>-->
+<form action="/manage/index" method="post" name="search" >
+    <input name="date" id="date"  value="${date?string("yyyy-MM-dd")}"/>
+    <#--设置展示格式，转成string-->
+<#--onclick="$.datepicker.formatDate('yy-mm-dd', new Date())">-->
+    <input type="submit" value="搜索" />
+</form>
+
 
 
 <table>
@@ -26,7 +35,6 @@
             <td>${encode}</td>
             <#list records[encode] as record>
                 <#if record.validStatus.code==1>
-                <#--<td><a href="">预定</a></td>-->
                     <td width="4%" height="26" align="center">
                         <input type="checkbox" name="timeChecked" id="timeChecked"
                                value=${record.timePeriod.code}>
@@ -36,7 +44,9 @@
                 </#if>
             </#list>
             <td>
-                <button onclick="reserve('${encode}','${date}')">申请预定</button>
+                <#assign dateOnly=date?date>
+                <button onclick="reserve('${encode}','${dateOnly?iso_local}')">申请预定</button>
+                <#--设置取值-->
             </td>
 
         </tr>
@@ -45,7 +55,9 @@
 
 
 <script>
+
     function reserve(encode, date) {
+
         var checked = document.getElementsByName("timeChecked");
         var str = "";
         for (var i = 0; i < checked.length; i++) {
@@ -59,7 +71,13 @@
         console.info("reserve" + url);
         window.open(url, "房间预定", 'height=800,width=600,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
     }
+
+    function search(date) {
+        window.open("/manage/index?date=" + date);
+    }
 </script>
+
+
 </@defaultLayout.layout>
 </html>
 

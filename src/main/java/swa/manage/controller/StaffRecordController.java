@@ -56,15 +56,8 @@ public class StaffRecordController {
         return mav;
     }
 
-    /**
-     * 跳转到添加页面
-     *
-     * @return
-     */
-    @RequestMapping(value = "/toAddDialog", method = {RequestMethod.GET, RequestMethod.POST})
-    public String toAddDialog(HttpServletRequest request, ModelMap model) {
-        return "staffRecord/staffRecordAddDialog";
-    }
+
+
 
 //    /**
 //     * 保存信息
