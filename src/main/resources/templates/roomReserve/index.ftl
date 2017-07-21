@@ -1,5 +1,3 @@
-<html>
-
 
 <#import "../common/defaultLayout.ftl" as defaultLayout>
 
@@ -44,9 +42,9 @@
                 </#if>
             </#list>
             <td>
-                <#assign dateOnly=date?date>
-                <button onclick="reserve('${encode}','${dateOnly?iso_local}')">申请预定</button>
-                <#--设置取值-->
+                <button onclick="reserve('${encode}','${date?string("yyyy-MM-dd")}')">申请预定</button>
+                <#--date转成String-->
+                <#--date加‘’转成String，否则使用date格式转成get请求的时候会自动把date转成String，这样转换的结果是错误的-->
             </td>
 
         </tr>
@@ -79,6 +77,5 @@
 
 
 </@defaultLayout.layout>
-</html>
 
 <#--页面解析出错会导致页面后续的内容无法加载-->
