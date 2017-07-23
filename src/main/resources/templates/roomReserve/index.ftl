@@ -13,6 +13,20 @@
 
 <form action="/manage/index" method="post" name="search">
     <input name="date" id="date" type="text" value="${date?string("yyyy-MM-dd")}">
+
+    <select name="org1">
+        <#--地区-->
+            <option value ="" ></option>
+            <option value ="1-1" selected="selected">北京</option>
+        <option value ="1-2">成都</option>
+    </select>
+    <select name="org2">
+    <#--地区-->
+        <#--todo 改成从列表获取 -->
+        <option value =""></option>
+        <option value ="2-1">互联网</option>
+        <option value ="2-2">电子大厦</option>
+    </select>
     <input type="submit" value="搜索"/>
 </form>
 
