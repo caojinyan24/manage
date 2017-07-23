@@ -5,7 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import swa.manage.entity.RoomConfig;
 import swa.manage.service.RoomConfigService;
 
@@ -30,7 +33,7 @@ public class RoomConfigController {
      */
     @RequestMapping("/roomConfigIndex")
     public String roomConfigIndex(Model model) {
-        List<RoomConfig> roomConfigs = roomConfigService.queryConfig();
+        List<RoomConfig> roomConfigs = roomConfigService.queryConfig(new RoomConfig());
         model.addAttribute("datas", roomConfigs);
         logger.info("roomConfig:{}", roomConfigs);
         return "roomConfig/roomConfigIndex";
@@ -38,18 +41,18 @@ public class RoomConfigController {
 
     }
 
-    /**
-     * 详情
-     *
-     * @return
-     */
-    @RequestMapping(value = "roomConfigDetail")
-    public String roomConfigDetail(@RequestParam(required = true, value = "id") Long id, Model model) {
-        model.addAttribute("roomConfig/roomConfigDetail");
-        RoomConfig roomConfig = roomConfigService.queryById(id);
-        model.addAttribute("roomConfig", roomConfig);
-        return "roomConfig/roomConfigDetail";
-    }
+//    /**
+//     * 详情
+//     *
+//     * @return
+//     */
+//    @RequestMapping(value = "roomConfigDetail")
+//    public String roomConfigDetail(@RequestParam(required = true, value = "id") Long id, Model model) {
+//        model.addAttribute("roomConfig/roomConfigDetail");
+//        RoomConfig roomConfig = roomConfigService.queryById(id);
+//        model.addAttribute("roomConfig", roomConfig);
+//        return "roomConfig/roomConfigDetail";
+//    }
 
     /**
      * 跳转到添加页面
@@ -78,52 +81,52 @@ public class RoomConfigController {
         }
     }
 
-    /**
-     * 跳转到编辑页面
-     *
-     * @return
-     */
-    @RequestMapping(value = "toEditDialog", method = RequestMethod.GET)
-    public String toEditDialog(@RequestParam(required = true, value = "id") Long id, Model model) {
-        RoomConfig roomConfig = roomConfigService.queryById(id);
-        model.addAttribute("roomConfig", roomConfig);
-        return "roomConfig/roomConfigEditDialog";
-    }
+//    /**
+//     * 跳转到编辑页面
+//     *
+//     * @return
+//     */
+//    @RequestMapping(value = "toEditDialog", method = RequestMethod.GET)
+//    public String toEditDialog(@RequestParam(required = true, value = "id") Long id, Model model) {
+//        RoomConfig roomConfig = roomConfigService.queryById(id);
+//        model.addAttribute("roomConfig", roomConfig);
+//        return "roomConfig/roomConfigEditDialog";
+//    }
+//
+//    /**
+//     * 编辑
+//     *
+//     * @return
+//     */
+//    @RequestMapping(value = "/roomConfigEdit", method = {RequestMethod.GET, RequestMethod.POST})
+//    @ResponseBody
+//    public String roomConfigEdit(@ModelAttribute RoomConfig roomConfig) {
+//        try {
+//            roomConfigService.update(roomConfig);
+//            return "编辑成功";
+//        } catch (Exception e) {
+//            logger.error("roomConfigEdit error:", e);
+//            return "编辑失败";
+//        }
+//    }
 
-    /**
-     * 编辑
-     *
-     * @return
-     */
-    @RequestMapping(value = "/roomConfigEdit", method = {RequestMethod.GET, RequestMethod.POST})
-    @ResponseBody
-    public String roomConfigEdit(@ModelAttribute RoomConfig roomConfig) {
-        try {
-            roomConfigService.update(roomConfig);
-            return "编辑成功";
-        } catch (Exception e) {
-            logger.error("roomConfigEdit error:", e);
-            return "编辑失败";
-        }
-    }
-
-
-    /**
-     * 删除
-     *
-     * @return
-     */
-    @RequestMapping(value = "roomConfigDelete")
-    @ResponseBody
-    public String roomConfigDelete(@RequestParam(required = true, value = "id") Long id) {
-        try {
-            roomConfigService.deleteByPriKey(id);
-            return "删除成功";
-        } catch (Exception e) {
-            logger.error("roomConfigDelete error:", e);
-            return "删除失败";
-        }
-    }
+//
+//    /**
+//     * 删除
+//     *
+//     * @return
+//     */
+//    @RequestMapping(value = "roomConfigDelete")
+//    @ResponseBody
+//    public String roomConfigDelete(@RequestParam(required = true, value = "id") Long id) {
+//        try {
+//            roomConfigService.deleteByPriKey(id);
+//            return "删除成功";
+//        } catch (Exception e) {
+//            logger.error("roomConfigDelete error:", e);
+//            return "删除失败";
+//        }
+//    }
 
 
 }

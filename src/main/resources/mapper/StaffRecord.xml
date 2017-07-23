@@ -11,10 +11,10 @@
                 AND sr.date = #{query.date}
             </if>
             <if test="query.startTime != null and query.startTime != ''">
-                AND sr.time_period_list = #{query.startTime}
+                AND sr.reserve_time = #{query.startTime}
             </if>
-            <if test="query.encode != null and query.encode != ''">
-                AND sr.encode = #{query.encode}
+            <if test="query.configId != null and query.configId != ''">
+                AND sr.config_id = #{query.configId}
             </if>
             <if test="query.validStatus != null and query.validStatus != ''">
                 AND sr.valid_status = #{query.validStatus}
@@ -39,8 +39,8 @@
         INSERT INTO staff_record /* 人员预定记录表 */
         (
         `date`
-        ,time_period_list
-        ,encode
+        ,reserve_time
+        ,config_id
         ,valid_status
         ,staff_name
         ,comment
@@ -48,8 +48,8 @@
         values
         (
         #{date}
-        ,#{timePeriodList}
-        ,#{encode}
+        ,#{reserveTime}
+        ,#{configId}
         ,#{validStatus}
         ,#{staffName}
         ,#{comment}
@@ -67,11 +67,11 @@
             <if test="date != null">
                 date = #{date},
             </if>
-            <if test="timePeriodList != null">
-                time_period_list = #{timePeriodList},
+            <if test="reserveTime != null">
+                reserve_time = #{reserveTime},
             </if>
-            <if test="encode != null">
-                encode = #{encode},
+            <if test="configId != null">
+                config_id = #{configId},
             </if>
             <if test="validStatus != null">
                 valid_status = #{validStatus},
@@ -102,8 +102,8 @@
         SELECT
         sr.id AS id
         ,sr.date AS date
-        ,sr.time_period_list AS timePeriodList
-        ,sr.encode AS encode
+        ,sr.reserve_time AS reserveTime
+        ,sr.config_id AS configId
         ,sr.valid_status AS validStatus
         ,sr.staff_name AS staffName
         ,sr.comment AS comment
@@ -141,8 +141,8 @@
         SELECT
         sr.id AS id
         ,sr.date AS date
-        ,sr.time_period_list AS timePeriodList
-        ,sr.encode AS encode
+        ,sr.reserve_time AS reserveTime
+        ,sr.config_id AS configId
         ,sr.valid_status AS validStatus
         ,sr.staff_name AS staffName
         ,sr.comment AS comment

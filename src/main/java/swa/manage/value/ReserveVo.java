@@ -18,7 +18,7 @@ public class ReserveVo {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     Date reserveDate;
-    String encode;
+    Long configId;
     String timePeriodStr;
     String reserveStaffName;
     String reserveStaffPhone;
@@ -27,7 +27,7 @@ public class ReserveVo {
     public static void checkParam(ReserveVo reserveVo) {
         Preconditions.checkArgument(reserveVo != null &&
                 !Strings.isNullOrEmpty(reserveVo.timePeriodStr) &&
-                !Strings.isNullOrEmpty(reserveVo.encode), "param invalid");
+                null != reserveVo.getConfigId(), "param invalid");
         Preconditions.checkArgument(!splitter.splitToList(reserveVo.timePeriodStr).isEmpty(), "time invalid");
         Preconditions.checkArgument(null != reserveVo.getReserveDate(), "date invalid");
     }
@@ -36,9 +36,9 @@ public class ReserveVo {
         StaffRecord staffRecord = new StaffRecord();
         staffRecord.setComment(reserveVo.getReserveReason());
         staffRecord.setDate(reserveVo.getReserveDate());
-        staffRecord.setEncode(reserveVo.getEncode());
+        staffRecord.setConfigId(reserveVo.getConfigId());
         staffRecord.setStaffName(reserveVo.getReserveStaffName());
-        staffRecord.setTimePeriodList(reserveVo.getTimePeriodStr());
+        staffRecord.setReserveTime(reserveVo.getTimePeriodStr());
         staffRecord.setValidStatus(ValidEnum.VALID);
         return staffRecord;
     }
@@ -63,12 +63,12 @@ public class ReserveVo {
         this.reserveDate = reserveDate;
     }
 
-    public String getEncode() {
-        return encode;
+    public Long getConfigId() {
+        return configId;
     }
 
-    public void setEncode(String encode) {
-        this.encode = encode;
+    public void setConfigId(Long configId) {
+        this.configId = configId;
     }
 
     public String getTimePeriodStr() {
@@ -106,8 +106,8 @@ public class ReserveVo {
     @Override
     public String toString() {
         return "ReserveVo{" +
-                "reserveDate='" + reserveDate + '\'' +
-                ", encode='" + encode + '\'' +
+                "reserveDate=" + reserveDate +
+                ", configId=" + configId +
                 ", timePeriodStr='" + timePeriodStr + '\'' +
                 ", reserveStaffName='" + reserveStaffName + '\'' +
                 ", reserveStaffPhone='" + reserveStaffPhone + '\'' +

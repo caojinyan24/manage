@@ -18,7 +18,7 @@
     <#list datas as data>
         <tr>
             <td>${data.date?string("yyyy-MM-dd")}</td>
-            <td>${data.timePeriodList}</td>
+            <td>${data.reserveTime}</td>
             <td>${data.encode}</td>
             <td>${data.validStatus}</td>
             <td>${data.staffName}</td>

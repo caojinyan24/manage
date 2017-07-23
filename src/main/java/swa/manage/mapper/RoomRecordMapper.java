@@ -18,13 +18,13 @@ import java.util.Set;
 @Repository
 public interface RoomRecordMapper {
 
-    void insertInitRecord(@Param("times") Set<Integer> times, @Param("date") Date date, @Param("encode") String encode);
+    void insertInitRecord(@Param("times") Set<Integer> times, @Param("date") Date date, @Param("configId") Long configId);
 
     void deleteByPriKey(Long id);
 
     RoomRecord queryByPriKey(Long id);
 
-    List<RoomRecord> queryRoomRecord(@Param("queryDate") Date queryDate, @Param("encode") String encode);
+    List<RoomRecord> queryRoomRecord(@Param("queryDate") Date queryDate, @Param("configId") Long configId);
 
-    void updateValidStatus(@Param("newValidStatus") ValidEnum newValidStatus, @Param("timePeriods") List<TimePeriodEnum> timePeriods, @Param("date") Date date, @Param("encode") String encode);
+    void updateValidStatus(@Param("newValidStatus") ValidEnum newValidStatus, @Param("timePeriods") List<TimePeriodEnum> timePeriods, @Param("date") Date date, @Param("configId") Long configId);
 }

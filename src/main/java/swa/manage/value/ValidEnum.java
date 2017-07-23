@@ -22,6 +22,7 @@ public enum ValidEnum {
 
     private final Integer code;
     private final String msg;
+
     ValidEnum(Integer code, String msg) {
         this.code = code;
         this.msg = msg;

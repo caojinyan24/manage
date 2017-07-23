@@ -13,8 +13,8 @@
             <if test="query.timePeriod != null and query.timePeriod != ''">
                 AND rr.time_period = #{query.timePeriod}
             </if>
-            <if test="query.encode != null and query.encode != ''">
-                AND rr.encode = #{query.encode}
+            <if test="query.configId != null and query.configId != ''">
+                AND rr.config_id = #{query.configId}
             </if>
             <if test="query.staffRecordId != null and query.staffRecordId != ''">
                 AND rr.staff_record_id = #{query.staffRecordId}
@@ -37,7 +37,7 @@
         (
         date
         ,time_period
-        ,encode
+        ,config_id
         ,staff_record_id
         ,valid_status
         ,create_time
@@ -47,7 +47,7 @@
         (
         #{date}
         ,#{timePeriod}
-        ,#{encode}
+        ,#{configId}
         ,#{staffRecordId}
         ,#{validStatus}
         ,#{createTime}
@@ -65,8 +65,8 @@
             <if test="timePeriod != null">
                 time_period = #{timePeriod},
             </if>
-            <if test="encode != null">
-                encode = #{encode},
+            <if test="configId != null">
+                config_id = #{configId},
             </if>
             <if test="staffRecordId != null">
                 staff_record_id = #{staffRecordId},
@@ -88,7 +88,7 @@
     <update id="updateValidStatus" parameterType="Object">
         UPDATE room_record
         set valid_status=#{newValidStatus}
-        where `date`=#{date} and encode=#{encode} and time_period in
+        where `date`=#{date} and config_id=#{configId} and time_period in
         <foreach collection="timePeriods" close=")" item="item" open="(" separator=",">
             #{item}
         </foreach>
@@ -113,26 +113,26 @@
         rr.id AS id
         ,rr.date AS date
         ,rr.time_period AS timePeriod
-        ,rr.encode AS encode
+        ,rr.config_id AS configId
         ,rr.staff_record_id AS staffRecordId
         ,rr.valid_status AS validStatus
         ,rr.create_time AS createTime
         ,rr.update_time AS updateTime
         FROM room_record AS rr
         WHERE rr.date=#{queryDate}
-        <if test="encode!=null">
-            and encode=#{encode}
+        <if test="configId!=null">
+            and config_id=#{configId}
         </if>
     </select>
 
     <insert id="insertInitRecord">
         INSERT INTO room_record
         (
-        `date` ,time_period ,encode
+        `date` ,time_period ,config_id
         )VALUES
         <foreach collection="times" item="time" separator=",">
             (
-            #{date},#{time},#{encode}
+            #{date},#{time},#{configId}
             )
         </foreach>
     </insert>

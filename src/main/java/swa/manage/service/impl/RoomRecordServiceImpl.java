@@ -36,13 +36,13 @@ public class RoomRecordServiceImpl implements RoomRecordService {
     }
 
     @Override
-    public List<RoomRecord> queryRoomRecord(Date queryDate, String encode) {
-        return roomRecordMapper.queryRoomRecord(queryDate, encode);
+    public List<RoomRecord> queryRoomRecord(Date queryDate, Long configId) {
+        return roomRecordMapper.queryRoomRecord(queryDate, configId);
     }
 
     @Override
-    public void insertInitRecord(Date date, String encode) {
-        roomRecordMapper.insertInitRecord(TimePeriodEnum.getAsMap().keySet(), date, encode);
+    public void insertInitRecord(Date date, Long configId) {
+        roomRecordMapper.insertInitRecord(TimePeriodEnum.getAsMap().keySet(), date, configId);
     }
 
     @Override
@@ -51,8 +51,8 @@ public class RoomRecordServiceImpl implements RoomRecordService {
     }
 
     @Override
-    public void updatevalidStatus(ValidEnum newValidStatus, List<TimePeriodEnum> timePeriod, Date date, String encode) {
-        roomRecordMapper.updateValidStatus(newValidStatus, timePeriod, date, encode);
+    public void updatevalidStatus(ValidEnum newValidStatus, List<TimePeriodEnum> timePeriod, Date date, Long configId) {
+        roomRecordMapper.updateValidStatus(newValidStatus, timePeriod, date, configId);
     }
 
 

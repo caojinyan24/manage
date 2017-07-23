@@ -24,8 +24,8 @@ public class StaffRecordMapperTest {
         StaffRecord staffRecord = new StaffRecord();
         staffRecord.setComment("test-comment");
         staffRecord.setDate(new Date());
-        staffRecord.setEncode("test");
-        staffRecord.setTimePeriodList("1,2");
+        staffRecord.setConfigId(1L);
+        staffRecord.setReserveTime("1,2");
         staffRecord.setStaffName("abc");
         staffRecord.setValidStatus(ValidEnum.VALID);
         staffRecordMapper.add(staffRecord);

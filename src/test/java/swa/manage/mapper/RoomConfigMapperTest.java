@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import swa.manage.entity.RoomConfig;
 
 import javax.annotation.Resource;
 
@@ -34,6 +35,8 @@ public class RoomConfigMapperTest {
 
     @Test
     public void testQueryConfig() throws Exception {
-        roomConfigMapper.queryConfig();
+        RoomConfig roomConfig = new RoomConfig();
+        roomConfig.setId(15L);
+        System.out.println(roomConfigMapper.queryConfig(roomConfig));
     }
 }

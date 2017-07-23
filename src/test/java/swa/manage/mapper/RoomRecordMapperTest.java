@@ -27,14 +27,14 @@ public class RoomRecordMapperTest {
 
     @Test
     public void testInsertInitRecord() throws Exception {
-        roomRecordMapper.insertInitRecord(TimePeriodEnum.getAsMap().keySet(), new Date(), "abc");
-        logger.info("##", roomRecordMapper.queryRoomRecord(new Date(), "abc"));
+        roomRecordMapper.insertInitRecord(TimePeriodEnum.getAsMap().keySet(), new Date(), 1L);
+        logger.info("##{}", roomRecordMapper.queryRoomRecord(DateUtil.truncateTime(new Date()), 1L));
 
     }
 
     @Test
     public void testQueryRoomRecord() throws Exception {
-        roomRecordMapper.updateValidStatus(ValidEnum.INVALID, Lists.newArrayList(TimePeriodEnum.EIGHTWEEN), new Date(), "1-1");
-        logger.info("##{}", roomRecordMapper.queryRoomRecord(DateUtil.truncateTime(new Date()), "1-1"));
+        roomRecordMapper.updateValidStatus(ValidEnum.INVALID, Lists.newArrayList(TimePeriodEnum.EIGHTWEEN), DateUtil.truncateTime(new Date()), 1L);
+        logger.info("##{}", roomRecordMapper.queryRoomRecord(DateUtil.truncateTime(new Date()), 1L));
     }
 }

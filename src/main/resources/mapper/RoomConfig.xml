@@ -4,134 +4,153 @@
 
 <mapper namespace="swa.manage.mapper.RoomConfigMapper">
 
+    <!-- 查询条件 -->
     <sql id="wherecontation">
         <trim suffixOverrides=",">
-            <if test="query.encode != null and query.encode != ''">
-                AND rc.encode = #{query.encode}
+            <if test="id != null and id != ''">
+                AND rc.id = #{id}
             </if>
-            <if test="query.layer != null and query.layer != ''">
-                AND rc.layer = #{query.layer}
+            <if test="city != null and city != ''">
+                AND rc.city = #{city}
             </if>
-            <if test="query.pid != null and query.pid != ''">
-                AND rc.pid = #{query.pid}
+            <if test="region != null and region != ''">
+                AND rc.region = #{region}
             </if>
-            <if test="query.roomName != null and query.roomName != ''">
-                AND rc.name_name = #{query.roomName}
+            <if test="layer != null and layer != ''">
+                AND rc.layer = #{layer}
             </if>
-            <if test="query.pPid != null and query.pPid != ''">
-                AND rc.p_pid = #{query.pPid}
+            <if test="roomName != null and roomName != ''">
+                AND rc.room_name = #{roomName}
             </if>
-            <if test="query.validStatus != null and query.validStatus != ''">
-                AND rc.valid_status = #{query.validStatus}
+            <if test="validStatus != null and validStatus != ''">
+                AND rc.valid_status = #{validStatus}
             </if>
-            <if test="query.createTime != null and query.createTime != ''">
-                AND rc.create_time = #{query.createTime}
+            <if test="createTime != null and createTime != ''">
+                AND rc.create_time = #{createTime}
             </if>
-            <if test="query.updateTime != null and query.updateTime != ''">
-                AND rc.update_time = #{query.updateTime}
+            <if test="updateTime != null and updateTime != ''">
+                AND rc.update_time = #{updateTime}
             </if>
         </trim>
     </sql>
 
-
-    <insert id="add" parameterType="swa.manage.entity.RoomConfig">
-        INSERT INTO room_config
+    <!--
+	方法名称: insert
+	调用路径: RoomConfig.insert
+	-->
+    <insert id="addConfig" parameterType="swa.manage.entity.RoomConfig">
+        INSERT INTO  room_config /* 配置表 */
         (
-        encode
-        ,layer
-        ,pid
-        ,room_name
-        ,p_pid
-        ,valid_status
-        ,create_time
-        ,update_time
+                               city                      
+                             ,region                    
+                             ,layer                     
+                             ,room_name                 
+                             ,valid_status              
+                             ,create_time               
+                             ,update_time               
         )
         values
         (
-        #{encode}
-        ,#{layer}
-        ,#{pid}
-        ,#{roomName}
-        ,#{pPid}
-        ,#{validStatus}
-        ,#{createTime}
-        ,#{updateTime}
+                               #{city}                     
+                             ,#{region}                    
+                             ,#{layer}                     
+                             ,#{roomName}                  
+                             ,#{validStatus}               
+                             ,#{createTime}                
+                             ,#{updateTime}                
         )
     </insert>
 
-    <update id="update" parameterType="swa.manage.entity.RoomConfig">
-        UPDATE room_config /* 配置表 */
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="encode != null">
-                encode = #{encode},
-            </if>
-            <if test="layer != null">
-                layer = #{layer},
-            </if>
-            <if test="pid != null">
-                pid = #{pid},
-            </if>
-            <if test="roomName != null">
-                room_name = #{roomName},
-            </if>
-            <if test="pPid != null">
-                p_pid = #{pPid},
-            </if>
-            <if test="validStatus != null">
-                valid_status = #{validStatus},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime},
-            </if>
-        </trim>
-        WHERE
-        id = #{id}
-    </update>
+
+    <!--&lt;!&ndash;-->
+    <!--方法名称: update-->
+    <!--调用路径: RoomConfig.update-->
+    <!--&ndash;&gt;-->
+    <!--<update id="update" parameterType="Object">-->
+    <!--UPDATE room_config /* 配置表 */-->
+    <!--<trim prefix="SET" suffixOverrides=",">-->
+    <!--<if test="city != null">-->
+    <!--city = #{city},-->
+    <!--</if>-->
+    <!--<if test="region != null">-->
+    <!--region = #{region},-->
+    <!--</if>-->
+    <!--<if test="layer != null">-->
+    <!--layer = #{layer},-->
+    <!--</if>-->
+    <!--<if test="roomName != null">-->
+    <!--room_name = #{roomName},-->
+    <!--</if>-->
+    <!--<if test="validStatus != null">-->
+    <!--valid_status = #{validStatus},-->
+    <!--</if>-->
+    <!--<if test="createTime != null">-->
+    <!--create_time = #{createTime},-->
+    <!--</if>-->
+    <!--<if test="updateTime != null">-->
+    <!--update_time = #{updateTime},-->
+    <!--</if>-->
+    <!--</trim>-->
+    <!--WHERE-->
+    <!--id = #{id}-->
+    <!--</update>-->
+
+    <!--&lt;!&ndash;-->
+    <!--方法名称: get-->
+    <!--调用路径: RoomConfig.get-->
+    <!--处理信息: 根据主键查询记录-->
+    <!--&ndash;&gt;-->
+    <!--<select id="get" parameterType="Object" resultType="swa.manage.entity.RoomConfig">-->
+    <!--SELECT-->
+    <!--rc.id                      AS   id-->
+    <!--,rc.city                    AS     city                   -->
+    <!--,rc.region                  AS     region                 -->
+    <!--,rc.layer                   AS     layer                  -->
+    <!--,rc.room_name               AS     roomName               -->
+    <!--,rc.valid_status            AS     validStatus            -->
+    <!--,rc.create_time             AS     createTime             -->
+    <!--,rc.update_time             AS     updateTime             -->
+    <!--FROM   room_config AS rc-->
+    <!--WHERE-->
+    <!--id = #{id}-->
+    <!--</select>-->
+
+    <!--&lt;!&ndash;-->
+    <!--方法名称: delete-->
+    <!--调用路径: RoomConfig.delete-->
+    <!--处理信息: 删除记录-->
+    <!--&ndash;&gt;-->
+    <!--<delete id="delete" parameterType="Object">-->
+    <!--DELETE FROM room_config-->
+    <!--WHERE-->
+    <!--id = #{id}-->
+    <!--</delete>-->
+
+    <!--&lt;!&ndash;-->
+    <!--方法名称: queryItemCount-->
+    <!--调用路径: RoomConfig.queryItemCount-->
+    <!--&ndash;&gt;-->
+    <!--<select id="queryItemCount" resultType="java.lang.Integer" parameterType="Object">-->
+    <!--SELECT count(*) FROM room_config AS rc-->
+    <!--WHERE 1=1-->
+    <!--<include refid="wherecontation"/>-->
+    <!--</select>-->
 
 
-    <delete id="deleteByPriKey" parameterType="java.lang.Long">
-        DELETE FROM room_config
-        WHERE
-        id = #{id}
-    </delete>
-
-
-    <select id="queryItemCount" resultType="java.lang.Integer" parameterType="swa.manage.entity.RoomConfig">
-        SELECT count(*) FROM room_config AS rc
+    <select id="queryConfig" parameterType="swa.manage.entity.RoomConfig" resultType="swa.manage.entity.RoomConfig">
+        SELECT
+        rc.id AS id
+        ,rc.city AS city
+        ,rc.region AS region
+        ,rc.layer AS layer
+        ,rc.room_name AS roomName
+        ,rc.valid_status AS validStatus
+        ,rc.create_time AS createTime
+        ,rc.update_time AS updateTime
+        FROM room_config AS rc
         WHERE 1=1
         <include refid="wherecontation"/>
     </select>
 
-
-    <select id="queryConfig" resultType="swa.manage.entity.RoomConfig">
-        SELECT
-        id AS id,
-        encode AS encode,
-        layer AS layer,
-        pid AS pid,
-        room_name AS roomName,
-        p_pid AS pPid,
-        valid_status AS validStatus,
-        create_time AS createTime,
-        update_time AS updateTime
-        FROM room_config
-    </select>
-
-    <select id="queryById" resultType="swa.manage.entity.RoomConfig" parameterType="java.lang.Long">
-        SELECT
-        id AS id,
-        encode AS encode,
-        layer AS layer,
-        pid AS pid,
-        room_name AS roomName,
-        p_pid AS pPid,
-        valid_status AS validStatus,
-        create_time AS createTime,
-        update_time AS updateTime
-        FROM room_config where id=#{id}
-    </select>
 
 </mapper>

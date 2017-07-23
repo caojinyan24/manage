@@ -13,13 +13,9 @@ public interface RoomConfigService {
 
     void add(RoomConfig roomConfig);
 
-    void update(RoomConfig roomConfig);
 
-    void deleteByPriKey(Long id);
+    List<RoomConfig> queryConfig(RoomConfig roomConfig);
 
-    List<RoomConfig> queryConfig();
-
-    RoomConfig queryById(Long id);
 
 }
 

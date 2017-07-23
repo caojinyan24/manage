@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTestContextBootstrapper;
 import org.springframework.test.context.BootstrapWith;
 import org.springframework.test.context.junit4.SpringRunner;
 import swa.manage.biz.RoomBiz;
+import swa.manage.entity.vo.SearchVo;
 
 import javax.annotation.Resource;
 import java.util.Calendar;
@@ -23,6 +24,6 @@ public class RoomBizImplTest {
 
     @Test
     public void testAssembleRecords() throws Exception {
-        roomBiz.queryAndInitRecords(DateUtils.truncate(new Date(), Calendar.DATE));
+        roomBiz.queryAndInitRecords(new SearchVo(DateUtils.truncate(new Date(), Calendar.DATE)));
     }
 }

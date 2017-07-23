@@ -10,22 +10,28 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
 <form action="/manage/index" method="post" name="search">
-    <input name="date" id="date" type="text" value="${date?string("yyyy-MM-dd")}">
-
-    <select name="org1">
-        <#--地区-->
-            <option value ="" ></option>
-            <option value ="1-1" selected="selected">北京</option>
-        <option value ="1-2">成都</option>
-    </select>
-    <select name="org2">
+    <input name="date" id="date" type="text" value="${searchVo.date?string("yyyy-MM-dd")}">
+    <select name="city" onchange="submit">
     <#--地区-->
-        <#--todo 改成从列表获取 -->
-        <option value =""></option>
-        <option value ="2-1">互联网</option>
-        <option value ="2-2">电子大厦</option>
+        <option value=""></option>
+        <#list citys as cityItem>
+            <#if  (searchVo.city!"北京")==cityItem>
+                <option value="${cityItem}" selected="selected">${cityItem}</option>
+            <#else>
+                <option value="${cityItem}">${cityItem}</option>
+            </#if>
+        </#list>
+    </select>
+    <select name="region">
+        <option value=""></option>
+        <#list regions as regionItem>
+            <#if (searchVo.region!"互联网")==regionItem>
+                <option value="${regionItem}" selected="selected">${regionItem}</option>
+            <#else>
+                <option value="${regionItem}">${regionItem}</option>
+            </#if>
+        </#list>
     </select>
     <input type="submit" value="搜索"/>
 </form>
@@ -36,16 +42,16 @@
         <td>房间编码</td>
         <#list timePeriods?values as timePeriod>
             <th>${timePeriod}</th>
-            <#--<th>${timePeriods}</th>-->
-            <#--<th>${timePeriods.get(timePeriod)}</th>-->
+        <#--<th>${timePeriods}</th>-->
+        <#--<th>${timePeriods.get(timePeriod)}</th>-->
         </#list>
         <th></th>
 
     </tr>
-    <#list records?keys as encode>
+    <#list recordInfoVos as recordInfoVo>
         <tr>
-            <td>${configs[encode].roomName}</td>
-            <#list records[encode] as record>
+            <td>${recordInfoVo.roomConfig.roomName}</td>
+            <#list recordInfoVo.roomRecords as record>
                 <#if record.validStatus.code==1>
                     <td width="4%" height="26" align="center">
                         <input type="checkbox" name="timeChecked" id="timeChecked"
@@ -56,7 +62,8 @@
                 </#if>
             </#list>
             <td>
-                <button onclick="reserve('${encode}','${date?string("yyyy-MM-dd")}')">申请预定</button>
+                <button onclick="reserve('${recordInfoVo.roomConfig.id}','${searchVo.date?string("yyyy-MM-dd")}')">申请预定
+                </button>
             <#--date转成String-->
             <#--date加‘’转成String，否则使用date格式转成get请求的时候会自动把date转成String，这样转换的结果是错误的-->
             </td>
@@ -65,13 +72,12 @@
     </#list>
 </table>
 
-
 <script>
     $(function () {
         $("#date").datepicker({dateFormat: "yy-mm-dd"});
     });
 
-    function reserve(encode, date) {
+    function reserve(configId, date) {
 
         var checked = document.getElementsByName("timeChecked");
         var str = "";
@@ -82,15 +88,25 @@
         }
         str = str.substring(1);
         console.info(str);
-        var url = "/manage/reserve?encode=" + encode + "&date=" + date + "&timePeriods=" + str;
+        var url = "/manage/reserve?configId=" + configId + "&date=" + date + "&timePeriods=" + str;
         console.info("reserve" + url);
         window.open(url, "房间预定", 'height=800,width=600,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
     }
+    //    function setRegion(regionMap) {
+    //        var selectedOption = document.getElementsByName("region");
+    //        var city = document.getElementsByName("city").value;
+    //        var regionOption = regionMap.get(city);
+    //        for (var i = 0; i < regionOption.length; i++) {
+    //            selectedOption.options[i] = new Option(regionOption[i], regionOption[i]);
+    ////            // 选中项
+    ////            if (selected == optionList[i].val) {
+    ////                selectedOption.options[start].selected = true;
+    ////            }
+    //        }
 
-    function search(date) {
-        window.open("/manage/index?date=" + date);
-    }
 </script>
+
+
 
 
 </@defaultLayout.layout>

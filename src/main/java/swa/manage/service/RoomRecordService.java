@@ -18,13 +18,13 @@ public interface RoomRecordService {
 
     public RoomRecord queryByPriKey(Long id);
 
-    List<RoomRecord> queryRoomRecord(Date queryDate, String encode);
+    List<RoomRecord> queryRoomRecord(Date queryDate, Long configId);
 
-    void insertInitRecord(Date date, String encode);
+    void insertInitRecord(Date date, Long configId);
 
     List<RoomRecord> queryRoomRecord(Date queryDate);
 
-    void updatevalidStatus(ValidEnum newValidStatus, List<TimePeriodEnum> timePeriod, Date date, String encode);
+    void updatevalidStatus(ValidEnum newValidStatus, List<TimePeriodEnum> timePeriod, Date date, Long configId);
 
 
 }
