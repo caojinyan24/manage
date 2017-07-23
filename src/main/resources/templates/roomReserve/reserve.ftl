@@ -1,4 +1,12 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <body>
+
 <ul>
     <li>预定时期：${date?string("yyyy-MM-dd")}</li>
     <li>预定房间：${roomConfig.roomName}</li>
@@ -12,7 +20,7 @@
 
     </li>
     <li>
-        <button onclick="close()">取消</button>
+        <button onclick="window.close()">取消</button>
     </li>
 
 </ul>
@@ -25,27 +33,25 @@
         var reserveReason = document.getElementById("reserveReason").value;
         var name = document.getElementById("name").value;
         var phone = document.getElementById("phone").value;
-//        jQuery.ajax({
-//            type: "GET",
-//            url: "/manage/reserveSubmit",
-//            data: {
-//                encode: encode,
-//                date: date,
-//                timePeriods: timePeriods,
-//                reserveReason: reserveReason,
-//                name: name,
-//                phone: phone
-//            },
-//            dataType: "json",
-//            success: function (data) {
-//                alert(data);
-//            }
-//        });
-//        todo 优化下
-        var url = "/manage/reserveSubmit?configId=" + configId + "&reserveDate=" + date + "&timePeriodStr=" + timePeriods + "&reserveReason=" + reserveReason +
-                "&reserveStaffName=" + name + "&reserveStaffPhone=" + phone;
-        console.info("submitReserve:" + url);
-//        window.open(url, "提交页面", 'height=100,width=400,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
-
+        jQuery.ajax({
+            type: "GET",
+            url: "/manage/reserveSubmit",
+            data: {
+                configId: configId,
+                reserveDate: date,
+                timePeriodStr: timePeriods,
+                reserveReason: reserveReason,
+                reserveStaffName: name,
+                reserveStaffPhone: phone
+            },
+            contentType: "json",
+            async: false,
+            success: function (data) {
+                alert(data);
+            }
+        });
+        window.close();
+        window.opener.document.location.reload();
     }
+
 </script>

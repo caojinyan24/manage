@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import swa.manage.biz.RoomBiz;
 import swa.manage.common.CacheInfoUtil;
@@ -16,6 +17,7 @@ import swa.manage.entity.RoomConfig;
 import swa.manage.entity.vo.RecordInfoVo;
 import swa.manage.entity.vo.SearchVo;
 import swa.manage.mapper.RoomConfigMapper;
+import swa.manage.value.ReserveVo;
 import swa.manage.value.TimePeriodEnum;
 
 import javax.annotation.Resource;
@@ -91,6 +93,22 @@ public class ManageController {
         }
         logger.info("roomReserve-end:{}", mav.getModel());
         return mav;
+    }
+
+    @RequestMapping("reserveSubmit")
+    @ResponseBody
+    public String submitReserve(ReserveVo reserveVo) {
+        try {
+            logger.info("submitReserve-begin:{}", reserveVo);
+            ReserveVo.checkParam(reserveVo);
+            roomBiz.reserve(reserveVo);//// TODO: 7/24/17 先查询现有状态，再更新
+            return "预定成功";
+        } catch (Exception e) {
+            logger.error("submitReserve error:", e);
+            return "预定失败";
+        }
+
+
     }
 
     private String getShowTime(String str) {// TODO: 7/21/17 合并时间段

@@ -19,7 +19,7 @@
         <tr>
             <td>${data.date?string("yyyy-MM-dd")}</td>
             <td>${data.reserveTime}</td>
-            <td>${data.encode}</td>
+            <td>${data.configId}</td>
             <td>${data.validStatus}</td>
             <td>${data.staffName}</td>
             <td>${data.comment}</td>

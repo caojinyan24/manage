@@ -92,17 +92,7 @@
         console.info("reserve" + url);
         window.open(url, "房间预定", 'height=800,width=600,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
     }
-    //    function setRegion(regionMap) {
-    //        var selectedOption = document.getElementsByName("region");
-    //        var city = document.getElementsByName("city").value;
-    //        var regionOption = regionMap.get(city);
-    //        for (var i = 0; i < regionOption.length; i++) {
-    //            selectedOption.options[i] = new Option(regionOption[i], regionOption[i]);
-    ////            // 选中项
-    ////            if (selected == optionList[i].val) {
-    ////                selectedOption.options[start].selected = true;
-    ////            }
-    //        }
+
 
 </script>
 

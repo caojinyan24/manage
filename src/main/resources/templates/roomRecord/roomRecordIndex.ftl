@@ -19,7 +19,7 @@
         <#list datas as data>
             <td>${data.date?string("yyyy-MM-dd")}</td>
             <td>${data.timePeriod}</td>
-            <td>${data.encode}</td>
+            <td>${data.configId}</td>
             <td>${data.staffRecordId}</td>
             <td>${data.validStatus}</td>
             <td>${data.createTime?string("yyyy-MM-dd HH:mm:ss")})</td>

@@ -39,25 +39,25 @@
 	调用路径: RoomConfig.insert
 	-->
     <insert id="addConfig" parameterType="swa.manage.entity.RoomConfig">
-        INSERT INTO  room_config /* 配置表 */
+        INSERT INTO room_config /* 配置表 */
         (
-                               city                      
-                             ,region                    
-                             ,layer                     
-                             ,room_name                 
-                             ,valid_status              
-                             ,create_time               
-                             ,update_time               
+        city
+        ,region
+        ,layer
+        ,room_name
+        ,valid_status
+        ,create_time
+        ,update_time
         )
         values
         (
-                               #{city}                     
-                             ,#{region}                    
-                             ,#{layer}                     
-                             ,#{roomName}                  
-                             ,#{validStatus}               
-                             ,#{createTime}                
-                             ,#{updateTime}                
+        #{city}
+        ,#{region}
+        ,#{layer}
+        ,#{roomName}
+        ,#{validStatus}
+        ,#{createTime}
+        ,#{updateTime}
         )
     </insert>
 
