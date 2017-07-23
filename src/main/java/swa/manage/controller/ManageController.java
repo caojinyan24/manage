@@ -40,7 +40,8 @@ public class ManageController {
      * @return
      */
     @RequestMapping(value = "index")
-    public ModelAndView roomRecordIndex(@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(value = "date", required = false) Date date) {
+    public ModelAndView roomRecordIndex(@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam(value = "date", required = false) Date date
+    ,@RequestParam(value="org1" ,required = false)String org1) {
         logger.info("roomRecordIndex-begin:{}", date);
         ModelAndView mav = new ModelAndView("roomReserve/index");
         try {
