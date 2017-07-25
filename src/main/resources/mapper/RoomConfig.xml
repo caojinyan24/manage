@@ -22,7 +22,7 @@
             <if test="roomName != null and roomName != ''">
                 AND rc.room_name = #{roomName}
             </if>
-            <if test="validStatus != null and validStatus != ''">
+            <if test="validStatus != null">
                 AND rc.valid_status = #{validStatus}
             </if>
             <if test="createTime != null and createTime != ''">
@@ -39,15 +39,12 @@
 	调用路径: RoomConfig.insert
 	-->
     <insert id="addConfig" parameterType="swa.manage.entity.RoomConfig">
-        INSERT INTO room_config /* 配置表 */
+        INSERT INTO room_config
         (
         city
         ,region
         ,layer
         ,room_name
-        ,valid_status
-        ,create_time
-        ,update_time
         )
         values
         (
@@ -55,12 +52,11 @@
         ,#{region}
         ,#{layer}
         ,#{roomName}
-        ,#{validStatus}
-        ,#{createTime}
-        ,#{updateTime}
         )
     </insert>
-
+    <update id="updateValidStatus">
+    update room_config set valid_status=#{validStatus} where id=#{id}
+    </update>
 
     <!--&lt;!&ndash;-->
     <!--方法名称: update-->
@@ -137,7 +133,8 @@
     <!--</select>-->
 
 
-    <select id="queryConfig" parameterType="swa.manage.entity.RoomConfig" resultType="swa.manage.entity.RoomConfig">
+    <select id="queryConfig" parameterType="swa.manage.entity.RoomConfig"
+            resultType="swa.manage.entity.RoomConfig">
         SELECT
         rc.id AS id
         ,rc.city AS city

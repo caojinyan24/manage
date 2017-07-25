@@ -16,7 +16,7 @@ public class SearchVo {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date = DateUtils.truncate(new Date(), Calendar.DATE);
     private String city = "北京";
-    private String region = "";
+    private String region;
 
     public SearchVo() {
     }

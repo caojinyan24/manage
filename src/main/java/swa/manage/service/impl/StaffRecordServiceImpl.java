@@ -28,8 +28,8 @@ public class StaffRecordServiceImpl implements StaffRecordService {
     }
 
     @Override
-    public void update(StaffRecord staffRecord) {
-        staffRecordMapper.update(staffRecord);
+    public void updateById(StaffRecord staffRecord) {
+        staffRecordMapper.updateById(staffRecord);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class StaffRecordServiceImpl implements StaffRecordService {
     }
 
     @Override
-    public List<StaffRecord> queryStaffRecord() {
-        return staffRecordMapper.queryStaffRecord();
+    public List<StaffRecord> queryStaffRecordDesc() {
+        return staffRecordMapper.queryStaffRecordDesc();
     }
 }

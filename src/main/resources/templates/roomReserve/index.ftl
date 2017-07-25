@@ -3,20 +3,12 @@
 <@defaultLayout.layout>
 
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<form action="/manage/index" method="post" name="search">
-    <input name="date" id="date" type="text" value="${searchVo.date?string("yyyy-MM-dd")}">
-    <select name="city" onchange="submit">
-    <#--地区-->
-        <option value=""></option>
+<form action="/manage/index" method="post" name="search" id="search">
+    <input name="date" id="date" type="text" value="${searchVo.date?string("yyyy-MM-dd")}"/>
+    <select name="city" onchange="onchangeCity(this.value)">
         <#list citys as cityItem>
-            <#if  (searchVo.city!"北京")==cityItem>
+            <#if (searchVo.city!"北京")==cityItem>
                 <option value="${cityItem}" selected="selected">${cityItem}</option>
             <#else>
                 <option value="${cityItem}">${cityItem}</option>
@@ -33,7 +25,7 @@
             </#if>
         </#list>
     </select>
-    <input type="submit" value="搜索"/>
+    <input type="submit" value="搜索" name="submit"/>
 </form>
 
 
@@ -42,8 +34,6 @@
         <td>房间编码</td>
         <#list timePeriods?values as timePeriod>
             <th>${timePeriod}</th>
-        <#--<th>${timePeriods}</th>-->
-        <#--<th>${timePeriods.get(timePeriod)}</th>-->
         </#list>
         <th></th>
 
@@ -75,8 +65,13 @@
 <script>
     $(function () {
         $("#date").datepicker({dateFormat: "yy-mm-dd"});
-    });
 
+    });
+    function onchangeCity(city) {
+        var date = document.getElementById("date").value;
+        window.location.href = "/manage/index?date=" + date + "&city=" + city;
+
+    }
     function reserve(configId, date) {
 
         var checked = document.getElementsByName("timeChecked");

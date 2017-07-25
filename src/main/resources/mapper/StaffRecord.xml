@@ -57,12 +57,8 @@
     </insert>
 
 
-    <!--
-	方法名称: update
-	调用路径: StaffRecord.update
-	-->
-    <update id="update" parameterType="Object">
-        UPDATE staff_record /* 人员预定记录表 */
+    <update id="updateById" parameterType="swa.manage.entity.StaffRecord">
+        UPDATE staff_record
         <trim prefix="SET" suffixOverrides=",">
             <if test="date != null">
                 date = #{date},
@@ -93,12 +89,8 @@
         id = #{id}
     </update>
 
-    <!--
-	方法名称: get
-	调用路径: StaffRecord.get
-	处理信息: 根据主键查询记录
-	-->
-    <select id="queryStaffRecord" resultType="swa.manage.entity.StaffRecord">
+
+    <select id="queryStaffRecordDesc" resultType="swa.manage.entity.StaffRecord">
         SELECT
         sr.id AS id
         ,sr.date AS date
@@ -109,35 +101,24 @@
         ,sr.comment AS comment
         ,sr.create_time AS createTime
         ,sr.update_time AS updateTime
-        FROM staff_record AS sr
+        FROM staff_record AS sr order by id desc
     </select>
 
-    <!--
-	方法名称: delete
-	调用路径: StaffRecord.delete
-	处理信息: 删除记录
-	-->
+
     <delete id="delete" parameterType="Object">
         DELETE FROM staff_record
         WHERE
         id = #{id}
     </delete>
 
-    <!--
-	方法名称: queryItemCount
-	调用路径: StaffRecord.queryItemCount
-	-->
+
     <select id="queryItemCount" resultType="java.lang.Integer" parameterType="Object">
         SELECT count(*) FROM staff_record AS sr
         WHERE 1=1
         <include refid="wherecontation"/>
     </select>
 
-    <!--
-	方法名称: queryPagenationList
-	调用路径: StaffRecord.queryPagenationList
-	-->
-    <select id="queryPagenationList" parameterType="Object" resultType="swa.manage.entity.StaffRecord">
+    <select id="queryByPriKey" parameterType="java.lang.Long" resultType="swa.manage.entity.StaffRecord">
         SELECT
         sr.id AS id
         ,sr.date AS date
@@ -149,11 +130,7 @@
         ,sr.create_time AS createTime
         ,sr.update_time AS updateTime
         FROM staff_record AS sr
-        WHERE 1=1
-        <include refid="wherecontation"/>
-        ORDER BY sr.id DESC
-        LIMIT #{startRow}
-        ,#{pageSize}
+        WHERE sr.id=#{id}
     </select>
 
 </mapper>

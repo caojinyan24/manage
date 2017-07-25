@@ -1,5 +1,8 @@
 package swa.manage.biz.impl;
 
+import com.google.common.base.Function;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,14 +12,17 @@ import org.springframework.util.CollectionUtils;
 import swa.manage.biz.RoomBiz;
 import swa.manage.entity.RoomConfig;
 import swa.manage.entity.RoomRecord;
+import swa.manage.entity.StaffRecord;
 import swa.manage.entity.vo.RecordInfoVo;
 import swa.manage.entity.vo.SearchVo;
 import swa.manage.service.RoomConfigService;
 import swa.manage.service.RoomRecordService;
 import swa.manage.service.StaffRecordService;
 import swa.manage.value.ReserveVo;
+import swa.manage.value.TimePeriodEnum;
 import swa.manage.value.ValidEnum;
 
+import javax.annotation.Nullable;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -36,7 +42,7 @@ public class RoomBizImpl implements RoomBiz {
     @Override
     public List<RecordInfoVo> queryAndInitRecords(SearchVo searchVo) {
         List<RecordInfoVo> result = Lists.newArrayList();
-        List<RoomConfig> roomConfigs = roomConfigService.queryConfig(new RoomConfig(searchVo));
+        List<RoomConfig> roomConfigs = roomConfigService.queryValidConfig(new RoomConfig(searchVo));
         for (RoomConfig roomConfig : roomConfigs) {
             List<RoomRecord> records = roomRecordService.queryRoomRecord(searchVo.getDate(), roomConfig.getId());
             if (CollectionUtils.isEmpty(records)) {
@@ -59,17 +65,24 @@ public class RoomBizImpl implements RoomBiz {
         staffRecordService.add(ReserveVo.assembleStaffRecord(reserveVo));
     }
 
-//    @Override
-//    public Map<String, RoomConfig> getConfigMap() {
-//
-//        Map<String, RoomConfig> result = Maps.newHashMap();
-//        List<RoomConfig> configs = roomConfigService.queryConfig();
-//
-//        for (RoomConfig config : configs) {
-//            result.put(config.getEncode(), config);
-//        }
-//        return result;
-//
-//
-//    }
+    @Override
+    @Transactional
+    public void cancelReserve(Long configId) {
+        StaffRecord staffRecord = staffRecordService.queryByPriKey(configId);
+        staffRecord.setValidStatus(ValidEnum.INVALID);
+        staffRecordService.updateById(staffRecord);
+        String timeStr = staffRecord.getReserveTime();
+        List<String> times = Splitter.on(",").omitEmptyStrings().splitToList(timeStr);
+        List<TimePeriodEnum> timePeriods = Lists.newArrayList(Collections2.transform(times, new Function<String, TimePeriodEnum>() {
+            @Nullable
+            @Override
+            public TimePeriodEnum apply(@Nullable String s) {
+                return TimePeriodEnum.toEnum(Integer.valueOf(s));
+            }
+        }));
+        roomRecordService.updatevalidStatus(ValidEnum.VALID, timePeriods, staffRecord.getDate(), staffRecord.getConfigId());
+
+    }
+
+
 }

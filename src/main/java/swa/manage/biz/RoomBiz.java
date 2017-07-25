@@ -15,6 +15,7 @@ public interface RoomBiz {
 
     void reserve(ReserveVo reserveVo);
 
-//    public Map<String, RoomConfig> getConfigMap();
+    void cancelReserve(Long configId);
+
 
 }

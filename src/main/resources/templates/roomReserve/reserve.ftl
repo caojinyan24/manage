@@ -5,30 +5,49 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<body>
 
-<ul>
-    <li>预定时期：${date?string("yyyy-MM-dd")}</li>
-    <li>预定房间：${roomConfig.roomName}</li>
-    <li>预定时段：${showTime}</li>
-    <li>申请用途：<input type="text" id="reserveReason" name="reserveReason"/></li>
-    <li>申请人姓名：<input type="text" id="name" name="name"/></li>
-    <li>申请人手机号：<input type="text" id="phone" name="phone"/></li>
-    <li>
-        <button onclick="submitReserve('${date?string("yyyy-MM-dd")}',${roomConfig.id},'${timePeriods}')">确定</button>
+<form class="form-horizontal" role="form" id="dailogForm" name="dailogForm">
+    <div class="form-group mno">
+        <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">预定时期：
+            <input type="text" name="reserveDate" id="reserveDate" class="form-control" readonly="readonly"
+                   value="${date?string("yyyy-MM-dd")}"/>
+        </label>
+    </div>
+    <div class="form-group mno">
+        <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">预定房间：
+            <input type="text" name="roomName" id="roomName" class="form-control" readonly="readonly"
+                   value="${roomConfig.roomName}"/>
+        </label>
+    </div>
+    <div class="form-group mno">
+        <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">预定时段：
+            <input type="text" name="time" id="time" class="form-control" readonly="readonly"
+                   value="${showTime}"/>
+        </label>
+    </div>
+    <div class="form-group mno">
+        <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">申请用途：
+            <input type="text" name="reserveReason" id="reserveReason" class="form-control"
+                   placeholder="申请用途"/>
+        </label>
+    </div>
+    <div class="form-group mno">
+        <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">申请人姓名：
+            <input type="text" name="name" id="name" class="form-control"
+                   placeholder="申请人姓名"/>
+        </label>
+    </div>
+    <div class="form-group mno">
+        <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">申请人手机号：
+            <input type="text" name="phone" id="phone" class="form-control"
+                   placeholder="手机号"/>
+        </label>
+    </div>
+    <button onclick="submitReserve('${date?string("yyyy-MM-dd")}',${roomConfig.id},'${timePeriods}')">确定</button>
+    <button onclick="window.close()">取消</button>
+</form>
 
-
-    </li>
-    <li>
-        <button onclick="window.close()">取消</button>
-    </li>
-
-</ul>
-
-</body>
 <script>
-
-
     function submitReserve(date, configId, timePeriods) {
         var reserveReason = document.getElementById("reserveReason").value;
         var name = document.getElementById("name").value;
@@ -53,5 +72,4 @@
         window.close();
         window.opener.document.location.reload();
     }
-
 </script>

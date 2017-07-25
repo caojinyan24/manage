@@ -13,13 +13,13 @@ public interface StaffRecordService {
 
     public void add(StaffRecord staffRecord);
 
-    public void update(StaffRecord staffRecord);
+    public void updateById(StaffRecord staffRecord);
 
     public void deleteByPriKey(Long id);
 
     public StaffRecord queryByPriKey(Long id);
 
-    List<StaffRecord> queryStaffRecord();
+    List<StaffRecord> queryStaffRecordDesc();
 
 }
 

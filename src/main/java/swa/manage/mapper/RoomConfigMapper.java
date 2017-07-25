@@ -1,7 +1,9 @@
 package swa.manage.mapper;
 
 
+import org.apache.ibatis.annotations.Param;
 import swa.manage.entity.RoomConfig;
+import swa.manage.value.ValidEnum;
 
 import java.util.List;
 
@@ -14,5 +16,7 @@ public interface RoomConfigMapper {
     void addConfig(RoomConfig roomConfig);
 
     List<RoomConfig> queryConfig(RoomConfig roomConfig);
+
+    void updateValidStatus(@Param("id") Long id, @Param("validStatus") ValidEnum validStatus);
 
 }

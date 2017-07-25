@@ -1,6 +1,5 @@
 package swa.manage.controller;
 
-import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import swa.manage.biz.RoomBiz;
 import swa.manage.common.CacheInfoUtil;
+import swa.manage.common.CommonServiceUtil;
 import swa.manage.entity.RoomConfig;
 import swa.manage.entity.vo.RecordInfoVo;
 import swa.manage.entity.vo.SearchVo;
-import swa.manage.mapper.RoomConfigMapper;
+import swa.manage.service.RoomConfigService;
 import swa.manage.value.ReserveVo;
 import swa.manage.value.TimePeriodEnum;
 
@@ -38,7 +38,7 @@ public class ManageController {
     @Resource
     private CacheInfoUtil cacheInfoUtil;
     @Resource
-    private RoomConfigMapper roomConfigMapper;
+    private RoomConfigService roomConfigService;
 
     /**
      * 查询指定日期所有房间的预定情况（默认查询当天的）
@@ -54,7 +54,7 @@ public class ManageController {
             mav.addObject("recordInfoVos", recordInfoVos);
             mav.addObject("timePeriods", TimePeriodEnum.getAsMap());
             mav.addObject("searchVo", searchVo);
-            mav.addObject("regions", cacheInfoUtil.getRegions(searchVo.getCity()));
+            mav.addObject("regions", CacheInfoUtil.getRegions(searchVo.getCity()));
             mav.addObject("citys", cacheInfoUtil.getCities());
 
         } catch (Exception e) {
@@ -84,10 +84,10 @@ public class ManageController {
         try {
             RoomConfig roomConfig = new RoomConfig();
             roomConfig.setId(configId);
-            mav.addObject("roomConfig", roomConfigMapper.queryConfig(roomConfig).get(0));
+            mav.addObject("roomConfig", roomConfigService.queryValidConfig(roomConfig).get(0));
             mav.addObject("date", date);
             mav.addObject("timePeriods", timePeriodsStr);
-            mav.addObject("showTime", getShowTime(timePeriodsStr));
+            mav.addObject("showTime", CommonServiceUtil.getShowTime(timePeriodsStr));
         } catch (Exception e) {
             logger.error("roomReserve error", e);
         }
@@ -111,13 +111,17 @@ public class ManageController {
 
     }
 
-    private String getShowTime(String str) {// TODO: 7/21/17 合并时间段
-        List<String> list = Splitter.on(",").omitEmptyStrings().splitToList(str);
-        StringBuilder sb = new StringBuilder("");
-        for (String s : list) {
-            sb.append(',').append(TimePeriodEnum.getAsMap().get(Integer.valueOf(s)));
+    @RequestMapping(value = "/toCancelReserve", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public String toCancelReserve(@RequestParam("id") Long id) {
+        logger.info("toCancelReserve:{}", id);
+        try {
+            roomBiz.cancelReserve(id);
+            return "取消成功";
+        } catch (Exception e) {
+            logger.error("toCancelReserve error:", e);
+            return "处理失败";
         }
-        return sb.toString().substring(1);
     }
 
 

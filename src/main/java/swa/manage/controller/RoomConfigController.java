@@ -5,12 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import swa.manage.entity.RoomConfig;
 import swa.manage.service.RoomConfigService;
+import swa.manage.value.ValidEnum;
 
 import java.util.List;
 
@@ -41,18 +39,28 @@ public class RoomConfigController {
 
     }
 
-//    /**
-//     * 详情
-//     *
-//     * @return
-//     */
-//    @RequestMapping(value = "roomConfigDetail")
-//    public String roomConfigDetail(@RequestParam(required = true, value = "id") Long id, Model model) {
-//        model.addAttribute("roomConfig/roomConfigDetail");
-//        RoomConfig roomConfig = roomConfigService.queryById(id);
-//        model.addAttribute("roomConfig", roomConfig);
-//        return "roomConfig/roomConfigDetail";
-//    }
+
+    @RequestMapping(value = "stopReserve")
+    @ResponseBody
+    public String stopReserve(@RequestParam(required = true, value = "id") Long id) {
+        try {
+            roomConfigService.updateValidStatus(id, ValidEnum.INVALID);
+            return "操作成功";
+        } catch (Exception e) {
+            return "操作失败";
+        }
+    }
+
+    @RequestMapping(value = "reReserve")
+    @ResponseBody
+    public String reReserve(@RequestParam(required = true, value = "id") Long id) {
+        try {
+            roomConfigService.updateValidStatus(id, ValidEnum.VALID);
+            return "操作成功";
+        } catch (Exception e) {
+            return "操作失败";
+        }
+    }
 
     /**
      * 跳转到添加页面
@@ -73,6 +81,7 @@ public class RoomConfigController {
     @ResponseBody
     public String roomConfigAdd(@ModelAttribute RoomConfig roomConfig) {
         try {
+            roomConfig.setValidStatus(ValidEnum.VALID);
             roomConfigService.add(roomConfig);
             return "保存成功";
         } catch (Exception e) {

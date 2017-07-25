@@ -5,8 +5,7 @@
     <tr>
         <th>预定日期</th>
         <th>预定时间</th>
-        <th>编码:layer-pid</th>
-        <th>是否已取消：0-取消，1-未取消</th>
+        <th>房间名</th>
         <th>预订人姓名</th>
         <th>预定用途</th>
         <th>创建时间</th>
@@ -17,17 +16,18 @@
 
     <#list datas as data>
         <tr>
-            <td>${data.date?string("yyyy-MM-dd")}</td>
-            <td>${data.reserveTime}</td>
-            <td>${data.configId}</td>
-            <td>${data.validStatus}</td>
-            <td>${data.staffName}</td>
-            <td>${data.comment}</td>
-            <td>${data.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
-            <td>${data.updateTime?string("yyyy-MM-dd HH:mm:ss")}</td>
+            <td>${data.staffRecord.date?string("yyyy-MM-dd")}</td>
+            <td>${data.timeShow}</td>
+            <td>${data.roomName}</td>
+            <td>${data.staffRecord.staffName}</td>
+            <td>${data.staffRecord.comment}</td>
+            <td>${data.staffRecord.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
+            <td>${data.staffRecord.updateTime?string("yyyy-MM-dd HH:mm:ss")}</td>
             <td>
-                <#if data.validStatus.code==1>
-                    <button type="button" onclick="cancel(${data.id})" value="取消">取消</button>
+                <#if data.staffRecord.validStatus.code==1>
+                    <button type="button" onclick="cancel(${data.staffRecord.id})" value="取消">取消</button>
+                <#else >
+                    已取消
                 </#if>
             </td>
         </tr>
@@ -37,8 +37,17 @@
 
 <script>
     function cancel(id) {
-        window.open("/manage/toCancelReserve?id=" + id);
+        jQuery.ajax({
+            url: "/manage/toCancelReserve",
+            data: {"id": id},
+            contentType: "json",
+            async: false,
+            success: function (data) {
+                alert(data);
+            }
 
+        });
+        window.document.location.reload();
     }
 </script>
 

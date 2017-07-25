@@ -1,69 +1,55 @@
-<#import "../common/defaultLayout.ftl" as defaultLayout>
+<#--<#import "../common/defaultLayout.ftl" as defaultLayout>-->
 
-<@defaultLayout.layout>
+<#--<@defaultLayout.layout>-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<form class="form-horizontal" role="form" id="dailogForm" name="dailogForm">
+    <div class="form-group mno">
+        <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">所在城市:
+            <input type="text" name="city" id="city" class="form-control"
+                   placeholder="所在城市"/>
+        </label>
+    </div>
+    <div class="form-group mno">
+        <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">所属区域:
+            <input type="text" name="region" id="region" class="form-control"
+                   placeholder="所属区域"/>
+        </label>
+    </div>
+    <div class="form-group mno">
+        <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">所在楼层
+            <input type="text" name="layer" id="layer" class="form-control"
+                   placeholder="所在楼层"/>
+        </label>
+    </div>
+    <div class="form-group mno">
+        <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">房间名称
+            <input type="text" name="roomName" id="roomName" class="form-control"
+                   placeholder="展示名称"/>
+        </label>
+    </div>
+    <input type="button" name="submit" value="保存" onclick="saveConfig()">
+</form>
 
-<div class="panel-body" style="width:70%; height:300px; float:left; background-color: #12c5ae;">
-    <form class="form-horizontal" role="form" id="dailogForm" action="../roomConfig/roomConfigAdd.do" method="POST">
-        <input type="hidden" id="btn_sub" class="btn_sub"/>
-        <div class="form-group mno">
-            <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">编码:layer-pid</label>
-            <div class="col-sm-8">
-                <input type="text" value="${roomConfig.encode}" name="encode" id="encode" class="form-control"
-                       placeholder="编码:layer-pid"/>
-            </div>
-        </div>
-        <div class="form-group mno">
-            <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">所属层级</label>
-            <div class="col-sm-8">
-                <input type="text" value="${roomConfig.layer}" name="layer" id="layer" class="form-control"
-                       placeholder="所属层级"/>
-            </div>
-        </div>
-        <div class="form-group mno">
-            <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">层级编码:0,1,2</label>
-            <div class="col-sm-8">
-                <input type="text" value="${roomConfig.pid}" name="pid" id="pid" class="form-control"
-                       placeholder="层级编码:0,1,2"/>
-            </div>
-        </div>
-        <div class="form-group mno">
-            <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">展示名称</label>
-            <div class="col-sm-8">
-                <input type="text" value="${roomConfig.roomName}" name="roomName" id="roomName" class="form-control"
-                       placeholder="展示名称"/>
-            </div>
-        </div>
-        <div class="form-group mno">
-            <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">所在上一层级编码</label>
-            <div class="col-sm-8">
-                <input type="text" value="${roomConfig.pPid}" name="pPid" id="pPid" class="form-control"
-                       placeholder="所在上一层级编码"/>
-            </div>
-        </div>
-        <div class="form-group mno">
-            <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">是否可用：0-不可用，1-可用</label>
-            <div class="col-sm-8">
-                <input type="text" value="${roomConfig.validStatus}" name="validStatus" id="validStatus"
-                       class="form-control"
-                       placeholder="是否可用：0-不可用，1-可用"/>
-            </div>
-        </div>
-        <div class="form-group mno">
-            <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">创建时间</label>
-            <div class="col-sm-8">
-                <input type="text" value="${roomConfig.createTime?string("yyyy-MM-dd HH:mm:ss")}" name="createTime"
-                       id="createTime" class="form-control" placeholder="创建时间"/>
-            </div>
-        </div>
-        <div class="form-group mno">
-            <label for="inputEmail3" class="col-sm-2 control-label" style="text-align:left;">更新时间</label>
-            <div class="col-sm-8">
-                <input type="text" value="${roomConfig.updateTime?string("yyyy-MM-dd HH:mm:ss")}" name="updateTime"
-                       id="updateTime" class="form-control" placeholder="更新时间"/>
-            </div>
-        </div>
-    </form>
-</div>
-
-</@defaultLayout.layout>
+<#--</@defaultLayout.layout>-->
+<script>
+    function saveConfig() {
+        jQuery.ajax({
+            type: "GET",
+            url: "/roomConfig/roomConfigAdd",
+            data: $("#dailogForm").serialize(),
+            contentType: "json",
+            async: false,
+            success: function (data) {
+                alert(data);
+            }
+        });
+        window.close();
+        window.opener.location.reload();
+    }
+</script>

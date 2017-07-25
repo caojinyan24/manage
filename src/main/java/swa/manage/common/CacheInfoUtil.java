@@ -22,11 +22,38 @@ public class CacheInfoUtil {
     private static final Logger logger = LoggerFactory.getLogger(CacheInfoUtil.class);
     private static Set<String> cities = Sets.newHashSet();
     private static Map<String, Set<String>> regionMap = Maps.newHashMap();
-    private static Map<Long, RoomConfig> roomConfigMap = Maps.newHashMap();
-    // TODO: 7/23/17 更新之后需要更新缓存
+    private static Map<String, RoomConfig> roomConfigMap = Maps.newHashMap();//freemarker只支持字符串key
+    // TODO: 7/23/17 更新之后需要更新缓存，guava的本地缓存
     @Resource
     private RoomConfigMapper roomConfigMapper;
 
+    public static Set<String> getCities() {
+        return cities;
+    }
+
+    public static void setCities(Set<String> cities) {
+        CacheInfoUtil.cities = cities;
+    }
+
+    public static Map<String, Set<String>> getRegionMap() {
+        return regionMap;
+    }
+
+    public static void setRegionMap(Map<String, Set<String>> regionMap) {
+        CacheInfoUtil.regionMap = regionMap;
+    }
+
+    public static Set<String> getRegions(String city) {
+        return regionMap.get(city);
+    }
+
+    public static Map<String, RoomConfig> getRoomConfigMap() {
+        return roomConfigMap;
+    }
+
+    public static void setRoomConfigMap(Map<String, RoomConfig> roomConfigMap) {
+        CacheInfoUtil.roomConfigMap = roomConfigMap;
+    }
 
     @PostConstruct
     public void setUp() {
@@ -37,38 +64,8 @@ public class CacheInfoUtil {
                 regionMap.put(roomConfig.getCity(), Sets.newHashSet());
             }
             regionMap.get(roomConfig.getCity()).add(roomConfig.getRegion());
-            roomConfigMap.put(roomConfig.getId(), roomConfig);
+            roomConfigMap.put(roomConfig.getId().toString(), roomConfig);
         }
-        logger.info("{},{},{}", cities, regionMap, roomConfigs);
-    }
-
-
-    public Map<Long, RoomConfig> getRoomConfigMap() {
-        return roomConfigMap;
-    }
-
-
-    public void setRoomConfigMap(Map<Long, RoomConfig> roomConfigMap) {
-        roomConfigMap = roomConfigMap;
-    }
-
-    public Set<String> getCities() {
-        return cities;
-    }
-
-    public void setCities(Set<String> cities) {
-        CacheInfoUtil.cities = cities;
-    }
-
-    public Set<String> getRegions(String city) {
-        return regionMap.get(city);
-    }
-
-    public Map<String, Set<String>> getRegionMap() {
-        return regionMap;
-    }
-
-    public void setRegionMap(Map<String, Set<String>> regionMap) {
-        CacheInfoUtil.regionMap = regionMap;
+        logger.info("{},{},{}", cities, regionMap, roomConfigMap);
     }
 }

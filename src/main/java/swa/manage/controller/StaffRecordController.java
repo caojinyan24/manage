@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import swa.manage.common.CacheInfoUtil;
 import swa.manage.entity.StaffRecord;
 import swa.manage.service.StaffRecordService;
+import swa.manage.value.StaffRecordVo;
+
+import javax.annotation.Resource;
 
 /**
  * StaffRecordController  人员预定记录表
@@ -23,6 +27,8 @@ public class StaffRecordController {
     private static final Logger logger = LoggerFactory.getLogger(StaffRecordController.class);
     @Autowired
     private StaffRecordService staffRecordService;
+    @Resource
+    private CacheInfoUtil cacheInfoUtil;
 
     /**
      * 列表页面
@@ -35,7 +41,8 @@ public class StaffRecordController {
                                          @RequestParam(required = false, value = "pageSize", defaultValue = "10") int pageSize) {
 
         ModelAndView mav = new ModelAndView("staffRecord/staffRecordIndex");
-        mav.addObject("datas", staffRecordService.queryStaffRecord());
+        mav.addObject("datas", StaffRecordVo.convert(staffRecordService.queryStaffRecordDesc()));
+        logger.info("staffRecordIndex-end:{}", mav.getModel());
         return mav;
     }
 

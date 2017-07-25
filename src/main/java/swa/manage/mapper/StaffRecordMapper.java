@@ -13,12 +13,12 @@ public interface StaffRecordMapper {
 
     void add(StaffRecord staffRecord);
 
-    void update(StaffRecord staffRecord);
+    void updateById(StaffRecord staffRecord);
 
     void deleteByPriKey(Long id);
 
     StaffRecord queryByPriKey(Long id);
 
-    List<StaffRecord> queryStaffRecord();
+    List<StaffRecord> queryStaffRecordDesc();
 
 }
