@@ -55,7 +55,7 @@
         )
     </insert>
     <update id="updateValidStatus">
-    update room_config set valid_status=#{validStatus} where id=#{id}
+        update room_config set valid_status=#{validStatus} where id=#{id}
     </update>
 
     <!--&lt;!&ndash;-->

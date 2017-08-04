@@ -55,5 +55,10 @@ public class RoomRecordServiceImpl implements RoomRecordService {
         roomRecordMapper.updateValidStatus(newValidStatus, timePeriod, date, configId);
     }
 
+    @Override
+    public List<RoomRecord> queryRoomRecord(ValidEnum currentValidStatus, List<TimePeriodEnum> timePeriods, Date date, Long configId) {
+        return roomRecordMapper.querySpecifiedRecord(currentValidStatus, timePeriods, date, configId);
+    }
+
 
 }

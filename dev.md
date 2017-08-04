@@ -38,10 +38,10 @@ index页面增加日期下拉搜索栏
 
 预定弹窗，预定成功/失败之后时关闭弹出的页面，同时刷新index页面
 预定成功后可取消预定
-
-
+提交预定时做状态校验
+添加登录页面
 freemarker中map的用法
 #todo
+aop配合Actuator做监控
+webpack+npm+bootstrap+babel
 
-
-提交预定时做状态校验

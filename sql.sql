@@ -45,3 +45,15 @@ CREATE TABLE `staff_record` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='人员预定记录表';
+
+
+CREATE TABLE `staff_verify` (
+  `id` bigint(24) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `user_name` varchar(32) NOT NULL DEFAULT '' COMMENT '用户名',
+  `password` varchar(64) NOT NULL DEFAULT '' COMMENT '密码',
+  `valid_status` tinyint(4)  NOT NULL DEFAULT '1' COMMENT '可用：0-不可用，1-可用',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE key `uniq_idx_user_name` (`user_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='登录用户信息表';

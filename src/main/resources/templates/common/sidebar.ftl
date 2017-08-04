@@ -1,7 +1,7 @@
-<div style="width:10%;  float:left; background-color:#93DB70">
+<div style="width:10%;  float:left;">
     <ul>
         <li>
-            <a href="/manage/index">预定</a>
+            <a href="/manage/roomReServeIndex">预定</a>
         </li>
         <li>
             <a href="/roomConfig/roomConfigIndex">配置</a>

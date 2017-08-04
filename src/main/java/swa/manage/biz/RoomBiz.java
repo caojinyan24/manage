@@ -17,5 +17,7 @@ public interface RoomBiz {
 
     void cancelReserve(Long configId);
 
+    void checkReserve(ReserveVo reserveVo);
+
 
 }

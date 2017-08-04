@@ -1,8 +1,6 @@
 package swa.manage.value;
 
-import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import org.springframework.format.annotation.DateTimeFormat;
 import swa.manage.entity.StaffRecord;
@@ -23,14 +21,6 @@ public class ReserveVo {
     String reserveStaffName;
     String reserveStaffPhone;
     String reserveReason;
-
-    public static void checkParam(ReserveVo reserveVo) {
-        Preconditions.checkArgument(reserveVo != null &&
-                !Strings.isNullOrEmpty(reserveVo.timePeriodStr) &&
-                null != reserveVo.getConfigId(), "param invalid");
-        Preconditions.checkArgument(!splitter.splitToList(reserveVo.timePeriodStr).isEmpty(), "time invalid");
-        Preconditions.checkArgument(null != reserveVo.getReserveDate(), "date invalid");
-    }
 
     public static StaffRecord assembleStaffRecord(ReserveVo reserveVo) {
         StaffRecord staffRecord = new StaffRecord();

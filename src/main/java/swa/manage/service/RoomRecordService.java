@@ -26,6 +26,8 @@ public interface RoomRecordService {
 
     void updatevalidStatus(ValidEnum newValidStatus, List<TimePeriodEnum> timePeriod, Date date, Long configId);
 
+    List<RoomRecord> queryRoomRecord(ValidEnum currentValidStatus, List<TimePeriodEnum> timePeriods, Date date, Long configId);
+
 
 }
 

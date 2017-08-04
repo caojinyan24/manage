@@ -10,13 +10,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import swa.manage.biz.RoomBiz;
 import swa.manage.common.CacheInfoUtil;
 import swa.manage.common.CommonServiceUtil;
+import swa.manage.common.ManageException;
 import swa.manage.entity.RoomConfig;
 import swa.manage.entity.vo.RecordInfoVo;
 import swa.manage.entity.vo.SearchVo;
 import swa.manage.service.RoomConfigService;
+import swa.manage.service.StaffVerifyService;
 import swa.manage.value.ReserveVo;
 import swa.manage.value.TimePeriodEnum;
 
@@ -39,6 +42,20 @@ public class ManageController {
     private CacheInfoUtil cacheInfoUtil;
     @Resource
     private RoomConfigService roomConfigService;
+    @Resource
+    private StaffVerifyService staffVerifyService;
+
+
+    /**
+     * 查询指定日期所有房间的预定情况（默认查询当天的）
+     *
+     * @return
+     */
+    @RequestMapping(value = "login")
+    public ModelAndView roomRecordIndex() {
+        //todo:校验是否登录,若未登录,重定向到登录页面
+        return new ModelAndView("common/login");
+    }
 
     /**
      * 查询指定日期所有房间的预定情况（默认查询当天的）
@@ -46,7 +63,23 @@ public class ManageController {
      * @return
      */
     @RequestMapping(value = "index")
-    public ModelAndView roomRecordIndex(SearchVo searchVo) {
+    public ModelAndView roomRecordIndex(@RequestParam(value = "userName", required = false) String userName, @RequestParam(value = "password", required = false) String password) {
+
+        if (staffVerifyService.isValidUser(userName, password)) {
+            return new ModelAndView(new RedirectView("/manage/roomReServeIndex"));
+        } else {
+            return new ModelAndView("common/login");
+        }
+    }
+
+
+    /**
+     * 查询指定日期所有房间的预定情况（默认查询当天的）
+     *
+     * @return
+     */
+    @RequestMapping(value = "roomReServeIndex")
+    public ModelAndView roomReServeIndex(SearchVo searchVo) {
         logger.info("roomRecordIndex-begin:{}", searchVo);
         ModelAndView mav = new ModelAndView("roomReserve/index");
         try {
@@ -100,9 +133,12 @@ public class ManageController {
     public String submitReserve(ReserveVo reserveVo) {
         try {
             logger.info("submitReserve-begin:{}", reserveVo);
-            ReserveVo.checkParam(reserveVo);
-            roomBiz.reserve(reserveVo);//// TODO: 7/24/17 先查询现有状态，再更新
+            roomBiz.checkReserve(reserveVo);
+            roomBiz.reserve(reserveVo);
             return "预定成功";
+        } catch (ManageException e) {
+            logger.info("submitReserve error:{}", e.getMessage());
+            return e.getMessage();
         } catch (Exception e) {
             logger.error("submitReserve error:", e);
             return "预定失败";

@@ -137,4 +137,24 @@
         </foreach>
     </insert>
 
+    <select id="querySpecifiedRecord" resultType="swa.manage.entity.RoomRecord">
+        SELECT
+        rr.id AS id
+        ,rr.date AS date
+        ,rr.time_period AS timePeriod
+        ,rr.config_id AS configId
+        ,rr.staff_record_id AS staffRecordId
+        ,rr.valid_status AS validStatus
+        ,rr.create_time AS createTime
+        ,rr.update_time AS updateTime
+        FROM room_record AS rr
+        WHERE rr.date=#{date}
+        and rr.config_id=#{configId}
+        and rr.valid_status=#{validStatus}
+        and rr.time_period in
+        <foreach collection="timePeriods" close=")" index="index" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
 </mapper>

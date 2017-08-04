@@ -27,4 +27,6 @@ public interface RoomRecordMapper {
     List<RoomRecord> queryRoomRecord(@Param("queryDate") Date queryDate, @Param("configId") Long configId);
 
     void updateValidStatus(@Param("newValidStatus") ValidEnum newValidStatus, @Param("timePeriods") List<TimePeriodEnum> timePeriods, @Param("date") Date date, @Param("configId") Long configId);
+
+    List<RoomRecord> querySpecifiedRecord(@Param("validStatus") ValidEnum validStatus, @Param("timePeriods") List<TimePeriodEnum> timePeriods, @Param("date") Date date, @Param("configId") Long configId);
 }

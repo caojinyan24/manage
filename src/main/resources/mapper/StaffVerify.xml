@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="swa.manage.mapper.StaffVerifyMapper">
+
+    <!-- 查询条件 -->
+    <sql id="wherecontation">
+        <trim suffixOverrides=",">
+            <if test="userName != null and userName != ''">
+                AND user_name = #{userName}
+            </if>
+            <if test="password != null and password != ''">
+                AND password = #{password}
+            </if>
+            <if test="validStatus != null and validStatus != ''">
+                AND valid_status = #{validStatus}
+            </if>
+            <if test="createTime != null and createTime != ''">
+                AND create_time = #{createTime}
+            </if>
+            <if test="updateTime != null and updateTime != ''">
+                AND update_time = #{updateTime}
+            </if>
+        </trim>
+    </sql>
+
+    <!--
+	方法名称: insert
+	调用路径: StaffVerify.insert
+	-->
+    <insert id="insert" parameterType="swa.manage.entity.StaffVerify">
+        INSERT INTO  staff_verify
+        (
+                               user_name                 
+                             ,password                  
+                             ,valid_status              
+                             ,create_time               
+                             ,update_time               
+        )
+        values
+        (
+                               #{userName}                 
+                             ,#{password}                  
+                             ,#{validStatus}               
+                             ,#{createTime}                
+                             ,#{updateTime}                
+        )
+    </insert>
+
+
+    <!--
+	方法名称: update
+	调用路径: StaffVerify.update
+	-->
+    <update id="update" parameterType="swa.manage.entity.StaffVerify">
+        UPDATE staff_verify /* 登录用户信息表 */
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="validStatus != null">
+                valid_status = #{validStatus},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <!--
+	方法名称: get
+	调用路径: StaffVerify.get
+	处理信息: 根据主键查询记录
+	-->
+    <select id="get" parameterType="Object" resultType="swa.manage.entity.StaffVerify">
+        SELECT
+         id                      AS   id
+         ,user_name               AS     userName               
+         ,password                AS     password               
+         ,valid_status            AS     validStatus            
+         ,create_time             AS     createTime             
+         ,update_time             AS     updateTime             
+        FROM   staff_verify AS sv
+        WHERE
+        id = #{id}
+    </select>
+
+    <!--
+	方法名称: delete
+	调用路径: StaffVerify.delete
+	处理信息: 删除记录
+	-->
+    <delete id="delete" parameterType="Object">
+        DELETE FROM staff_verify
+        WHERE
+        id = #{id}
+    </delete>
+
+    <!--
+	方法名称: queryItemCount
+	调用路径: StaffVerify.queryItemCount
+	-->
+    <select id="queryItemCount" resultType="java.lang.Integer" parameterType="Object">
+        SELECT count(*) FROM staff_verify AS sv
+        WHERE 1=1
+        <include refid="wherecontation"/>
+    </select>
+
+    <!--
+	方法名称: queryPagenationList
+	调用路径: StaffVerify.queryPagenationList
+	-->
+    <select id="queryUser" parameterType="Object" resultType="swa.manage.entity.StaffVerify">
+        SELECT
+          id                      AS     id                     
+         ,user_name               AS     userName               
+         ,password                AS     password               
+         ,valid_status            AS     validStatus            
+         ,create_time             AS     createTime             
+         ,update_time             AS     updateTime             
+        FROM     staff_verify AS sv
+        where user_name=#{userName} and password=#{password}
+    </select>
+
+</mapper>

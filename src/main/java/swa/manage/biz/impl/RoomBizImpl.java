@@ -2,6 +2,7 @@ package swa.manage.biz.impl;
 
 import com.google.common.base.Function;
 import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import swa.manage.biz.RoomBiz;
+import swa.manage.common.ManageException;
+import swa.manage.common.PreconditionUtil;
 import swa.manage.entity.RoomConfig;
 import swa.manage.entity.RoomRecord;
 import swa.manage.entity.StaffRecord;
@@ -82,6 +85,26 @@ public class RoomBizImpl implements RoomBiz {
         }));
         roomRecordService.updatevalidStatus(ValidEnum.VALID, timePeriods, staffRecord.getDate(), staffRecord.getConfigId());
 
+    }
+
+
+    /**
+     * 校验当前是否可以
+     *
+     * @param reserveVo
+     * @return
+     */
+    @Override
+    public void checkReserve(ReserveVo reserveVo) {
+        PreconditionUtil.checkArgument(reserveVo != null &&
+                !Strings.isNullOrEmpty(reserveVo.getTimePeriodStr()) &&
+                null != reserveVo.getConfigId(), "param invalid");
+        PreconditionUtil.checkArgument(!Splitter.on(",").omitEmptyStrings().splitToList(reserveVo.getTimePeriodStr()).isEmpty(), "time invalid");
+        PreconditionUtil.checkArgument(null != reserveVo.getReserveDate(), "date invalid");
+
+        if (!CollectionUtils.isEmpty(roomRecordService.queryRoomRecord(ValidEnum.INVALID, reserveVo.getTimePeriods(), reserveVo.getReserveDate(), reserveVo.getConfigId()))) {
+            throw new ManageException("所预定房间不可用,请刷新页面后重试");
+        }
     }
 
 
