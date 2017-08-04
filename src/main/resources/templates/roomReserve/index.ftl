@@ -15,6 +15,7 @@
             </#if>
         </#list>
     </select>
+
     <select name="region">
         <option value=""></option>
         <#list regions as regionItem>
@@ -28,40 +29,38 @@
     <input type="submit" value="搜索" name="submit"/>
 </form>
 
-
-<table>
-    <tr>
-        <td>房间编码</td>
-        <#list timePeriods?values as timePeriod>
-            <th>${timePeriod}</th>
-        </#list>
-        <th></th>
-
-    </tr>
-    <#list recordInfoVos as recordInfoVo>
+    <table class="table table-striped">
         <tr>
-            <td>${recordInfoVo.roomConfig.roomName}</td>
-            <#list recordInfoVo.roomRecords as record>
-                <#if record.validStatus.code==1>
-                    <td width="4%" height="26" align="center">
-                        <input type="checkbox" name="timeChecked" id="timeChecked"
-                               value=${record.timePeriod.code}>
-                    </td>
-                <#else>
-                    <td></td>
-                </#if>
+            <td>房间编码</td>
+            <#list timePeriods?values as timePeriod>
+                <th>${timePeriod}</th>
             </#list>
-            <td>
-                <button onclick="reserve('${recordInfoVo.roomConfig.id}','${searchVo.date?string("yyyy-MM-dd")}')">申请预定
-                </button>
-            <#--date转成String-->
-            <#--date加‘’转成String，否则使用date格式转成get请求的时候会自动把date转成String，这样转换的结果是错误的-->
-            </td>
-
+            <th></th>
         </tr>
-    </#list>
-</table>
+        <#list recordInfoVos as recordInfoVo>
+            <tr>
+                <td>${recordInfoVo.roomConfig.roomName}</td>
+                <#list recordInfoVo.roomRecords as record>
+                    <#if record.validStatus.code==1>
+                        <td width="4%" height="26" align="center">
+                            <input type="checkbox" name="timeChecked" id="timeChecked"
+                                   value=${record.timePeriod.code}>
+                        </td>
+                    <#else>
+                        <td></td>
+                    </#if>
+                </#list>
+                <td>
+                    <button onclick="reserve('${recordInfoVo.roomConfig.id}','${searchVo.date?string("yyyy-MM-dd")}')">
+                        预定
+                    </button>
+                <#--date转成String-->
+                <#--date加‘’转成String，否则使用date格式转成get请求的时候会自动把date转成String，这样转换的结果是错误的-->
+                </td>
 
+            </tr>
+        </#list>
+    </table>
 <script>
     $(function () {
         $("#date").datepicker({dateFormat: "yy-mm-dd"});

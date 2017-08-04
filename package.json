@@ -1,0 +1,22 @@
+{
+  "name": "manage",
+  "version": "1.0.0",
+  "description": "1. 区分管理员和普通人员 2. 管理员可查看预定操作和修改会议室配置 3. 普通人员只预定会议室 4. TODO：和部门人员组织进行对接",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swa19/manage.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swa19/manage/issues"
+  },
+  "homepage": "https://github.com/swa19/manage#readme",
+  "devDependencies": {
+    "webpack": "^3.4.1"
+  }
+}

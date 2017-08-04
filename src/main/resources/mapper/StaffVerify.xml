@@ -30,21 +30,21 @@
 	调用路径: StaffVerify.insert
 	-->
     <insert id="insert" parameterType="swa.manage.entity.StaffVerify">
-        INSERT INTO  staff_verify
+        INSERT INTO staff_verify
         (
-                               user_name                 
-                             ,password                  
-                             ,valid_status              
-                             ,create_time               
-                             ,update_time               
+        user_name
+        ,password
+        ,valid_status
+        ,create_time
+        ,update_time
         )
         values
         (
-                               #{userName}                 
-                             ,#{password}                  
-                             ,#{validStatus}               
-                             ,#{createTime}                
-                             ,#{updateTime}                
+        #{userName}
+        ,#{password}
+        ,#{validStatus}
+        ,#{createTime}
+        ,#{updateTime}
         )
     </insert>
 
@@ -83,13 +83,13 @@
 	-->
     <select id="get" parameterType="Object" resultType="swa.manage.entity.StaffVerify">
         SELECT
-         id                      AS   id
-         ,user_name               AS     userName               
-         ,password                AS     password               
-         ,valid_status            AS     validStatus            
-         ,create_time             AS     createTime             
-         ,update_time             AS     updateTime             
-        FROM   staff_verify AS sv
+        id AS id
+        ,user_name AS userName
+        ,password AS password
+        ,valid_status AS validStatus
+        ,create_time AS createTime
+        ,update_time AS updateTime
+        FROM staff_verify AS sv
         WHERE
         id = #{id}
     </select>
@@ -121,13 +121,13 @@
 	-->
     <select id="queryUser" parameterType="Object" resultType="swa.manage.entity.StaffVerify">
         SELECT
-          id                      AS     id                     
-         ,user_name               AS     userName               
-         ,password                AS     password               
-         ,valid_status            AS     validStatus            
-         ,create_time             AS     createTime             
-         ,update_time             AS     updateTime             
-        FROM     staff_verify AS sv
+        id AS id
+        ,user_name AS userName
+        ,password AS password
+        ,valid_status AS validStatus
+        ,create_time AS createTime
+        ,update_time AS updateTime
+        FROM staff_verify AS sv
         where user_name=#{userName} and password=#{password}
     </select>
 
