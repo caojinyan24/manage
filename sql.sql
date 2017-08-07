@@ -28,7 +28,7 @@ CREATE TABLE `room_record` (
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uniq_date_time_encode_period` (`date`,`time_period`,`encode`)
+  UNIQUE KEY `uniq_date_time_period_config_id` (`date`,`time_period`,`config_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='会议室预定记录表';
 
 
