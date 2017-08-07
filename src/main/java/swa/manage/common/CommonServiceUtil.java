@@ -44,6 +44,7 @@ public class CommonServiceUtil {
                     temp.add(Integer.valueOf(s));
                 }
             }
+            lists.add(temp);
         } else {
             for (String s : newList) {
                 temp.add(Integer.valueOf(s));
@@ -61,6 +62,6 @@ public class CommonServiceUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(getShowTime("36,37"));
+        System.out.println(getShowTime("31,33,34"));
     }
 }

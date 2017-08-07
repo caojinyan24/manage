@@ -4,9 +4,9 @@
 
 
 
-<form action="/manage/index" method="post" name="search" id="search">
+<form action="/manage/roomReServeIndex" method="post" name="search" id="search">
     <input name="date" id="date" type="text" value="${searchVo.date?string("yyyy-MM-dd")}"/>
-    <select name="city" onchange="onchangeCity(this.value)">
+    <select  class="input-sm" name="city" onchange="onchangeCity(this.value)">
         <#list citys as cityItem>
             <#if (searchVo.city!"北京")==cityItem>
                 <option value="${cityItem}" selected="selected">${cityItem}</option>
@@ -16,7 +16,7 @@
         </#list>
     </select>
 
-    <select name="region">
+    <select class="input-sm" name="region">
         <option value=""></option>
         <#list regions as regionItem>
             <#if (searchVo.region!"互联网")==regionItem>
@@ -29,46 +29,54 @@
     <input type="submit" value="搜索" name="submit"/>
 </form>
 
-    <table class="table table-striped">
-        <tr>
-            <td>房间编码</td>
-            <#list timePeriods?values as timePeriod>
-                <th>${timePeriod}</th>
-            </#list>
-            <th></th>
-        </tr>
-        <#list recordInfoVos as recordInfoVo>
-            <tr>
-                <td>${recordInfoVo.roomConfig.roomName}</td>
-                <#list recordInfoVo.roomRecords as record>
-                    <#if record.validStatus.code==1>
-                        <td width="4%" height="26" align="center">
-                            <input type="checkbox" name="timeChecked" id="timeChecked"
-                                   value=${record.timePeriod.code}>
-                        </td>
-                    <#else>
-                        <td></td>
-                    </#if>
-                </#list>
-                <td>
-                    <button onclick="reserve('${recordInfoVo.roomConfig.id}','${searchVo.date?string("yyyy-MM-dd")}')">
-                        预定
-                    </button>
-                <#--date转成String-->
-                <#--date加‘’转成String，否则使用date格式转成get请求的时候会自动把date转成String，这样转换的结果是错误的-->
-                </td>
-
-            </tr>
+<table class="table table-striped">
+    <tr>
+        <td>房间编码</td>
+        <#list timePeriods?values as timePeriod>
+            <th>${timePeriod}</th>
         </#list>
-    </table>
+        <th></th>
+    </tr>
+    <#list recordInfoVos as recordInfoVo>
+        <tr>
+            <td>${recordInfoVo.roomConfig.roomName}</td>
+            <#list recordInfoVo.roomRecords as record>
+                <#if record.validStatus.code==1>
+                    <td width="4%" height="26" align="center">
+                        <input type="checkbox" name="timeChecked" id="timeChecked"
+                               value=${record.timePeriod.code}>
+                    </td>
+                <#else>
+                    <td></td>
+                </#if>
+            </#list>
+            <td>
+                <button onclick="reserve('${recordInfoVo.roomConfig.id}','${searchVo.date?string("yyyy-MM-dd")}')">
+                    预定
+                </button>
+            <#--date转成String-->
+            <#--date加‘’转成String，否则使用date格式转成get请求的时候会自动把date转成String，这样转换的结果是错误的-->
+            </td>
+
+        </tr>
+    </#list>
+</table>
 <script>
     $(function () {
-        $("#date").datepicker({dateFormat: "yy-mm-dd"});
+//        $("#date").datepicker({dateFormat: "yy-mm-dd"});
+        $('#date').datepicker({
+            format: "yyyy-mm-dd",
+            startDate: -1,
+            endDate: +7,
+            clearBtn: true,
+            daysOfWeekDisabled: "0,6",
+            daysOfWeekHighlighted: "1,2,3,4,5"
+        });
 
     });
     function onchangeCity(city) {
         var date = document.getElementById("date").value;
-        window.location.href = "/manage/index?date=" + date + "&city=" + city;
+        window.location.href = "/manage/roomReServeIndex?date=" + date + "&city=" + city;
 
     }
     function reserve(configId, date) {

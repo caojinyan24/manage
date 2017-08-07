@@ -1,6 +1,6 @@
 <#import "../common/defaultLayout.ftl" as defaultLayout>
 <@defaultLayout.layout>
-<body>
+
 <div class="container">
     <form class="form-signin">
         <h2 class="form-signin-heading">登录</h2>
@@ -14,7 +14,7 @@
         <button class="btn btn-lg btn-primary btn-block" type="button" onclick="login()">登录</button>
     </form>
 </div>
-</body>
+
 </@defaultLayout.layout>
 
 <script>
