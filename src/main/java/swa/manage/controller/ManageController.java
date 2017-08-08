@@ -66,7 +66,7 @@ public class ManageController {
     public ModelAndView roomRecordIndex(@RequestParam(value = "userName", required = false) String userName, @RequestParam(value = "password", required = false) String password) {
 
         if (staffVerifyService.isValidUser(userName, password)) {
-            return new ModelAndView(new RedirectView("/manage/roomReServeIndex"));
+            return new ModelAndView(new RedirectView("/manage/roomReserveIndex"));
         } else {
             return new ModelAndView("common/login");
         }
@@ -78,10 +78,10 @@ public class ManageController {
      *
      * @return
      */
-    @RequestMapping(value = "roomReServeIndex")
+    @RequestMapping(value = "roomReserveIndex")
     public ModelAndView roomReServeIndex(SearchVo searchVo) {
         logger.info("roomRecordIndex-begin:{}", searchVo);
-        ModelAndView mav = new ModelAndView("roomReserve/index");
+        ModelAndView mav = new ModelAndView("roomReserve/roomReserveIndex");
         try {
             List<RecordInfoVo> recordInfoVos = roomBiz.queryAndInitRecords(searchVo);
             mav.addObject("recordInfoVos", recordInfoVos);
@@ -108,11 +108,11 @@ public class ManageController {
      *
      * @return
      */
-    @RequestMapping(value = "reserve", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "roomReserve", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView roomReserve(@DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam("date") Date date,
                                     @RequestParam("configId") Long configId,
                                     @RequestParam("timePeriods") String timePeriodsStr) {
-        ModelAndView mav = new ModelAndView("roomReserve/reserve");
+        ModelAndView mav = new ModelAndView("roomReserve/roomReserve");
         logger.info("roomReserve-begin:{},{},{}", date, configId, timePeriodsStr);
         try {
             RoomConfig roomConfig = new RoomConfig();

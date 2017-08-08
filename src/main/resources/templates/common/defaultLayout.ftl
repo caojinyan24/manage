@@ -30,8 +30,6 @@
     <script src="/script/bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
 
 
-    <script src="/script/bootstrap-datapicker/js/bootstrap-datepicker.js"></script>
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -67,7 +65,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="/manage/roomReServeIndex">预定<span class="sr-only">(current)</span></a></li>
+                <li><a href="/manage/roomReserveIndex">预定</a></li>
                 <li><a href="/roomConfig/roomConfigIndex">配置</a></li>
                 <li><a href="/staffRecord/staffRecordIndex">历史</a></li>
             </ul>
@@ -77,19 +75,18 @@
                 <#nested>
             </div>
         </div>
+        <footer class="footer">
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <p>powered by swa@jinyan.cao</p>
+            </div>
+        </footer>
     </div>
-    <footer class="footer">
-        <div class="container">
-            <p class="text-muted">powered by swa@jinyan.cao</p>
-        </div>
-    </footer>
 </div>
 
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="/script/bootstrap/assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="/script/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->

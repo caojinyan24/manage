@@ -2,31 +2,36 @@
 
 <@defaultLayout.layout>
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<form action="/manage/roomReserveIndex" method="post" name="search" id="search">
+    <div class="form-group">
+        <input class="input-sm form-control-static" name="date" id="date" type="text" value="${searchVo.date?string("yyyy-MM-dd")}"/>
 
-<form action="/manage/roomReServeIndex" method="post" name="search" id="search">
-    <input name="date" id="date" type="text" value="${searchVo.date?string("yyyy-MM-dd")}"/>
-    <select  class="input-sm" name="city" onchange="onchangeCity(this.value)">
-        <#list citys as cityItem>
-            <#if (searchVo.city!"北京")==cityItem>
-                <option value="${cityItem}" selected="selected">${cityItem}</option>
-            <#else>
-                <option value="${cityItem}">${cityItem}</option>
-            </#if>
-        </#list>
-    </select>
+        <select name="city" class="input-sm form-control-static" onchange="onchangeCity(this.value)">
+            <#list citys as cityItem>
+                <#if (searchVo.city!"北京")==cityItem>
+                    <option value="${cityItem}" selected="selected">${cityItem}</option>
+                <#else>
+                    <option value="${cityItem}">${cityItem}</option>
+                </#if>
+            </#list>
+        </select>
 
-    <select class="input-sm" name="region">
-        <option value=""></option>
-        <#list regions as regionItem>
-            <#if (searchVo.region!"互联网")==regionItem>
-                <option value="${regionItem}" selected="selected">${regionItem}</option>
-            <#else>
-                <option value="${regionItem}">${regionItem}</option>
-            </#if>
-        </#list>
-    </select>
-    <input type="submit" value="搜索" name="submit"/>
+        <select name="region" class="input-sm form-control-static">
+            <option value=""></option>
+            <#list regions as regionItem>
+                <#if (searchVo.region!"互联网")==regionItem>
+                    <option value="${regionItem}" selected="selected">${regionItem}</option>
+                <#else>
+                    <option value="${regionItem}">${regionItem}</option>
+                </#if>
+            </#list>
+        </select>
+        <input type="submit" value="搜索" name="submit"/>
+    </div>
 </form>
 
 <table class="table table-striped">
@@ -63,20 +68,11 @@
 </table>
 <script>
     $(function () {
-//        $("#date").datepicker({dateFormat: "yy-mm-dd"});
-        $('#date').datepicker({
-            format: "yyyy-mm-dd",
-            startDate: -1,
-            endDate: +7,
-            clearBtn: true,
-            daysOfWeekDisabled: "0,6",
-            daysOfWeekHighlighted: "1,2,3,4,5"
-        });
-
+        $("#date").datepicker({dateFormat: "yy-mm-dd"});
     });
     function onchangeCity(city) {
         var date = document.getElementById("date").value;
-        window.location.href = "/manage/roomReServeIndex?date=" + date + "&city=" + city;
+        window.location.href = "/manage/roomReserveIndex?date=" + date + "&city=" + city;
 
     }
     function reserve(configId, date) {
@@ -90,8 +86,8 @@
         }
         str = str.substring(1);
         console.info(str);
-        var url = "/manage/reserve?configId=" + configId + "&date=" + date + "&timePeriods=" + str;
-        console.info("reserve" + url);
+        var url = "/manage/roomReserve?configId=" + configId + "&date=" + date + "&timePeriods=" + str;
+        console.info("roomReserve" + url);
         window.open(url, "房间预定", 'height=800,width=600,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
     }
 
