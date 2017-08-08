@@ -65,7 +65,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="/manage/roomReserveIndex">预定</a></li>
+                <li><a href="/reserve/roomReserveIndex">预定</a></li>
                 <li><a href="/roomConfig/roomConfigIndex">配置</a></li>
                 <li><a href="/staffRecord/staffRecordIndex">历史</a></li>
             </ul>

@@ -45,3 +45,15 @@ freemarker中map的用法
 aop配合Actuator做监控
 webpack+npm+bootstrap+babel
 
+
+#添加springsecurity后出错
+```
+2017-08-08 19:12:15.437  INFO 28709 --- [nio-8080-exec-2] swa.manage.component.MonitorService      : execution(ManageController.roomRecordIndex()) callMethod end:ModelAndView: reference to view with name 'common/login'; model is null
+2017-08-08 19:12:22.125  INFO 28709 --- [nio-8080-exec-8] swa.manage.component.MonitorService      : execution(ManageController.roomRecordIndex(..)) callMethod begin:[user, password]
+2017-08-08 19:12:22.147  INFO 28709 --- [nio-8080-exec-8] swa.manage.component.MonitorService      : execution(ManageController.roomRecordIndex(..)) callMethod end:ModelAndView: materialized View is [org.springframework.web.servlet.view.RedirectView: unnamed; URL [/reserve/roomReserveIndex]]; model is null
+2017-08-08 19:12:22.195  INFO 28709 --- [nio-8080-exec-9] swa.manage.component.MonitorService      : execution(ManageController.roomRecordIndex()) callMethod begin:[]
+2017-08-08 19:12:22.196  INFO 28709 --- [nio-8080-exec-9] swa.manage.component.MonitorService      : execution(ManageController.roomRecordIndex()) callMethod end:ModelAndView: reference to view with name 'common/login'; model is null
+2017-08-08 19:13:33.011  INFO 28709 --- [nio-8080-exec-1] swa.manage.component.MonitorService      : execution(ManageController.roomRecordIndex()) callMethod begin:[]
+2017-08-08 19:13:33.012  INFO 28709 --- [nio-8080-exec-1] swa.manage.component.MonitorService      : execution(ManageController.roomRecordIndex()) callMethod end:ModelAndView: reference to view with name 'common/login'; model is null
+```
+

@@ -6,7 +6,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<form action="/manage/roomReserveIndex" method="post" name="search" id="search">
+<form action="/reserve/roomReserveIndex" method="post" name="search" id="search">
     <div class="form-group">
         <input class="input-sm form-control-static" name="date" id="date" type="text" value="${searchVo.date?string("yyyy-MM-dd")}"/>
 
@@ -72,7 +72,7 @@
     });
     function onchangeCity(city) {
         var date = document.getElementById("date").value;
-        window.location.href = "/manage/roomReserveIndex?date=" + date + "&city=" + city;
+        window.location.href = "/reserve/roomReserveIndex?date=" + date + "&city=" + city;
 
     }
     function reserve(configId, date) {
@@ -86,7 +86,7 @@
         }
         str = str.substring(1);
         console.info(str);
-        var url = "/manage/roomReserve?configId=" + configId + "&date=" + date + "&timePeriods=" + str;
+        var url = "/reserve/roomReserve?configId=" + configId + "&date=" + date + "&timePeriods=" + str;
         console.info("roomReserve" + url);
         window.open(url, "房间预定", 'height=800,width=600,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
     }

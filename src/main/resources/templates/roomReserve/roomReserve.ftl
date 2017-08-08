@@ -54,7 +54,7 @@
         var phone = document.getElementById("phone").value;
         jQuery.ajax({
             type: "GET",
-            url: "/manage/reserveSubmit",
+            url: "/reserve/reserveSubmit",
             data: {
                 configId: configId,
                 reserveDate: date,
