@@ -51,7 +51,7 @@ public class ManageApplication implements WebMvcConfigurer {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests().antMatchers("/reserve/*").hasAnyAuthority("USER","ADMIN").and()
+            http.authorizeRequests().antMatchers("/reserve/*","/staffRecord/*").hasAnyAuthority("USER","ADMIN").and()
                     .authorizeRequests().antMatchers("/roomConfig/*").hasAuthority("ADMIN")
                     .and() .formLogin().loginPage("/login").failureUrl("/login?error").permitAll().and()
                     .logout().permitAll();
