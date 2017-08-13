@@ -1,35 +1,35 @@
 <#import "../common/defaultLayout.ftl" as defaultLayout>
 <@defaultLayout.layout>
-    <table class="table table-striped">
+<table class="table table-striped">
+    <tr>
+        <th>所在城市</th>
+        <th>所属区域</th>
+        <th>所在楼层</th>
+        <th>房间名称</th>
+        <th>创建时间</th>
+        <th>更新时间</th>
+        <th>操作</th>
+    </tr>
+    <#list datas as data>
         <tr>
-            <th>所在城市</th>
-            <th>所属区域</th>
-            <th>所在楼层</th>
-            <th>房间名称</th>
-            <th>创建时间</th>
-            <th>更新时间</th>
-            <th>操作</th>
+            <td>${data.city}</td>
+            <td>${data.region}</td>
+            <td>${data.layer}</td>
+            <td>${data.roomName}</td>
+            <td>${data.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
+            <td>${data.updateTime?string("yyyy-MM-dd HH:mm:ss")}</td>
+            <td>
+                <#if data.validStatus.code==1>
+                    <button type="button" onclick="stopReserve(${data.id})">暂停预定</button>
+                <#else>
+                    <button type="button" onclick="reReserve(${data.id})">恢复预定</button>
+                </#if>
+            </td
         </tr>
-        <#list datas as data>
-            <tr>
-                <td>${data.city}</td>
-                <td>${data.region}</td>
-                <td>${data.layer}</td>
-                <td>${data.roomName}</td>
-                <td>${data.createTime?string("yyyy-MM-dd HH:mm:ss")}</td>
-                <td>${data.updateTime?string("yyyy-MM-dd HH:mm:ss")}</td>
-                <td>
-                    <#if data.validStatus.code==1>
-                        <button type="button" onclick="stopReserve(${data.id})">暂停预定</button>
-                    <#else>
-                        <button type="button" onclick="reReserve(${data.id})">恢复预定</button>
-                    </#if>
-                </td
-            </tr>
-        </#list>
-        <button type="button" onclick="addConfig()"
-        ">添加配置</a>
-    </table>
+    </#list>
+    <button type="button" onclick="addConfig()"
+    ">添加配置</a>
+</table>
 </@defaultLayout.layout>
 
 <script>

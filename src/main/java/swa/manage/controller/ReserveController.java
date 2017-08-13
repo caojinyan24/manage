@@ -5,7 +5,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import swa.manage.biz.RoomBiz;
 import swa.manage.common.CacheInfoUtil;
@@ -36,6 +39,7 @@ public class ReserveController {
     private CacheInfoUtil cacheInfoUtil;
     @Resource
     private RoomConfigService roomConfigService;
+
     /**
      * 查询指定日期所有房间的预定情况（默认查询当天的）
      *
@@ -109,8 +113,12 @@ public class ReserveController {
     @ResponseBody
     public String toCancelReserve(@RequestParam("id") Long id) {
         try {
+            roomBiz.checkCancelReserve(id);
             roomBiz.cancelReserve(id);
             return "取消成功";
+        } catch (ManageException e) {
+            logger.info("toCancelReserve error:{}", e.getMessage());
+            return e.getMessage();
         } catch (Exception e) {
             logger.error("toCancelReserve error:", e);
             return "处理失败";

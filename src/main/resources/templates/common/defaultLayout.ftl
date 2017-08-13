@@ -11,7 +11,6 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/script/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -61,7 +60,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-        <ul class="nav nav-sidebar">
+            <ul class="nav nav-sidebar">
                 <li><a href="/reserve/roomReserveIndex">预定</a></li>
                 <li><a href="/roomConfig/roomConfigIndex">配置</a></li>
                 <li><a href="/staffRecord/staffRecordIndex">历史</a></li>
@@ -74,7 +73,7 @@
         </div>
         <footer class="footer">
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <p>powered by swa@jinyan.cao</p>
+                <p>powered by swa@jinyan.cao</p>
             </div>
         </footer>
     </div>

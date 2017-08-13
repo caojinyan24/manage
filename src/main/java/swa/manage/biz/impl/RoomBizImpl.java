@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import swa.manage.biz.RoomBiz;
+import swa.manage.common.CommonServiceUtil;
 import swa.manage.common.ManageException;
 import swa.manage.common.PreconditionUtil;
 import swa.manage.entity.RoomConfig;
@@ -101,9 +102,22 @@ public class RoomBizImpl implements RoomBiz {
                 null != reserveVo.getConfigId(), "param invalid");
         PreconditionUtil.checkArgument(!Splitter.on(",").omitEmptyStrings().splitToList(reserveVo.getTimePeriodStr()).isEmpty(), "time invalid");
         PreconditionUtil.checkArgument(null != reserveVo.getReserveDate(), "date invalid");
-
+        String userName = CommonServiceUtil.getLoginUserName();
+        if (Strings.isNullOrEmpty(userName)) {
+            throw new ManageException("请登录后预定");
+        }
+        reserveVo.setUserName(userName);
         if (!CollectionUtils.isEmpty(roomRecordService.queryRoomRecord(ValidEnum.INVALID, reserveVo.getTimePeriods(), reserveVo.getReserveDate(), reserveVo.getConfigId()))) {
             throw new ManageException("所预定房间不可用,请刷新页面后重试");
+        }
+    }
+
+    @Override
+    public void checkCancelReserve(Long id) {
+        StaffRecord record = staffRecordService.queryByPriKey(id);
+        if (!record.getUserName().equals(CommonServiceUtil.getLoginUserName())) {
+            throw new ManageException("仅限本人操作");
+
         }
     }
 

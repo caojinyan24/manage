@@ -21,6 +21,7 @@ public class ReserveVo {
     String reserveStaffName;
     String reserveStaffPhone;
     String reserveReason;
+    String userName;
 
     public static StaffRecord assembleStaffRecord(ReserveVo reserveVo) {
         StaffRecord staffRecord = new StaffRecord();
@@ -30,6 +31,7 @@ public class ReserveVo {
         staffRecord.setStaffName(reserveVo.getReserveStaffName());
         staffRecord.setReserveTime(reserveVo.getTimePeriodStr());
         staffRecord.setValidStatus(ValidEnum.VALID);
+        staffRecord.setUserName(reserveVo.getUserName());
         return staffRecord;
     }
 
@@ -93,6 +95,14 @@ public class ReserveVo {
         this.reserveReason = reserveReason;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     @Override
     public String toString() {
         return "ReserveVo{" +
@@ -102,6 +112,7 @@ public class ReserveVo {
                 ", reserveStaffName='" + reserveStaffName + '\'' +
                 ", reserveStaffPhone='" + reserveStaffPhone + '\'' +
                 ", reserveReason='" + reserveReason + '\'' +
+                ", userName='" + userName + '\'' +
                 '}';
     }
 }

@@ -41,7 +41,7 @@ index页面增加日期下拉搜索栏
 提交预定时做状态校验
 添加登录页面
 freemarker中map的用法
-通过sprngSecurity添加简单的权限控制
+通过sprngSecurity添加简单的权限控制,SpringSecurity获得登录用户信息
 #todo
 aop配合Actuator做监控
 webpack+npm+bootstrap+babel
@@ -49,4 +49,3 @@ webpack+npm+bootstrap+babel
 
 使用Security的时候，页面要使用thymeleaf，否则无法传递CSRF token
 
-获得登录用户信息，并记录操作人名称（*怎么实现*）（折中方法，取消时，填写预订人信息，校验信息是否一致）

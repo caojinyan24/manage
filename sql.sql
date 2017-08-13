@@ -21,7 +21,7 @@ INSERT INTO `user`.`room_config` (`city`, `region`, `layer`, `room_name`, `valid
 CREATE TABLE `room_record` (
   `id` bigint(24) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增主键',
   `date` date NOT NULL DEFAULT '1971-01-01' COMMENT '预定日期',
-  `time_period` tinyint(4) NOT NULL DEFAULT '0' COMMENT '预定时间段，如0代表00:00-00:30，1代表00:30-1:00',
+  `time_period` tinyint(4) NOT NULL DEFAULT '0' COMMENT '预定时间段',
   `config_id` bigint(16) NOT NULL DEFAULT '0' COMMENT '配置表ID',
   `staff_record_id` bigint(24) unsigned NOT NULL DEFAULT '0' COMMENT '人员预定表中关联id',
   `valid_status` tinyint(4)  NOT NULL DEFAULT '1' COMMENT '可用状态：0-不可用，1-可用',
@@ -41,6 +41,7 @@ CREATE TABLE `staff_record` (
   `staff_name` varchar(16) NOT NULL DEFAULT '' COMMENT '预订人姓名',
   `staff_phone` varchar(16) NOT NULL DEFAULT '' COMMENT '预订人手机号',
   `comment` varchar(1024) NOT NULL DEFAULT '' COMMENT '预定用途',
+  `user_name` varchar(16) NOT NULL DEFAULT '' COMMENT '操作人姓名',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)

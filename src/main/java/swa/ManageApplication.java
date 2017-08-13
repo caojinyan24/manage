@@ -3,8 +3,6 @@ package swa;
 //import org.mybatis.spring.annotation.MapperScan;
 
 import org.mybatis.spring.annotation.MapperScan;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,8 +24,13 @@ import javax.sql.DataSource;
 public class ManageApplication implements WebMvcConfigurer {
 
 
+    public static void main(String[] args) {
+        SpringApplication.run(ManageApplication.class, args);
+    }
+
     /**
      * 添加login页面
+     *
      * @param registry
      */
     @Override
@@ -35,25 +38,20 @@ public class ManageApplication implements WebMvcConfigurer {
         registry.addViewController("/login").setViewName("login");
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(ManageApplication.class, args);
-    }
-
-
     /**
      * 程序启动时运行（否则无法加载登录页面）
      */
     @Configuration
     @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-    protected static   class ManageSecurity extends WebSecurityConfigurerAdapter {
+    protected static class ManageSecurity extends WebSecurityConfigurerAdapter {
         @Autowired
         private DataSource dataSource;
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests().antMatchers("/reserve/*","/staffRecord/*").hasAnyAuthority("USER","ADMIN").and()
+            http.authorizeRequests().antMatchers("/reserve/*", "/staffRecord/*").hasAnyAuthority("USER", "ADMIN").and()
                     .authorizeRequests().antMatchers("/roomConfig/*").hasAuthority("ADMIN")
-                    .and() .formLogin().loginPage("/login").failureUrl("/login?error").permitAll().and()
+                    .and().formLogin().loginPage("/login").failureUrl("/login?error").permitAll().and()
                     .logout().permitAll();
         }
 

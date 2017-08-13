@@ -4,6 +4,8 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import swa.manage.value.TimePeriodEnum;
 
 import java.util.List;
@@ -59,6 +61,13 @@ public class CommonServiceUtil {
         }
         String result = sb.toString();
         return result.substring(0, result.lastIndexOf("&&"));
+    }
+
+    public static String getLoginUserName() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+        return userDetails.getName();
     }
 
     public static void main(String[] args) {

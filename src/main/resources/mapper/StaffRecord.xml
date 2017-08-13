@@ -25,6 +25,9 @@
             <if test="query.comment != null and query.comment != ''">
                 AND sr.comment = #{query.comment}
             </if>
+            <if test="query.userName != null and query.userName != ''">
+                AND sr.user_name = #{query.userName}
+            </if>
             <if test="query.createTime != null and query.createTime != ''">
                 AND sr.create_time = #{query.createTime}
             </if>
@@ -44,6 +47,7 @@
         ,valid_status
         ,staff_name
         ,comment
+        ,user_name
         )
         values
         (
@@ -53,6 +57,7 @@
         ,#{validStatus}
         ,#{staffName}
         ,#{comment}
+        ,#{userName}
         )
     </insert>
 
@@ -78,11 +83,8 @@
             <if test="comment != null">
                 comment = #{comment},
             </if>
-            <if test="createTime != null">
-                create_time = #{createTime},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime},
+            <if test="userName != null">
+                user_name = #{userName},
             </if>
         </trim>
         WHERE
@@ -99,6 +101,7 @@
         ,sr.valid_status AS validStatus
         ,sr.staff_name AS staffName
         ,sr.comment AS comment
+        ,sr.user_name as userName
         ,sr.create_time AS createTime
         ,sr.update_time AS updateTime
         FROM staff_record AS sr order by id desc
@@ -127,6 +130,7 @@
         ,sr.valid_status AS validStatus
         ,sr.staff_name AS staffName
         ,sr.comment AS comment
+        ,sr.user_name as userName
         ,sr.create_time AS createTime
         ,sr.update_time AS updateTime
         FROM staff_record AS sr
