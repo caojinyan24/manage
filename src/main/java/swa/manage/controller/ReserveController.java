@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * USER和ADMIN用户均可访问
  * Created by jinyan on 8/8/17 7:00 PM.
  */
 @RequestMapping("reserve")

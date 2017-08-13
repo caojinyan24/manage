@@ -6,11 +6,14 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<form action="/reserve/roomReserveIndex" method="post" name="search" id="search">
-    <div class="form-group">
-        <input class="input-sm form-control-static" name="date" id="date" type="text" value="${searchVo.date?string("yyyy-MM-dd")}"/>
+<#--<form action="/reserve/roomReserveIndex" method="post" name="search" id="search">-->
+<form>
 
-        <select name="city" class="input-sm form-control-static" onchange="onchangeCity(this.value)">
+    <div class="form-group">
+        <input class="input-sm form-control-static" name="date" id="date" type="text"
+               value="${searchVo.date?string("yyyy-MM-dd")}"/>
+
+        <select name="city" id="city" class="input-sm form-control-static" onchange="onchangeCity(this.value)">
             <#list citys as cityItem>
                 <#if (searchVo.city!"北京")==cityItem>
                     <option value="${cityItem}" selected="selected">${cityItem}</option>
@@ -20,7 +23,7 @@
             </#list>
         </select>
 
-        <select name="region" class="input-sm form-control-static">
+        <select name="region" id="region" class="input-sm form-control-static" onchange="onchangeRegin(this.value)">
             <option value=""></option>
             <#list regions as regionItem>
                 <#if (searchVo.region!"互联网")==regionItem>
@@ -30,7 +33,7 @@
                 </#if>
             </#list>
         </select>
-        <input type="submit" value="搜索" name="submit"/>
+    <#--<input type="submit" value="搜索" name="submit"/>-->
     </div>
 </form>
 
@@ -74,6 +77,11 @@
         var date = document.getElementById("date").value;
         window.location.href = "/reserve/roomReserveIndex?date=" + date + "&city=" + city;
 
+    }
+    function onchangeRegin(region) {
+        var date = document.getElementById("date").value;
+        var city = document.getElementById("city").value;
+        window.location.href = "/reserve/roomReserveIndex?date=" + date + "&city=" + city + "&region=" + region;
     }
     function reserve(configId, date) {
 

@@ -39,7 +39,7 @@
 <script>
     function cancel(id) {
         jQuery.ajax({
-            url: "/manage/toCancelReserve",
+            url: "/reserve/toCancelReserve",
             data: {"id": id},
             contentType: "json",
             async: false,

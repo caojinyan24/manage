@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * RoomConfigController  配置表
  * Created by jinyan.cao on 2017-07-03 17:47:53
+ * 仅ADMIN角色用户可访问
  */
 @Controller
 @RequestMapping("/roomConfig")
@@ -90,52 +91,6 @@ public class RoomConfigController {
         }
     }
 
-//    /**
-//     * 跳转到编辑页面
-//     *
-//     * @return
-//     */
-//    @RequestMapping(value = "toEditDialog", method = RequestMethod.GET)
-//    public String toEditDialog(@RequestParam(required = true, value = "id") Long id, Model model) {
-//        RoomConfig roomConfig = roomConfigService.queryById(id);
-//        model.addAttribute("roomConfig", roomConfig);
-//        return "roomConfig/roomConfigEditDialog";
-//    }
-//
-//    /**
-//     * 编辑
-//     *
-//     * @return
-//     */
-//    @RequestMapping(value = "/roomConfigEdit", method = {RequestMethod.GET, RequestMethod.POST})
-//    @ResponseBody
-//    public String roomConfigEdit(@ModelAttribute RoomConfig roomConfig) {
-//        try {
-//            roomConfigService.update(roomConfig);
-//            return "编辑成功";
-//        } catch (Exception e) {
-//            logger.error("roomConfigEdit error:", e);
-//            return "编辑失败";
-//        }
-//    }
-
-//
-//    /**
-//     * 删除
-//     *
-//     * @return
-//     */
-//    @RequestMapping(value = "roomConfigDelete")
-//    @ResponseBody
-//    public String roomConfigDelete(@RequestParam(required = true, value = "id") Long id) {
-//        try {
-//            roomConfigService.deleteByPriKey(id);
-//            return "删除成功";
-//        } catch (Exception e) {
-//            logger.error("roomConfigDelete error:", e);
-//            return "删除失败";
-//        }
-//    }
 
 
 }

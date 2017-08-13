@@ -53,18 +53,15 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/manage/login">login</a></li>
+                <li><a href="/login">login</a></li>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
         </div>
     </div>
 </nav>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
+        <ul class="nav nav-sidebar">
                 <li><a href="/reserve/roomReserveIndex">预定</a></li>
                 <li><a href="/roomConfig/roomConfigIndex">配置</a></li>
                 <li><a href="/staffRecord/staffRecordIndex">历史</a></li>

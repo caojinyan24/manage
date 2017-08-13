@@ -41,19 +41,12 @@ index页面增加日期下拉搜索栏
 提交预定时做状态校验
 添加登录页面
 freemarker中map的用法
+通过sprngSecurity添加简单的权限控制
 #todo
 aop配合Actuator做监控
 webpack+npm+bootstrap+babel
 
 
-#添加springsecurity后出错
-```
-2017-08-08 19:12:15.437  INFO 28709 --- [nio-8080-exec-2] swa.manage.component.MonitorService      : execution(ManageController.roomRecordIndex()) callMethod end:ModelAndView: reference to view with name 'common/login'; model is null
-2017-08-08 19:12:22.125  INFO 28709 --- [nio-8080-exec-8] swa.manage.component.MonitorService      : execution(ManageController.roomRecordIndex(..)) callMethod begin:[user, password]
-2017-08-08 19:12:22.147  INFO 28709 --- [nio-8080-exec-8] swa.manage.component.MonitorService      : execution(ManageController.roomRecordIndex(..)) callMethod end:ModelAndView: materialized View is [org.springframework.web.servlet.view.RedirectView: unnamed; URL [/reserve/roomReserveIndex]]; model is null
-2017-08-08 19:12:22.195  INFO 28709 --- [nio-8080-exec-9] swa.manage.component.MonitorService      : execution(ManageController.roomRecordIndex()) callMethod begin:[]
-2017-08-08 19:12:22.196  INFO 28709 --- [nio-8080-exec-9] swa.manage.component.MonitorService      : execution(ManageController.roomRecordIndex()) callMethod end:ModelAndView: reference to view with name 'common/login'; model is null
-2017-08-08 19:13:33.011  INFO 28709 --- [nio-8080-exec-1] swa.manage.component.MonitorService      : execution(ManageController.roomRecordIndex()) callMethod begin:[]
-2017-08-08 19:13:33.012  INFO 28709 --- [nio-8080-exec-1] swa.manage.component.MonitorService      : execution(ManageController.roomRecordIndex()) callMethod end:ModelAndView: reference to view with name 'common/login'; model is null
-```
+使用Security的时候，页面要使用thymeleaf，否则无法传递CSRF token
 
+获得登录用户信息，并记录操作人名称（*怎么实现*）（折中方法，取消时，填写预订人信息，校验信息是否一致）
