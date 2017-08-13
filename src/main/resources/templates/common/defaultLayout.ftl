@@ -1,8 +1,9 @@
 <#macro layout>
 
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"><!-- Thymeleaf为我们提供的Spring Security的标签支持 -->
 <head>
+    <meta content="text/html;charset=UTF-8"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,8 +63,15 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li><a href="/reserve/roomReserveIndex">预定</a></li>
-                <li><a href="/roomConfig/roomConfigIndex">配置</a></li>
                 <li><a href="/staffRecord/staffRecordIndex">历史</a></li>
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <li><a href="/roomConfig/roomConfigIndex">配置2</a></li>
+                </div>
+                <div sec:authorize="hasAuthority('ADMIN')">
+                    <li><a href="/roomConfig/roomConfigIndex">配置1</a></li>
+
+                </div>
+
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
