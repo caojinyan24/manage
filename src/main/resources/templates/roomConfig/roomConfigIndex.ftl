@@ -27,8 +27,7 @@
             </td
         </tr>
     </#list>
-    <button type="button" onclick="addConfig()"
-    ">添加配置</a>
+    <button type="button" onclick="addConfig()">添加配置</button>
 </table>
 </@defaultLayout.layout>
 
