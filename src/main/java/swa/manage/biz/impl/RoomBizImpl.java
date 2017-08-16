@@ -115,7 +115,7 @@ public class RoomBizImpl implements RoomBiz {
     @Override
     public void checkCancelReserve(Long id) {
         StaffRecord record = staffRecordService.queryByPriKey(id);
-        if (!record.getUserName().equals(CommonServiceUtil.getLoginUserName())) {
+        if (!(record.getUserName().equals(CommonServiceUtil.getLoginUserName()) || CommonServiceUtil.isAdmin())) {
             throw new ManageException("仅限本人操作");
 
         }

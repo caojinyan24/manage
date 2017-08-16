@@ -1,6 +1,6 @@
 <#macro layout>
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html>
 
 <head>
     <meta charset="utf-8">

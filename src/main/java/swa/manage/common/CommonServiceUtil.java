@@ -4,6 +4,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import swa.manage.value.TimePeriodEnum;
@@ -68,6 +69,18 @@ public class CommonServiceUtil {
                 .getAuthentication()
                 .getPrincipal();
         return userDetails.getName();
+    }
+
+    public static Boolean isAdmin() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
+        for (GrantedAuthority authority : userDetails.getAuthorities()) {
+            if ("ADMIN".equals(authority.getAuthority())) {
+                return Boolean.TRUE;
+            }
+        }
+        return false;
     }
 
     public static void main(String[] args) {
