@@ -3,7 +3,6 @@ package swa;
 //import org.mybatis.spring.annotation.MapperScan;
 
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 @SpringBootApplication
@@ -44,7 +44,7 @@ public class ManageApplication implements WebMvcConfigurer {
     @Configuration
     @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
     protected static class ManageSecurity extends WebSecurityConfigurerAdapter {
-        @Autowired
+        @Resource
         private DataSource dataSource;
 
         @Override
